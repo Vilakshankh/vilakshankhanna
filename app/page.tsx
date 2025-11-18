@@ -112,6 +112,27 @@ export default function Home() {
             </Link>
           </p>
         </div>
+        
+        {/* Scroll Down Arrow */}
+        <button
+          onClick={scrollToProjects}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-black/40 hover:text-black/60 transition-colors cursor-pointer"
+          aria-label="Scroll down"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ animation: 'bounce-down 2s ease-in-out infinite' }}
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
       </section>
 
       {/* Projects View - Cards or Detailed */}
@@ -279,7 +300,7 @@ export default function Home() {
             {/* Text Overlay */}
             <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-12 lg:p-16">
               <div className="text-white mb-6">
-                <div className="group flex items-center gap-3 mb-2 opacity-50 hover:opacity-100 transition-opacity">
+                <div className="group flex items-center gap-3 mb-2">
                   <Image 
                     src="/Untitled-2_white.png" 
                     alt="FiveFiveFive Studio Logo" 
@@ -291,7 +312,7 @@ export default function Home() {
                     Co-organizer | Branding | Community Designer
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-4 text-xs md:text-sm font-helvetica mb-4 opacity-50">
+                <div className="flex flex-wrap gap-4 text-xs md:text-sm font-helvetica mb-4">
                   <Link 
                     href="https://luma.com/fivefivefive?k=c&period=past" 
                     target="_blank" 
@@ -325,25 +346,25 @@ export default function Home() {
                     Website
                   </Link>
                 </div>
-                <p className="text-xs md:text-sm mb-4 font-helvetica opacity-50">
+                <p className="text-xs md:text-sm mb-4 font-helvetica">
                   Creative nights event series in Montreal, 1000+ people so far
                 </p>
-                <div className="flex flex-wrap gap-2 mb-4 opacity-50 max-w-md">
+                <div className="flex flex-wrap gap-2 mb-4 max-w-md">
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-purple-500/20 hover:border-purple-500/50 hover:text-purple-200 transition-colors cursor-default">Branding</span>
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default">Community Development</span>
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-green-500/20 hover:border-green-500/50 hover:text-green-200 transition-colors cursor-default">Entrepreneurship</span>
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-200 transition-colors cursor-default">Design</span>
                 </div>
                 <div className="group max-w-md">
-                  <p className="text-xs md:text-sm mb-4 font-helvetica opacity-50 group-hover:opacity-100 transition-opacity">
+                  <p className="text-xs md:text-sm mb-4 font-helvetica">
                     FiveFiveFive is a studio that produces creative transformation by exploring and interacting with ideas, people, and spaces.
                   </p>
-                  <p className="text-xs md:text-sm mb-6 font-helvetica opacity-50 group-hover:opacity-100 transition-opacity">
+                  <p className="text-xs md:text-sm mb-6 font-helvetica">
                     The studio creates environments for meaningful interaction, where collaboration and experimentation foster transformation. Through their work, they bridge the gap between vision and reality, crafting experiences that inspire change.
                   </p>
                 </div>
               </div>
-              <h2 className="group text-4xl md:text-5xl lg:text-6xl font-bold text-white font-helvetica text-right opacity-50 hover:opacity-100 transition-opacity">
+              <h2 className="group text-4xl md:text-5xl lg:text-6xl font-bold text-white font-helvetica text-right">
                 FiveFiveFive Studio
               </h2>
             </div>
@@ -367,7 +388,7 @@ export default function Home() {
             
             <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-12 lg:p-16">
               <div className="text-white mb-6">
-                <div className="group flex items-center gap-3 mb-2 opacity-50 hover:opacity-100 transition-opacity">
+                <div className="group flex items-center gap-3 mb-2">
                   <Image 
                     src="/Asset 15.svg" 
                     alt="Trails Logo" 
@@ -379,7 +400,7 @@ export default function Home() {
                     Cofounder | Product Designer | Entrepreneurship | Branding
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-4 text-xs md:text-sm font-helvetica mb-4 opacity-50">
+                <div className="flex flex-wrap gap-4 text-xs md:text-sm font-helvetica mb-4">
                   <Link 
                     href="https://trailslegal.com/" 
                     target="_blank" 
@@ -389,7 +410,7 @@ export default function Home() {
                     Website
                   </Link>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-4 opacity-50 max-w-md">
+                <div className="flex flex-wrap gap-2 mb-4 max-w-md">
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-cyan-500/20 hover:border-cyan-500/50 hover:text-cyan-200 transition-colors cursor-default">Product Design</span>
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-indigo-500/20 hover:border-indigo-500/50 hover:text-indigo-200 transition-colors cursor-default">UI/UX Branding Development</span>
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-teal-500/20 hover:border-teal-500/50 hover:text-teal-200 transition-colors cursor-default">Web Development</span>
@@ -398,12 +419,12 @@ export default function Home() {
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-yellow-500/20 hover:border-yellow-500/50 hover:text-yellow-200 transition-colors cursor-default">B2B</span>
                 </div>
                 <div className="group max-w-md">
-                  <p className="text-xs md:text-sm mb-6 font-helvetica opacity-50 group-hover:opacity-100 transition-opacity">
+                  <p className="text-xs md:text-sm mb-6 font-helvetica">
                     Trails automates manual workflows to help your legal firm deliver fast, high quality output for your clients
                   </p>
                 </div>
               </div>
-              <h2 className="group text-4xl md:text-5xl lg:text-6xl font-bold text-white font-helvetica text-right opacity-50 hover:opacity-100 transition-opacity">
+              <h2 className="group text-4xl md:text-5xl lg:text-6xl font-bold text-white font-helvetica text-right">
                 Trails Legal
               </h2>
             </div>
@@ -427,7 +448,7 @@ export default function Home() {
             
             <div className="relative z-10 h-full flex flex-col justify-end p-8 md:p-12 lg:p-16">
               <div className="text-white mb-6">
-                <div className="group flex items-center gap-3 mb-2 opacity-50 hover:opacity-100 transition-opacity">
+                <div className="group flex items-center gap-3 mb-2">
                   <Image 
                     src="/WPFQXzXewBVy5FNFqSoY5jaFCWs.webp" 
                     alt="The Butterfly Project Logo" 
@@ -439,7 +460,7 @@ export default function Home() {
                     Founder | Product Designer | Community Builder
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2 mb-4 opacity-50 max-w-md">
+                <div className="flex flex-wrap gap-2 mb-4 max-w-md">
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-purple-500/20 hover:border-purple-500/50 hover:text-purple-200 transition-colors cursor-default">Product Design</span>
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-blue-500/20 hover:border-blue-500/50 hover:text-blue-200 transition-colors cursor-default">Community Development</span>
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-orange-500/20 hover:border-orange-500/50 hover:text-orange-200 transition-colors cursor-default">Business Strategy Development</span>
@@ -448,15 +469,15 @@ export default function Home() {
                   <span className="text-xs font-helvetica px-2 py-1 border border-white/30 rounded hover:bg-pink-500/20 hover:border-pink-500/50 hover:text-pink-200 transition-colors cursor-default">B2C</span>
                 </div>
                 <div className="group max-w-md">
-                  <p className="text-xs md:text-sm mb-4 font-helvetica opacity-50 group-hover:opacity-100 transition-opacity">
+                  <p className="text-xs md:text-sm mb-4 font-helvetica">
                     Cowork together and meet new people.
                   </p>
-                  <p className="text-xs md:text-sm mb-6 font-helvetica opacity-50 group-hover:opacity-100 transition-opacity">
+                  <p className="text-xs md:text-sm mb-6 font-helvetica">
                     The parent of 555. The Butterfly projects goal was to cowork and meet new people at the same time. Personality matched together by answering a questionnaire and a new cafe location every coworking session. We made wireframes of product.
                   </p>
                 </div>
               </div>
-              <h2 className="group text-4xl md:text-5xl lg:text-6xl font-bold text-white font-helvetica text-right opacity-50 hover:opacity-100 transition-opacity">
+              <h2 className="group text-4xl md:text-5xl lg:text-6xl font-bold text-white font-helvetica text-right">
                 The Butterfly Project
               </h2>
             </div>
