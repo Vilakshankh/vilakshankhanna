@@ -2,21 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Instrument Serif';
-  src: local('Instrument Serif'), local('InstrumentSerif-Regular');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Serif';
-  src: local('Instrument Serif'), local('InstrumentSerif-Italic');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
 
 @layer base {
   body {

@@ -13,22 +13,24 @@ const config: Config = {
   			sans: [
   				'Helvetica Neue',
   				'Helvetica',
+  				'var(--font-inter)',
   				'Arial',
   				'sans-serif'
   			],
   			helvetica: [
   				'Helvetica Neue',
   				'Helvetica',
+  				'var(--font-inter)',
   				'Arial',
   				'sans-serif'
   			],
   			serif: [
-  				'Instrument Serif',
+  				'var(--font-instrument-serif)',
   				'Georgia',
   				'serif'
   			],
   			'instrument-serif': [
-  				'Instrument Serif',
+  				'var(--font-instrument-serif)',
   				'Georgia',
   				'serif'
   			]
