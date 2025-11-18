@@ -89,15 +89,15 @@ export default function Home() {
         <div className="absolute top-8 left-0 right-0 z-20 flex justify-center">
           <HeroNavigation onProjectsClick={scrollToProjects} onWorkClick={scrollToWork} />
         </div>
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-helvetica text-sm">
-          <h1 className="text-3xl  text-center tracking-tight">
+        <div className="z-10 max-w-5xl w-full flex flex-col items-center font-helvetica text-sm">
+          <h1 className="text-3xl text-center tracking-tight mb-6 md:mb-2 whitespace-nowrap">
             Vilakshan Khanna
           </h1>
-          <h1 className="text-3xl text-center mb-4 tracking-normal text-center font-serif"> Branding, Design, and Development</h1>
-          <p className="text-black/40 text-center text-base/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-6">
-          Asking why because understanding is the first step to learning and ultimately to connecting.        
+          <h1 className="text-3xl text-center mb-8 md:mb-4 tracking-normal font-serif">Branding, Design, & Development</h1>
+          <p className="text-black/40 text-center text-base/5 max-w-sm sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-8 md:mb-6">
+          Always asking why because understanding is the first step to learning and ultimately to connecting.        
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center mb-6 md:mb-0">
             <Button 
               onClick={scrollToProjects}
               className="rounded-xl font-helvetica font-medium bg-black/80"
@@ -105,7 +105,7 @@ export default function Home() {
               See my work
             </Button>
           </div>
-          <p className="text-center text-xs text-black/40 mt-4">
+          <p className="text-center text-xs text-black/40 mt-6 md:mt-4">
             or learn more with a{" "}
             <Link href="https://cal.com/vilakshankh" target="_blank" rel="noopener noreferrer" className="underline hover:text-black/50 transition-colors">
               free call
@@ -156,8 +156,8 @@ export default function Home() {
             <div className="max-w-3xl mx-auto text-white font-helvetica">
               {/* Header */}
               <div className="mb-12">
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">Vilakshan Khanna</h1>
-                <p className="text-lg text-white/80 mb-4">Startup | Product & Experience Designer | Creative Strategist</p>
+                <h1 className="text-3xl md:text-4xl font-bold mb-2 font-instrument-serif">Vilakshan Khanna</h1>
+                <p className="text-base text-white/80 mb-4">Startup | Product & Experience Designer | Creative Strategist</p>
                 <p className="text-sm text-white/60 mb-2">📍Montréal, QC (open to relocation) | 📩vilakshank20@gmail.com | <Link href="#" className="underline hover:text-white/80">Vilakshan&apos;s Linktree</Link></p>
                 <p className="text-sm text-white/70 mt-4">Five years in high-intensity startup environments have shaped Vilakshan into a builder who thrives on autonomy, solves complex problems with clarity, moves quickly without sacrificing quality, and adapts instantly as requirements evolve.</p>
               </div>

@@ -23,7 +23,7 @@ export function HeroNavigation({ onProjectsClick, onWorkClick }: HeroNavigationP
 
   return (
     <NavigationMenu viewport={false}>
-      <NavigationMenuList className="flex-wrap gap-2">
+      <NavigationMenuList className="flex-wrap gap-1 md:gap-2">
         <NavigationMenuItem>
           <button
             onClick={onProjectsClick}
