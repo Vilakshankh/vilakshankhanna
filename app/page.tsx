@@ -158,7 +158,7 @@ export default function Home() {
               <div className="mb-12">
                 <h1 className="text-3xl md:text-4xl font-bold mb-2">Vilakshan Khanna</h1>
                 <p className="text-lg text-white/80 mb-4">Startup | Product & Experience Designer | Creative Strategist</p>
-                <p className="text-sm text-white/60 mb-2">📍Montréal, QC (open to relocation) | 📩vilakshank20@gmail.com | <Link href="#" className="underline hover:text-white/80">Vilakshan's Linktree</Link></p>
+                <p className="text-sm text-white/60 mb-2">📍Montréal, QC (open to relocation) | 📩vilakshank20@gmail.com | <Link href="#" className="underline hover:text-white/80">Vilakshan&apos;s Linktree</Link></p>
                 <p className="text-sm text-white/70 mt-4">Five years in high-intensity startup environments have shaped Vilakshan into a builder who thrives on autonomy, solves complex problems with clarity, moves quickly without sacrificing quality, and adapts instantly as requirements evolve.</p>
               </div>
 
