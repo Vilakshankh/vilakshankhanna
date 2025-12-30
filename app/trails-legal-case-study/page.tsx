@@ -135,7 +135,7 @@ export default function TrailsLegalCaseStudy() {
           <div className="space-y-4 text-base leading-relaxed text-black/80 font-helvetica">
             <p>500k arr</p>
             <p>4 contracts</p>
-            <p>idk.</p>
+            
           </div>
         </section>
       </div>
