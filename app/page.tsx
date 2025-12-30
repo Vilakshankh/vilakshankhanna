@@ -109,28 +109,28 @@ export default function Home() {
   return (
     <main className="flex flex-col" style={{ scrollSnapType: 'none' }}>
       {/* Hero Section */}
-      <section className="flex min-h-screen flex-col items-center justify-center p-24 snap-start snap-always relative">
+      <section className="flex min-h-[70vh] flex-col items-center justify-center p-24 snap-start snap-always relative">
         {/* Navigation */}
         <div className="absolute top-8 left-0 right-0 z-20 flex justify-center">
           <HeroNavigation onProjectsClick={scrollToProjects} onWorkClick={scrollToWork} />
         </div>
-        <div className="z-10 max-w-5xl w-full flex flex-col items-center font-helvetica text-sm">
-          <h1 className="text-3xl text-center tracking-tight mb-6 md:mb-2 whitespace-nowrap">
+        <div className="z-10 max-w-2xl w-full flex flex-col items-center font-helvetica text-sm">
+          <h1 className="text-3xl text-left tracking-tight mb-6 md:mb-2 whitespace-nowrap">
             Vilakshan Khanna
           </h1>
-          <h1 className="text-3xl text-center mb-8 md:mb-4 tracking-normal font-serif">Design Engineering and Branding</h1>
-          <p className="text-black/40 text-center text-base/5 max-w-sm sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-8 md:mb-6">
+          <h1 className="text-xl text-center mb-8 md:mb-4 font-sans">Design Engineering and Branding</h1>
+          <p className="text-black/40 text-center text-base/5 max-w-sm sm:max-w-sm md:max-w-md lg:max-w-lg mb-8 md:mb-6">
           Always asking why because understanding is the first step to learning and ultimately to connecting.        
           </p>
-          <div className="flex justify-center mb-6 md:mb-0">
+          <div className="flex justify-start mb-6 md:mb-0">
             <Button 
               onClick={scrollToProjects}
-              className="rounded-xl font-helvetica font-medium bg-black/80"
+              
             >
               See my work
             </Button>
           </div>
-          <p className="text-center text-xs text-black/40 mt-6 md:mt-4">
+          <p className="text-left text-xs text-black/40 mt-6 md:mt-4">
             or learn more with a{" "}
             <Link href="https://cal.com/vilakshankh" target="_blank" rel="noopener noreferrer" className="underline hover:text-black/50 transition-colors">
               free call
@@ -140,13 +140,13 @@ export default function Home() {
       </section>
 
       {/* Articles Section */}
-      <section className="bg-white snap-start snap-always relative pb-20 pt-8" style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
+      <section className="bg-white snap-start snap-always relative pb-20 pt-8 px-24" style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
         
-        <div className="w-full px-4">
-        <h2 className="text-2xl font-helvetica font-regular tracking-tight text-left pb-6">Recent Articles</h2>
-          <div className="grid grid-cols-2 gap-2.5 w-full">
-            {/* <div className="aspect-[2/1] flex flex-col relative group cursor-pointer">
-              <div className="w-full h-full relative">
+        <div className="w-full max-w-2xl mx-auto">
+        <h2 className="text-2xl font-helvetica font-regular tracking-tight text-center pb-6">Recent Articles</h2>
+          <div className="flex flex-col items-center gap-6 w-full">
+            {/* <div className="w-full flex flex-col relative group cursor-pointer">
+              <div className="w-full aspect-video relative">
                 <Image
                   src={articleImages[currentImageIndex]}
                   alt="555 Studio"
@@ -154,16 +154,16 @@ export default function Home() {
                   className="object-cover transition-opacity duration-1000 ease-in-out"
                 />
               </div>
-              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
+              <div className="py-4 flex flex-col gap-3 bg-white">
                 <div className="flex items-center justify-between">
                   <h3 className="font-helvetica text-md font-medium group-hover:text-black/70 transition-colors">Branding Montreal&apos;s Creative Pulse: The 555 Studio Story</h3>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
-                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 group-hover:text-black/80 transition-colors w-[50%]">Branding not just a studio, but a cultural movement rooted in creativity and human connection.</p>
+                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 group-hover:text-black/80 transition-colors">Branding not just a studio, but a cultural movement rooted in creativity and human connection.</p>
               </div>
             </div> */}
-            <Link href="/trails-legal-case-study" className="aspect-[2/1] flex flex-col relative group cursor-pointer">
-              <div className="w-full h-full relative">
+            <Link href="/trails-legal-case-study" className="w-full flex flex-col relative group cursor-pointer">
+              <div className="w-full aspect-video relative">
                 <video
                   src="/trails/trailslandingpage2.mp4"
                   className="w-full h-full object-cover"
@@ -174,12 +174,12 @@ export default function Home() {
                   preload="auto"
                 />
               </div>
-              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
+              <div className="py-4 flex flex-col gap-3 bg-white">
                 <div className="flex items-center justify-between">
                   <h3 className="font-helvetica text-md font-medium group-hover:text-black/70 transition-colors">Modern Interfaces for an Ancient Industry: My Approach to Legal UX</h3>
                   <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
-                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 group-hover:text-black/80 transition-colors w-[50%]">How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems.</p>
+                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 group-hover:text-black/80 transition-colors">How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems.</p>
               </div>
             </Link>
            
