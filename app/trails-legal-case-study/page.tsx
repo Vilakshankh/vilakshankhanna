@@ -53,6 +53,42 @@ export default function TrailsLegalCaseStudy() {
               <li>why specific habits exist in their workflow</li>
             </ul>
 
+            {/* Product Feature GIFs */}
+            <div className="flex gap-3 my-8 overflow-x-auto">
+              <Image
+                src="/trails-product-images/keywordvsconversational.gif"
+                alt="Keyword vs Conversational Search"
+                width={300}
+                height={200}
+                className="rounded-xl h-auto"
+                unoptimized
+              />
+              <Image
+                src="/trails-product-images/featurecheck treatment.gif"
+                alt="Feature Check Treatment"
+                width={300}
+                height={200}
+                className="rounded-xl h-auto"
+                unoptimized
+              />
+              <Image
+                src="/trails-product-images/feature_relevancycheck.gif"
+                alt="Feature Relevancy Check"
+                width={300}
+                height={200}
+                className="rounded-xl h-auto"
+                unoptimized
+              />
+              <Image
+                src="/trails-product-images/feature_key legal insights.gif"
+                alt="Feature Key Legal Insights"
+                width={300}
+                height={200}
+                className="rounded-xl h-auto"
+                unoptimized
+              />
+            </div>
+
             <p>
               From there, I built a new workflow — intake → case analysis → HR workflows — and designed the entire interface around it. I mapped their user flows, turned them into prototypes, tested them with lawyers, redesigned them, tested again, and repeated that cycle over and over.
             </p>
@@ -78,21 +114,21 @@ export default function TrailsLegalCaseStudy() {
             alt="Trails Product Screenshot 2"
             width={200}
             height={400}
-            className="rounded-xl h-auto"
+            className="rounded-sm h-auto"
           />
           <Image
             src="/trails-product-images/IMG_0229.PNG"
             alt="Trails Product Screenshot 3"
             width={200}
             height={400}
-            className="rounded-xl h-auto"
+            className="rounded-sm h-auto"
           />
           <Image
             src="/trails-product-images/IMG_0234.PNG"
             alt="Trails Product Screenshot 4"
             width={200}
             height={400}
-            className="rounded-xl h-auto"
+            className="rounded-sm h-auto"
           />
         </div>
 
@@ -149,7 +185,7 @@ export default function TrailsLegalCaseStudy() {
           <div className="space-y-4 text-base leading-relaxed text-black/80 font-helvetica">
             <p>500k arr</p>
             <p>4 contracts</p>
-            
+                
           </div>
         </section>
       </div>
