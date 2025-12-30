@@ -1,9 +1,19 @@
 import Image from "next/image"
+import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function TrailsLegalCaseStudy() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-white py-16 px-6 md:px-12">
       <div className="max-w-3xl w-full">
+        {/* Back Button */}
+        <Link href="/" className="inline-block mb-8">
+          <Button variant="outline" size="icon">
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+        </Link>
+
         {/* Hero Title */}
         <h1 className="text-4xl md:text-5xl font-bold mb-8 text-left font-helvetica">
           Trails Legal
