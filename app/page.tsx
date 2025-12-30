@@ -93,7 +93,7 @@ export default function Home() {
           <h1 className="text-3xl text-center tracking-tight mb-6 md:mb-2 whitespace-nowrap">
             Vilakshan Khanna
           </h1>
-          <h1 className="text-3xl text-center mb-8 md:mb-4 tracking-normal font-serif">Branding, Design, & Development</h1>
+          <h1 className="text-3xl text-center mb-8 md:mb-4 tracking-normal font-serif">Design Engineering and Branding</h1>
           <p className="text-black/40 text-center text-base/5 max-w-sm sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mb-8 md:mb-6">
           Always asking why because understanding is the first step to learning and ultimately to connecting.        
           </p>
@@ -178,8 +178,8 @@ export default function Home() {
               {/* Header */}
               <div className="mb-12">
                 <h1 className="text-3xl md:text-4xl font-bold mb-2 font-instrument-serif">Vilakshan Khanna</h1>
-                <p className="text-base text-white/80 mb-4">Startup | Product & Experience Designer | Creative Strategist</p>
-                <p className="text-sm text-white/60 mb-2">📍Montréal, QC (open to relocation) | 📩vilakshank20@gmail.com | <Link href="#" className="underline hover:text-white/80">Vilakshan&apos;s Linktree</Link></p>
+                <p className="text-base text-white/80 mb-4">Startup | Design Engineer | Creative Strategist</p>
+                <p className="text-sm text-white/60 mb-2">📍Toronto, ON | 📩vilakshank20@gmail.com | <Link href="#" className="underline hover:text-white/80">Vilakshan&apos;s Linktree</Link></p>
                 <p className="text-sm text-white/70 mt-4">Five years in high-intensity startup environments have shaped Vilakshan into a builder who thrives on autonomy, solves complex problems with clarity, moves quickly without sacrificing quality, and adapts instantly as requirements evolve.</p>
               </div>
 
@@ -271,7 +271,8 @@ export default function Home() {
               role="Cofounder | Product Designer | Entrepreneurship | Branding"
               tags={["Product Design", "UI/UX Branding Development", "Web Development", "Business Strategy", "Entrepreneurship", "B2B"]}
               links={[
-                { label: "Website", href: "https://trailslegal.com/" }
+                { label: "Website", href: "https://trailslegal.com/" },
+                { label: "Case Study", href: "/trails-legal-case-study" }
               ]}
             />
             <ProjectCard
