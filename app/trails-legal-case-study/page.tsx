@@ -12,29 +12,18 @@ export default function TrailsLegalCaseStudy() {
             Automating Manual Workflows for Legal Firms
         </span>
 
-        {/* Product Images */}
-        <div className="flex gap-3 mb-16 overflow-x-auto">
-          <Image
-            src="/trails-product-images/IMG_0226.PNG"
-            alt="Trails Product Screenshot 2"
-            width={200}
-            height={400}
-            className="rounded-xl h-auto"
-          />
-          <Image
-            src="/trails-product-images/IMG_0229.PNG"
-            alt="Trails Product Screenshot 3"
-            width={200}
-            height={400}
-            className="rounded-xl h-auto"
-          />
-          <Image
-            src="/trails-product-images/IMG_0234.PNG"
-            alt="Trails Product Screenshot 4"
-            width={200}
-            height={400}
-            className="rounded-xl h-auto"
-          />
+        {/* Product Video */}
+        <div className="mb-12">
+          <video 
+            className="w-full" 
+            autoPlay 
+            muted 
+            loop
+            playsInline
+          >
+            <source src="/trails-product-images/trailslegal.com.mov" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         {/* Product Design Section */}
@@ -81,6 +70,31 @@ export default function TrailsLegalCaseStudy() {
             </p>
           </div>
         </section>
+
+        {/* Product Images */}
+        <div className="flex gap-3 mb-16 overflow-x-auto">
+          <Image
+            src="/trails-product-images/IMG_0226.PNG"
+            alt="Trails Product Screenshot 2"
+            width={200}
+            height={400}
+            className="rounded-xl h-auto"
+          />
+          <Image
+            src="/trails-product-images/IMG_0229.PNG"
+            alt="Trails Product Screenshot 3"
+            width={200}
+            height={400}
+            className="rounded-xl h-auto"
+          />
+          <Image
+            src="/trails-product-images/IMG_0234.PNG"
+            alt="Trails Product Screenshot 4"
+            width={200}
+            height={400}
+            className="rounded-xl h-auto"
+          />
+        </div>
 
         {/* Branding Section */}
         <section className="mb-16">
