@@ -13,22 +13,22 @@ export default function Home() {
   const [view, setView] = useState<"detailed" | "cards">("detailed")
   const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState<"work" | "projects">("projects")
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  // const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const scrollPositionRef = useRef<number>(0)
   
-  const articleImages = [
-    "/Artboard 3.png",
-    
-    
-    "/IMG_9754.JPG",
-    "/IMG_9763.JPG",
-    "/IMG_8885 3.JPG",
-    "/IMG_9764.JPG",
-    "/IMG_9775.JPG",
-    "/Artboard 4_1.png",
-    "/_DSC1062.JPG",
-    "/_DSC1282.JPG"
-  ]
+  // const articleImages = [
+  //   "/Artboard 3.png",
+  //   
+  //   
+  //   "/IMG_9754.JPG",
+  //   "/IMG_9763.JPG",
+  //   "/IMG_8885 3.JPG",
+  //   "/IMG_9764.JPG",
+  //   "/IMG_9775.JPG",
+  //   "/Artboard 4_1.png",
+  //   "/_DSC1062.JPG",
+  //   "/_DSC1282.JPG"
+  // ]
   
   const scrollToProjects = () => {
     const projectsSection = document.getElementById("projects-section")
@@ -48,13 +48,13 @@ export default function Home() {
   }
   
   // Auto-rotate images for articles section
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % articleImages.length)
-    }, 3000) // Change image every 3 seconds
-    
-    return () => clearInterval(interval)
-  }, [articleImages.length])
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % articleImages.length)
+  //   }, 3000) // Change image every 3 seconds
+  //   
+  //   return () => clearInterval(interval)
+  // }, [articleImages.length])
   
   const handleViewChange = (newView: "detailed" | "cards") => {
     if (newView !== view) {
@@ -137,6 +137,54 @@ export default function Home() {
             </Link>
           </p>
         </div>
+      </section>
+
+      {/* Articles Section */}
+      <section className="bg-white snap-start snap-always relative pb-20 pt-8" style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
+        
+        <div className="w-full px-4">
+        <h2 className="text-2xl font-helvetica font-regular tracking-tight text-left pb-6">Recent Articles</h2>
+          <div className="grid grid-cols-2 gap-2.5 w-full">
+            {/* <div className="aspect-[2/1] flex flex-col relative group cursor-pointer">
+              <div className="w-full h-full relative">
+                <Image
+                  src={articleImages[currentImageIndex]}
+                  alt="555 Studio"
+                  fill
+                  className="object-cover transition-opacity duration-1000 ease-in-out"
+                />
+              </div>
+              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-helvetica text-md font-medium group-hover:text-black/70 transition-colors">Branding Montreal&apos;s Creative Pulse: The 555 Studio Story</h3>
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 group-hover:text-black/80 transition-colors w-[50%]">Branding not just a studio, but a cultural movement rooted in creativity and human connection.</p>
+              </div>
+            </div> */}
+            <Link href="/trails-legal-case-study" className="aspect-[2/1] flex flex-col relative group cursor-pointer">
+              <div className="w-full h-full relative">
+                <video
+                  src="/trails/trailslandingpage2.mp4"
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                />
+              </div>
+              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-helvetica text-md font-medium group-hover:text-black/70 transition-colors">Modern Interfaces for an Ancient Industry: My Approach to Legal UX</h3>
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 group-hover:text-black/80 transition-colors w-[50%]">How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems.</p>
+              </div>
+            </Link>
+           
+          </div>
+        </div>
         
         {/* Scroll Down Arrow */}
         <button
@@ -158,52 +206,6 @@ export default function Home() {
             <path d="M6 9l6 6 6-6" />
           </svg>
         </button>
-      </section>
-
-      {/* Articles Section */}
-      <section className="bg-white snap-start snap-always" style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
-        <div className="w-full p-4">
-          <div className="grid grid-cols-2 gap-2.5 w-full">
-            <div className="aspect-[2/1] flex flex-col relative">
-              <div className="w-full h-full relative">
-                <Image
-                  src={articleImages[currentImageIndex]}
-                  alt="555 Studio"
-                  fill
-                  className="object-cover transition-opacity duration-1000 ease-in-out"
-                />
-              </div>
-              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-helvetica text-md font-medium">Branding Montreal's Creative Pulse: The 555 Studio Story</h3>
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
-                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 w-[50%]">Branding not just a studio, but a cultural movement rooted in creativity and human connection.</p>
-              </div>
-            </div>
-            <div className="aspect-[2/1] flex flex-col relative">
-              <div className="w-full h-full relative">
-                <video
-                  src="/trails/trailslandingpage2.mp4"
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="auto"
-                />
-              </div>
-              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-helvetica text-md font-medium">Modern Interfaces for an Ancient Industry: My Approach to Legal UX</h3>
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
-                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 w-[50%]">How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems.</p>
-              </div>
-            </div>
-           
-          </div>
-        </div>
       </section>
 
       {/* Projects View - Cards or Detailed */}

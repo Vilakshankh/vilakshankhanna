@@ -15,12 +15,15 @@ export default function TrailsLegalCaseStudy() {
         </Link>
 
         {/* Hero Title */}
-        <h1 className="text-4xl md:text-5xl font-bold mb-8 text-left font-helvetica">
-          Trails Legal
+        <h1 className="text-2xl md:text-3xl font-semibold mb-3 text-left font-helvetica">
+            Modern Interfaces for an Ancient Industry: My Approach to Legal UX
         </h1>
-        <span className="block text-xl font-helvetica md:text-md my-4">
-            Automating Manual Workflows for Legal Firms
+        <span className="block text-md font-helvetica md:text-md mb-3">
+            How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems.
         </span>
+        <p className="text-sm font-helvetica text-black/60 mb-8">
+            by Vilakshan Khanna · December 30, 2025
+        </p>
 
         {/* Product Video */}
         <div className="mb-12">
