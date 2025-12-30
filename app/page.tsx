@@ -7,12 +7,37 @@ import Image from "next/image"
 import { ViewToggle } from "@/components/view-toggle"
 import { ProjectCard } from "@/components/project-card"
 import { HeroNavigation } from "@/components/hero-navigation"
+import { ArrowUpRight } from "lucide-react"
 
 export default function Home() {
   const [view, setView] = useState<"detailed" | "cards">("detailed")
   const [isLoading, setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState<"work" | "projects">("projects")
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const scrollPositionRef = useRef<number>(0)
+  
+  const articleImages = [
+    "/Artboard 3.png",
+    
+    
+    "/IMG_9754.JPG",
+    "/IMG_9763.JPG",
+    "/IMG_8885 3.JPG",
+    "/IMG_9764.JPG",
+    "/IMG_9775.JPG",
+    "/Artboard 4_1.png",
+    "/_DSC1062.JPG",
+    "/_DSC1282.JPG"
+  ]
+  
+  // Auto-rotate images for articles section
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % articleImages.length)
+    }, 3000) // Change image every 3 seconds
+    
+    return () => clearInterval(interval)
+  }, [articleImages.length])
   
   const scrollToProjects = () => {
     const projectsSection = document.getElementById("projects-section")
@@ -23,7 +48,6 @@ export default function Home() {
   }
   
   const scrollToWork = () => {
-    scrollPositionRef.current = window.scrollY
     setActiveTab("work")
     const projectsSection = document.getElementById("projects-section")
     if (projectsSection) {
@@ -54,6 +78,13 @@ export default function Home() {
     // Disable scroll snap when work tab is active
     if (activeTab === "work") {
       document.documentElement.style.scrollSnapType = 'none'
+      // Only restore scroll position if we're switching tabs (not initial navigation)
+      // Check if we're already scrolled past the hero section
+      const projectsSection = document.getElementById("projects-section")
+      if (projectsSection && window.scrollY < projectsSection.offsetTop - 100) {
+        // We're still in the hero section, don't restore scroll position
+        return
+      }
       // Restore scroll position after render with multiple attempts
       const restoreScroll = () => {
         if (scrollPositionRef.current > 0) {
@@ -135,33 +166,83 @@ export default function Home() {
         </button>
       </section>
 
+      {/* Articles Section */}
+      <section className="bg-white snap-start snap-always" style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
+        <div className="w-full p-4">
+          <div className="grid grid-cols-2 gap-2.5 w-full">
+            <div className="aspect-[2/1] flex flex-col relative">
+              <div className="w-full h-full relative">
+                <Image
+                  src={articleImages[currentImageIndex]}
+                  alt="555 Studio"
+                  fill
+                  className="object-cover transition-opacity duration-1000 ease-in-out"
+                />
+              </div>
+              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-helvetica text-md font-medium">Branding Montreal's Creative Pulse: The 555 Studio Story</h3>
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
+                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 w-[50%]">Branding not just a studio, but a cultural movement rooted in creativity and human connection.</p>
+              </div>
+            </div>
+            <div className="aspect-[2/1] flex flex-col relative">
+              <div className="w-full h-full relative">
+                <video
+                  src="/trails/trailslandingpage2.mp4"
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                />
+              </div>
+              <div className="h-[30%] py-4 flex flex-col justify-between bg-white">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-helvetica text-md font-medium">Modern Interfaces for an Ancient Industry: My Approach to Legal UX</h3>
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
+                <p className="font-helvetica text-sm font-mono tracking-tight text-black/60 w-[50%]">How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems.</p>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </section>
+
       {/* Projects View - Cards or Detailed */}
       <div id="projects-section" className="relative snap-none">
         {/* Sticky Header Section with Toggle - Only appears above project section */}
-        <div className="sticky top-0 z-50 bg-[#1C1C1C] border-b border-white/10 py-4 px-8 md:px-12 lg:px-16">
+        <div className="sticky top-0 z-50 bg-white py-4 px-8 md:px-12 lg:px-16">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-6">
               <button 
                 onClick={(e) => {
                   e.preventDefault()
-                  scrollPositionRef.current = window.scrollY
+                  scrollPositionRef.current = window.scrollY  // Save position when switching tabs
                   setActiveTab("work")
                 }}
-                className={activeTab === "work" ? "text-white hover:text-white/90 font-helvetica text-sm transition-colors" : "text-white/60 hover:text-white/80 font-helvetica text-sm transition-colors"}
+                className={activeTab === "work" ? "text-black hover:text-black/90 font-helvetica text-6xl transition-colors" : "text-black/60 hover:text-black/80 font-helvetica text-6xl transition-colors"}
               >
                 work
               </button>
-              <button 
-                onClick={() => {
-                  setActiveTab("projects")
-                  scrollToProjects()
-                }}
-                className={activeTab === "projects" ? "text-white hover:text-white/90 font-helvetica text-sm transition-colors" : "text-white/60 hover:text-white/80 font-helvetica text-sm transition-colors"}
-              >
-                projects
-              </button>
+              <div className="flex items-center gap-4">
+                <button 
+                  onClick={() => {
+                    setActiveTab("projects")
+                    scrollToProjects()
+                  }}
+                  className={activeTab === "projects" ? "text-black hover:text-black/90 font-helvetica text-6xl transition-colors" : "text-black/60 hover:text-black/80 font-helvetica text-6xl transition-colors"}
+                >
+                  projects
+                </button>
+                {activeTab === "projects" && (
+                  <ViewToggle view={view} onViewChange={handleViewChange} disableList={false} />
+                )}
+              </div>
             </div>
-            <ViewToggle view={view} onViewChange={handleViewChange} disableList={activeTab === "work"} />
           </div>
         </div>
         
@@ -173,7 +254,7 @@ export default function Home() {
         )}
         
         {activeTab === "work" ? (
-          <section className="bg-[#1C1C1C] py-16 md:py-24 px-8 md:px-12 lg:px-16" style={{ scrollSnapAlign: 'none', scrollSnapStop: 'normal' }}>
+          <section className="bg-[#1C1C1C] pt-24 py-16 md:py-24 px-8 md:px-12 lg:px-16" style={{ scrollSnapAlign: 'none', scrollSnapStop: 'normal' }}>
             <div className="max-w-3xl mx-auto text-white font-helvetica">
               {/* Header */}
               <div className="mb-12">
@@ -251,7 +332,7 @@ export default function Home() {
             </div>
           </section>
         ) : view === "cards" ? (
-          <section className="bg-[#1C1C1C] min-h-screen py-16 md:py-24 px-8 md:px-12 lg:px-16 snap-start snap-always relative">
+          <section className="bg-[#1C1C1C] min-h-screen pt-24 py-16 md:py-24 px-8 md:px-12 lg:px-16 snap-start snap-always relative">
           <div className="max-w-2xl flex flex-col gap-3">
             <ProjectCard
               title="FiveFiveFive Studio"

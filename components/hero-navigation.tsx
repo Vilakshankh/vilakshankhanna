@@ -36,7 +36,7 @@ export function HeroNavigation({ onProjectsClick, onWorkClick }: HeroNavigationP
         <NavigationMenuItem>
           <button
             onClick={onWorkClick}
-            className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium text-black/60 transition-colors hover:bg-black/5 hover:text-black/80 focus:bg-black/5 focus:text-black/80 focus:outline-none font-helvetica"
+            className="inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium btext-black/60 transition-colors hover:bg-black/5 hover:text-black/80 focus:bg-black/5 focus:text-black/80 focus:outline-none font-helvetica"
           >
             Work
           </button>
