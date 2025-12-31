@@ -201,7 +201,7 @@ function FeedContent({ isDark }: FeedProps) {
         title: "Trails Legal",
         description: "Trails automates manual workflows to help your legal firm deliver fast, high quality output for your clients",
         role: "Cofounder | Product Designer | Entrepreneurship | Branding",
-        logoSrc: "/Asset 15.svg",
+        logoSrc: "/Asset 10.svg",
         imageSrc: "/feature_key legal insights.gif",
       },
       {

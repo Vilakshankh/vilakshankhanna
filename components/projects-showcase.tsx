@@ -252,7 +252,7 @@ export function ProjectsShowcase({
                 {/* Logo + Project Name */}
                 <div className="flex items-center gap-3 mb-4 pb-2">
                   <Image 
-                    src="/Asset 15.svg" 
+                    src="/Asset 10.svg" 
                     alt="Trails Logo" 
                     width={32} 
                     height={32}
@@ -314,7 +314,7 @@ export function ProjectsShowcase({
                   <div className="text-white mb-6">
                     <div className="group flex items-center gap-3 mb-2">
                       <Image 
-                        src="/Asset 15.svg" 
+                        src="/Asset 10.svg" 
                         alt="Trails Logo" 
                         width={40}
                         height={40}
