@@ -62,7 +62,7 @@ export default function StudioenokRandomAnxietyDesignAutopsy({ isDark = false, e
       <ArticleSection isDark={isDark} title="Further Reading">
         <div className="space-y-4">
           <ArticleLink href="https://lnkd.in/eWHVuszF" isDark={isDark}>
-            Read more about Studioenok's work
+            Read more about Studioenok&apos;s work
           </ArticleLink>
           <br />
           <ArticleLink href="https://lnkd.in/e6xdfj6Z" isDark={isDark}>

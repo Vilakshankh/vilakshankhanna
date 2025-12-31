@@ -29,7 +29,7 @@ export default function TrailsLegalCaseStudy({ isDark = false, embedded = false 
 
       <ArticleSection isDark={isDark} title="Product Design">
         <p>
-          <strong>Trails was important to me because it was my first real attempt at reimagining how legal work could function — not just cosmetically, but fundamentally.</strong> I walked into an industry where everything felt old-school: slow systems, rigid workflows, interfaces that looked like they hadn't been touched in 20 years. I wanted to see if it was possible to take something this entrenched and redesign it into something modern, streamlined, and deeply personalized.
+          <strong>Trails was important to me because it was my first real attempt at reimagining how legal work could function — not just cosmetically, but fundamentally.</strong> I walked into an industry where everything felt old-school: slow systems, rigid workflows, interfaces that looked like they hadn&apos;t been touched in 20 years. I wanted to see if it was possible to take something this entrenched and redesign it into something modern, streamlined, and deeply personalized.
         </p>
 
         <p>
@@ -96,11 +96,11 @@ export default function TrailsLegalCaseStudy({ isDark = false, embedded = false 
         </p>
 
         <p>
-          We ran between 200–250 user interviews, recorded them, analyzed them with AI, and studied patterns in everything they said. Over time, I started to understand this "animal": how it behaves, what stresses it, what it avoids, what it values, what triggers it to make decisions.
+          We ran between 200–250 user interviews, recorded them, analyzed them with AI, and studied patterns in everything they said. Over time, I started to understand this &quot;animal&quot;: how it behaves, what stresses it, what it avoids, what it values, what triggers it to make decisions.
         </p>
 
         <p>
-          That was the most interesting part — realizing that once I understood how a lawyer <em>thinks</em>, I could influence the workflow through design. I wasn't just designing screens; I was reshaping behavior.
+          That was the most interesting part — realizing that once I understood how a lawyer <em>thinks</em>, I could influence the workflow through design. I wasn&apos;t just designing screens; I was reshaping behavior.
         </p>
       </ArticleSection>
 
@@ -133,11 +133,11 @@ export default function TrailsLegalCaseStudy({ isDark = false, embedded = false 
 
       <ArticleSection isDark={isDark} title="Branding">
         <p>
-          Trails' branding began with a simple question I asked myself: <em>how do I modernize a legal practice without alienating the people who built it?</em> My target demographic included middle-aged lawyers with decades of experience — people who have seen the legal field evolve but still work in an environment associated with tradition, luxury, and formality: Dior suits, negotiation rooms, refined paperwork, the balance scale, and all the classic symbolism of law.
+          Trails&apos; branding began with a simple question I asked myself: <em>how do I modernize a legal practice without alienating the people who built it?</em> My target demographic included middle-aged lawyers with decades of experience — people who have seen the legal field evolve but still work in an environment associated with tradition, luxury, and formality: Dior suits, negotiation rooms, refined paperwork, the balance scale, and all the classic symbolism of law.
         </p>
 
         <p>
-          To bridge that world with the modern, personalized, tech-driven experience I was designing, I drew inspiration from industries that carried a similar luxury archetype but also communicated freshness and transformation — specifically <strong>jewelry</strong> and <strong>cosmetics</strong>. Both industries sit at the intersection of heritage and renewal, elegance and innovation. That matched perfectly with Trails' mission: <strong>to transform traditional legal practices into modern, technology-driven firms</strong>. So I took elements from those archetypes and translated them into the brand's visual identity.
+          To bridge that world with the modern, personalized, tech-driven experience I was designing, I drew inspiration from industries that carried a similar luxury archetype but also communicated freshness and transformation — specifically <strong>jewelry</strong> and <strong>cosmetics</strong>. Both industries sit at the intersection of heritage and renewal, elegance and innovation. That matched perfectly with Trails&apos; mission: <strong>to transform traditional legal practices into modern, technology-driven firms</strong>. So I took elements from those archetypes and translated them into the brand&apos;s visual identity.
         </p>
 
         <p>This shaped all of my brand decisions:</p>
@@ -146,7 +146,7 @@ export default function TrailsLegalCaseStudy({ isDark = false, embedded = false 
           <li><strong>Color palette:</strong> black, brown, white, and green — a mix of heritage, luxury, and renewal.</li>
           <li><strong>Typography:</strong> serif fonts to honor the classical, literature-rich history of law. I used <strong>Playfair Display</strong> for headings and <strong>Inter</strong> for body text to blend timeless formality with digital clarity.</li>
           <li><strong>Logo:</strong> simple, monochromatic, and flexible.</li>
-          <li><strong>Name:</strong> previously "LegiSimple," the rebranding came from exploring deeper symbolism. Legal work involves research paths, case histories, and paper trails. Lawyers follow trails — and they leave them. I also liked the subtle visual similarity between "trials" and "trails," reinforcing the legal theme while still feeling modern.</li>
+          <li><strong>Name:</strong> previously &quot;LegiSimple,&quot; the rebranding came from exploring deeper symbolism. Legal work involves research paths, case histories, and paper trails. Lawyers follow trails — and they leave them. I also liked the subtle visual similarity between &quot;trials&quot; and &quot;trails,&quot; reinforcing the legal theme while still feeling modern.</li>
         </ul>
 
         <p>
@@ -157,7 +157,7 @@ export default function TrailsLegalCaseStudy({ isDark = false, embedded = false 
           Copywriting was one of the hardest parts early on. I was discovering the market at the same time I was discovering our value proposition, so I experimented heavily. I ran multiple rounds of messaging tests — different tones, hero lines, structures, and narrative angles — and used each round of feedback to get closer to a voice that communicated modernization, trust, and transformation without losing the gravitas of the legal industry.
         </p>
 
-        <p>In the end, I built Trails' branding the same way I build product:</p>
+        <p>In the end, I built Trails&apos; branding the same way I build product:</p>
 
         <p className="text-lg font-semibold">
           test, collect feedback, refine, repeat.

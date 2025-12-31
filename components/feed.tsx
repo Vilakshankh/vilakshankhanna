@@ -243,8 +243,8 @@ function FeedContent({ isDark }: FeedProps) {
         setIsArticleLoading(true)
         setArticleError(null)
         try {
-          const module = await import(`@/app/articles/${article}/page`)
-          setArticleComponent(() => module.default)
+          const articleModule = await import(`@/app/articles/${article}/page`)
+          setArticleComponent(() => articleModule.default)
         } catch (err) {
           console.error(`Failed to load article ${article}:`, err)
           setArticleError(`Failed to load article "${article}"`)

@@ -49,11 +49,11 @@ export default function IntroducingSyntra({ isDark = false, embedded = false }: 
           The workflow is still fragmented—design in one tool, implementation in another, and constant back-and-forth.
         </p>
         <p>
-          The friction doesn't come from bad design or bad engineering. It comes from the mental context switch: moving from creative
+          The friction doesn&apos;t come from bad design or bad engineering. It comes from the mental context switch: moving from creative
           experimentation into rigid, analytical coding. That workload with current tools is separated, slow, and breaks flow state.
         </p>
         <p>
-          AI tools claim to remove friction by "auto generating" prototypes from prompts, but in practice they produce sloppy, non-iterative output.
+          AI tools claim to remove friction by &quot;auto generating&quot; prototypes from prompts, but in practice they produce sloppy, non-iterative output.
           They attempt to eliminate the back-and-forth instead of improving it. But that back-and-forth is where real design thinking happens.
           We discover intent, emotion, interaction, and the nuance of how something should <em>feel</em>.
         </p>
@@ -120,13 +120,13 @@ export default function IntroducingSyntra({ isDark = false, embedded = false }: 
       <ArticleSection isDark={isDark} title="Hierarchy View">
         <p>
           The Hierarchy View is a hierarchical outline that appears whenever a component is being worked on. It mirrors the exact structure of the
-          component's code: parent, child, wrapper, and layout group—helping designers understand structure without scanning code.
+          component&apos;s code: parent, child, wrapper, and layout group—helping designers understand structure without scanning code.
         </p>
 
         <ArticleImage
           src={ASSETS.hierarchyExplainer}
           alt="Hierarchy View explainer"
-          caption="Hierarchy View mirrors the component's code structure"
+          caption="Hierarchy View mirrors the component&apos;s code structure"
           isDark={isDark}
         />
 
@@ -164,7 +164,7 @@ export default function IntroducingSyntra({ isDark = false, embedded = false }: 
         <ArticleImage
           src={ASSETS.customization}
           alt="Component customization panel"
-          caption="A closer look at Syntra's customization tools"
+          caption="A closer look at Syntra&apos;s customization tools"
           isDark={isDark}
         />
       </ArticleSection>
@@ -235,7 +235,7 @@ export default function IntroducingSyntra({ isDark = false, embedded = false }: 
         <ArticleImage
           src={ASSETS.marketingFrame}
           alt="Introducing Syntra marketing frame"
-          caption='"Introducing Syntra" marketing frame'
+          caption="&quot;Introducing Syntra&quot; marketing frame"
           isDark={isDark}
         />
 
@@ -247,7 +247,7 @@ export default function IntroducingSyntra({ isDark = false, embedded = false }: 
 
       <ArticleSection isDark={isDark} title="Feedback and future versions">
         <p>
-          Syntra's first version forms the foundation: editing components visually with code updating in real time. From there, the evolution depends on
+          Syntra&apos;s first version forms the foundation: editing components visually with code updating in real time. From there, the evolution depends on
           observing how users push, bend, and break the system.
         </p>
 
