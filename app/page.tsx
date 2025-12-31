@@ -1,10 +1,10 @@
 "use client"
 
-import Link from "next/link"
-import { Newspaper, TrendingUp, Target, Users, Music } from "lucide-react"
 import { useState, useEffect, Suspense } from "react"
-import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { Feed } from "@/components/feed"
+import { AboutSidebar } from "@/components/about-sidebar"
+import { DirectorySidebar } from "@/components/directory-sidebar"
 // import {
 //   Dialog,
 //   DialogContent,
@@ -23,13 +23,14 @@ import { Feed } from "@/components/feed"
 // }
 
 function HomeContent() {
-  const router = useRouter()
-  const pathname = usePathname()
   const searchParams = useSearchParams()
   const directory = searchParams.get("directory")
   
   const [isFlashing, setIsFlashing] = useState(false)
   const [isDark, setIsDark] = useState(false)
+  const [aboutCollapsed, setAboutCollapsed] = useState(false)
+  const [directoryCollapsed, setDirectoryCollapsed] = useState(false)
+  const [isDoNotDisturb, setIsDoNotDisturb] = useState(false)
   // const [isDialogOpen, setIsDialogOpen] = useState(false)
   // const [spotifyData, setSpotifyData] = useState<SpotifyTrack | null>(null)
   // const [isLoading, setIsLoading] = useState(false)
@@ -45,6 +46,12 @@ function HomeContent() {
     }
     return () => clearInterval(interval)
   }, [isFlashing])
+
+  const handleDoNotDisturb = (active: boolean) => {
+    setIsDoNotDisturb(active)
+    setAboutCollapsed(active)
+    setDirectoryCollapsed(active)
+  }
 
   // useEffect(() => {
   //   const fetchNowPlaying = async () => {
@@ -91,118 +98,15 @@ function HomeContent() {
       </nav>
 
       {/* Main 3-Column Layout */}
-      <main className="grid grid-cols-1 md:grid-cols-[0.5fr_1fr_0.5fr] flex-1 overflow-hidden">
-        {/* About Column */}
-        <section className={`p-8 border-r overflow-y-auto ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
-          <h2 className="font-helvetica text-sm font-medium tracking-tight mb-4">ABOUT</h2>
-          <div className={`font-helvetica text-sm space-y-4 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
-            {directory === "work-stats" ? (
-              <>
-                <div>
-                  <h3 className={`font-helvetica text-base font-semibold mb-1 ${isDark ? 'text-white' : 'text-black'}`}>
-                    Vilakshan Khanna
-                  </h3>
-                  <p className={`font-helvetica text-xs mb-3 ${isDark ? 'text-white/60' : 'text-black/60'}`}>
-                    Startup | Design Engineer | Creative Strategist
-                  </p>
-                </div>
-                <p className={`font-helvetica text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
-                  📍Toronto, ON | 📩vilakshank20@gmail.com | <Link href="#" className={`underline hover:opacity-70 ${isDark ? 'text-white/60' : 'text-black/60'}`}>Vilakshan&apos;s Linktree</Link>
-                </p>
-                <p className={`font-helvetica text-xs leading-relaxed ${isDark ? 'text-white/70' : 'text-black/70'}`}>
-                  Five years in high-intensity startup environments have shaped Vilakshan into a builder who thrives on autonomy, solves complex problems with clarity, moves quickly without sacrificing quality, and adapts instantly as requirements evolve.
-                </p>
-              </>
-            ) : (
-              <>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-                <p>
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                <p>
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
-              </>
-            )}
-          </div>
-        </section>
+      <main className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] flex-1 overflow-hidden">
+        {/* About Sidebar */}
+        <AboutSidebar isDark={isDark} directory={directory} isCollapsed={aboutCollapsed} onCollapsedChange={setAboutCollapsed} />
 
         {/* Feed Column */}
         <Feed isDark={isDark} />
 
-        {/* Directory Column */}
-        <section className={`p-8 overflow-y-auto ${isDark ? 'bg-white/5' : 'bg-black/5'}`}>
-          <h2 className="font-helvetica text-sm font-medium tracking-tight mb-4">DIRECTORY</h2>
-          <div className="flex flex-col gap-1 font-mono tracking-loose text-xs px-5">
-            <button 
-              onClick={() => router.push(pathname + "?directory=articles", { scroll: false })}
-              className={`flex items-center gap-2 text-left px-2 py-1 transition-all ${
-                directory === "articles"
-                  ? isDark 
-                    ? "bg-white text-black" 
-                    : "bg-black text-white"
-                  : "hover:opacity-70"
-              }`}
-            >
-              <Newspaper className="w-4 h-4" />
-              articles
-            </button>
-            <button 
-              onClick={() => router.push(pathname + "?directory=projects", { scroll: false })}
-              className={`flex items-center gap-2 text-left px-2 py-1 transition-all ${
-                directory === "projects"
-                  ? isDark 
-                    ? "bg-white text-black" 
-                    : "bg-black text-white"
-                  : "hover:opacity-70"
-              }`}
-            >
-              <TrendingUp className="w-4 h-4" />
-              projects
-            </button>
-            <button 
-              onClick={() => router.push(pathname + "?directory=work-stats", { scroll: false })}
-              className={`flex items-center gap-2 text-left px-2 py-1 transition-all ${
-                directory === "work-stats"
-                  ? isDark 
-                    ? "bg-white text-black" 
-                    : "bg-black text-white"
-                  : "hover:opacity-70"
-              }`}
-            >
-              <Target className="w-4 h-4" />
-              work stats
-            </button>
-            <button 
-              onClick={() => router.push(pathname + "?directory=socials", { scroll: false })}
-              className={`flex items-center gap-2 text-left px-2 py-1 transition-all ${
-                directory === "socials"
-                  ? isDark 
-                    ? "bg-white text-black" 
-                    : "bg-black text-white"
-                  : "hover:opacity-70"
-              }`}
-            >
-              <Users className="w-4 h-4" />
-              socials
-            </button>
-            <button 
-              onClick={() => router.push(pathname + "?directory=music", { scroll: false })}
-              className={`flex items-center gap-2 text-left px-2 py-1 transition-all ${
-                directory === "music"
-                  ? isDark 
-                    ? "bg-white text-black" 
-                    : "bg-black text-white"
-                  : "hover:opacity-70"
-              }`}
-            >
-              <Music className="w-4 h-4" />
-              music
-            </button>
-          </div>
-        </section>
+        {/* Directory Sidebar */}
+        <DirectorySidebar isDark={isDark} directory={directory} isCollapsed={directoryCollapsed} onCollapsedChange={setDirectoryCollapsed} isDoNotDisturb={isDoNotDisturb} onDoNotDisturbChange={handleDoNotDisturb} />
       </main>
 
       {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

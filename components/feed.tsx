@@ -251,8 +251,9 @@ function FeedContent({ isDark }: FeedProps) {
   }
 
   return (
-    <section className={`py-8 border-r overflow-y-auto ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-      <div className="flex items-center justify-between mb-8 min-h-[32px] px-8">
+    <section className="py-8 overflow-y-auto flex justify-center">
+      <div className="w-full max-w-[900px] px-12">
+        <div className="flex items-center justify-between mb-8 min-h-[32px]">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -262,11 +263,11 @@ function FeedContent({ isDark }: FeedProps) {
                     onClick={() => handleBreadcrumbClick(pathname)}
                     className="font-helvetica text-sm font-medium tracking-tight hover:opacity-70"
                   >
-                    Feed
+                    FEED
                   </button>
                 </BreadcrumbLink>
               ) : (
-                <BreadcrumbPage className="font-helvetica text-sm font-medium tracking-tight">Feed</BreadcrumbPage>
+                <BreadcrumbPage className="font-helvetica text-sm font-medium tracking-tight">FEED</BreadcrumbPage>
               )}
             </BreadcrumbItem>
             {directory && (
@@ -318,7 +319,7 @@ function FeedContent({ isDark }: FeedProps) {
       </div>
 
       {/* Content Area */}
-      <div className="min-h-[400px] px-1">
+      <div className="min-h-[400px]">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
@@ -335,7 +336,7 @@ function FeedContent({ isDark }: FeedProps) {
               <button
                 key={item.slug}
                 onClick={() => handleArticleClick(item.slug)}
-                className="w-4/5 mx-auto flex flex-col relative group cursor-pointer text-left"
+                className="w-[750px] mx-auto flex flex-col relative group cursor-pointer text-left"
               >
                 <div className="w-full aspect-[16/10] relative">
                   <video
@@ -349,16 +350,16 @@ function FeedContent({ isDark }: FeedProps) {
                   />
                 </div>
                 <div className={`py-2 flex flex-col gap-2 ${isDark ? 'bg-black' : 'bg-white'}`}>
-                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[10px] mb-1">
+                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
                     article
                   </span>
                   <div className="flex items-center justify-between">
-                    <h3 className={`font-helvetica text-lg font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
+                    <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
                       {item.title}
                     </h3>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
-                  <p className={`font-helvetica text-xs font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
+                  <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
                     {item.description}
                   </p>
                   <span className={`font-helvetica text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
@@ -377,18 +378,18 @@ function FeedContent({ isDark }: FeedProps) {
           // Work experience cards
           <div className="flex flex-col gap-6 animate-in fade-in duration-500">
             {/* Skills Section */}
-            <div className={`w-4/5 mx-auto p-6 rounded-sm border ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
-              <h2 className={`font-helvetica text-lg font-medium mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Skills</h2>
+            <div className={`w-[750px] mx-auto p-5 rounded-sm border ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
+              <h2 className={`font-helvetica text-xl font-medium mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Skills</h2>
               <div className="space-y-4">
                 <div>
                   <h3 className={`font-helvetica text-sm font-medium mb-2 ${isDark ? 'text-white/80' : 'text-black/80'}`}>Technical</h3>
-                  <p className={`font-helvetica text-xs ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                  <p className={`font-helvetica text-sm ${isDark ? 'text-white/70' : 'text-black/70'}`}>
                     React, Next.js, TypeScript, React Native, SwiftUI, Flutter, Javascript, Component Architecture
                   </p>
                 </div>
                 <div>
                   <h3 className={`font-helvetica text-sm font-medium mb-2 ${isDark ? 'text-white/80' : 'text-black/80'}`}>Design & AI</h3>
-                  <p className={`font-helvetica text-xs ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                  <p className={`font-helvetica text-sm ${isDark ? 'text-white/70' : 'text-black/70'}`}>
                     Figma, Design Systems, Interaction Design, v0.dev, Cursor, ChatGPT/LLM workflows
                   </p>
                 </div>
@@ -399,7 +400,7 @@ function FeedContent({ isDark }: FeedProps) {
             {workExperiences.map((experience) => (
               <div
                 key={experience.id}
-                className={`w-4/5 mx-auto p-6 rounded-sm border transition-colors ${
+                className={`w-[750px] mx-auto p-5 rounded-sm border transition-colors ${
                   isDark 
                     ? 'border-white/10 bg-white/5 hover:bg-white/10' 
                     : 'border-black/10 bg-black/5 hover:bg-black/10'
@@ -407,16 +408,16 @@ function FeedContent({ isDark }: FeedProps) {
               >
                 <div className="flex flex-col gap-3">
                   <div className="flex flex-col gap-1">
-                    <h3 className={`font-helvetica text-lg font-medium ${isDark ? 'text-white' : 'text-black'}`}>
+                    <h3 className={`font-helvetica text-xl font-medium ${isDark ? 'text-white' : 'text-black'}`}>
                       {experience.company} | {experience.role}
                     </h3>
                     <p className={`font-helvetica text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
                       {experience.location} | {experience.period}
                     </p>
                   </div>
-                  <ul className={`space-y-2 mt-2 list-disc list-outside pl-5 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                  <ul className={`space-y-2 mt-1 list-disc list-outside pl-5 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
                     {experience.achievements.map((achievement, index) => (
-                      <li key={index} className={`font-helvetica text-xs leading-relaxed`}>
+                      <li key={index} className={`font-helvetica text-sm leading-relaxed`}>
                         {achievement}
                       </li>
                     ))}
@@ -426,9 +427,9 @@ function FeedContent({ isDark }: FeedProps) {
             ))}
 
             {/* Education Section */}
-            <div className={`w-4/5 mx-auto p-6 rounded-sm border ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
-              <h2 className={`font-helvetica text-lg font-medium mb-2 ${isDark ? 'text-white' : 'text-black'}`}>Education</h2>
-              <p className={`font-helvetica text-xs ${isDark ? 'text-white/70' : 'text-black/70'} mb-1`}>
+            <div className={`w-[750px] mx-auto p-5 rounded-sm border ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
+              <h2 className={`font-helvetica text-xl font-medium mb-2 ${isDark ? 'text-white' : 'text-black'}`}>Education</h2>
+              <p className={`font-helvetica text-sm ${isDark ? 'text-white/70' : 'text-black/70'} mb-1.5`}>
                 Computer Science and Business Administration (Specializing in UI/UX Design and Video Game Design)
               </p>
               <p className={`font-helvetica text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
@@ -450,7 +451,7 @@ function FeedContent({ isDark }: FeedProps) {
               <button
                 key={item.id}
                 onClick={() => handleUnifiedItemClick(item)}
-                className="w-4/5 mx-auto flex flex-col relative group cursor-pointer text-left"
+                className="w-[750px] mx-auto flex flex-col relative group cursor-pointer text-left"
               >
                 {/* Logo + Project Name (for projects) */}
                 {item.type === "project" && item.logoSrc && (
@@ -465,7 +466,7 @@ function FeedContent({ isDark }: FeedProps) {
                       height={32}
                       className="object-contain"
                     />
-                    <h3 className={`font-helvetica text-md font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
+                    <h3 className={`font-helvetica text-base font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
                       {item.title}
                     </h3>
                   </div>
@@ -473,7 +474,7 @@ function FeedContent({ isDark }: FeedProps) {
                 
                 {/* Media Content */}
                 {item.type === "article" && item.videoSrc ? (
-                  <div className="w-full aspect-[16/10] relative mb-4">
+                  <div className="w-full aspect-[16/10] relative mb-3">
                     <video
                       src={item.videoSrc}
                       className="w-full h-full object-cover rounded-sm"
@@ -485,7 +486,7 @@ function FeedContent({ isDark }: FeedProps) {
                     />
                   </div>
                 ) : item.type === "project" && item.youtubeEmbed ? (
-                  <div className="w-full aspect-[16/10] relative overflow-hidden rounded-sm mb-4">
+                  <div className="w-full aspect-[16/10] relative overflow-hidden rounded-sm mb-3">
                     <iframe
                       className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2 scale-150"
                       src={item.youtubeEmbed}
@@ -495,7 +496,7 @@ function FeedContent({ isDark }: FeedProps) {
                     />
                   </div>
                 ) : item.type === "project" && item.imageSrc ? (
-                  <div className="w-full aspect-[16/10] relative mb-4">
+                  <div className="w-full aspect-[16/10] relative mb-3">
                     <Image
                       src={item.imageSrc}
                       alt={item.title}
@@ -505,7 +506,7 @@ function FeedContent({ isDark }: FeedProps) {
                     />
                   </div>
                 ) : item.type === "project" && item.videoSrc ? (
-                  <div className="w-full aspect-[16/10] relative mb-4">
+                  <div className="w-full aspect-[16/10] relative mb-3">
                     <video
                       src={item.videoSrc}
                       className="w-full h-full object-cover rounded-sm"
@@ -517,27 +518,27 @@ function FeedContent({ isDark }: FeedProps) {
                     />
                   </div>
                 ) : (
-                  <div className={`w-full aspect-[16/10] relative rounded-sm flex items-center justify-center mb-4 ${isDark ? 'bg-white/10' : 'bg-black/10'}`}>
-                    <span className={`font-helvetica text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                  <div className={`w-full aspect-[16/10] relative rounded-sm flex items-center justify-center mb-3 ${isDark ? 'bg-white/10' : 'bg-black/10'}`}>
+                    <span className={`font-helvetica text-[10px] ${isDark ? 'text-white/40' : 'text-black/40'}`}>
                       Coming Soon
                     </span>
                   </div>
                 )}
                 
                 {/* Metadata */}
-                <div className={`py-2 flex flex-col gap-3 ${isDark ? 'bg-black' : 'bg-white'}`}>
+                <div className={`py-2 flex flex-col gap-2.5 ${isDark ? 'bg-black' : 'bg-white'}`}>
                   {item.type === "article" && (
                     <>
-                      <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[10px] mb-1">
+                      <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
                         article
                       </span>
                       <div className="flex items-center justify-between">
-                        <h3 className={`font-helvetica text-lg font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
+                        <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
                           {item.title}
                         </h3>
                         <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </div>
-                      <p className={`font-helvetica text-xs font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
+                      <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
                         {item.description}
                       </p>
                       {item.date && (
@@ -549,15 +550,15 @@ function FeedContent({ isDark }: FeedProps) {
                   )}
                   {item.type === "project" && (
                     <>
-                      <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[10px] mb-1">
+                      <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
                         project
                       </span>
                       {item.role && (
-                        <p className={`font-helvetica text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                        <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
                           {item.role}
                         </p>
                       )}
-                      <p className={`font-helvetica text-xs font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
+                      <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
                         {item.description}
                       </p>
                     </>
@@ -567,6 +568,7 @@ function FeedContent({ isDark }: FeedProps) {
             ))}
           </div>
         )}
+      </div>
       </div>
     </section>
   )

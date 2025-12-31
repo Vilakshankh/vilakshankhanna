@@ -90,7 +90,7 @@ export function ProjectsShowcase({
       ) : (
         <>
           {/* FiveFiveFive Studio Section */}
-          <section className={variant === "embedded" ? "w-4/5 mx-auto mb-12 flex flex-col" : "relative w-full h-screen overflow-hidden snap-start snap-always"}>
+          <section className={variant === "embedded" ? "w-[750px] mx-auto mb-12 flex flex-col" : "relative w-full h-screen overflow-hidden snap-start snap-always"}>
             {variant === "embedded" ? (
               <>
                 {/* Logo + Project Name */}
@@ -102,7 +102,7 @@ export function ProjectsShowcase({
                     height={32}
                     className="object-contain"
                   />
-                  <h3 className="font-helvetica text-lg font-medium">555 Studio</h3>
+                  <h3 className="font-helvetica text-base font-medium">555 Studio</h3>
                 </div>
                 
                 {/* Media Container */}
@@ -117,13 +117,13 @@ export function ProjectsShowcase({
                 </div>
                 
                 {/* Metadata */}
-                <div className="py-2 flex flex-col gap-3">
-                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[10px] mb-1">
+                <div className="py-2 flex flex-col gap-2.5">
+                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
                     project
                   </span>
-                  <p className="font-helvetica text-xs text-black/60">Co-organizer | Branding | Community Designer</p>
-                  <p className="font-helvetica text-xs font-mono tracking-tight">Creative nights event series in Montreal, 1000+ people so far</p>
-                  <div className="flex flex-wrap gap-2 text-xs font-helvetica">
+                  <p className="font-helvetica text-sm text-black/60">Co-organizer | Branding | Community Designer</p>
+                  <p className="font-helvetica text-sm font-mono tracking-tight">Creative nights event series in Montreal, 1000+ people so far</p>
+                  <div className="flex flex-wrap gap-2 text-sm font-helvetica">
                     <Link 
                       href="https://luma.com/fivefivefive?k=c&period=past" 
                       target="_blank" 
@@ -246,7 +246,7 @@ export function ProjectsShowcase({
           </section>
 
           {/* Trails Section */}
-          <section className={variant === "embedded" ? "w-4/5 mx-auto mb-12 flex flex-col" : "relative w-full h-screen overflow-hidden snap-start snap-always"}>
+          <section className={variant === "embedded" ? "w-[750px] mx-auto mb-12 flex flex-col" : "relative w-full h-screen overflow-hidden snap-start snap-always"}>
             {variant === "embedded" ? (
               <>
                 {/* Logo + Project Name */}
@@ -258,7 +258,7 @@ export function ProjectsShowcase({
                     height={32}
                     className="object-contain"
                   />
-                  <h3 className="font-helvetica text-lg font-medium">Trails Legal</h3>
+                  <h3 className="font-helvetica text-base font-medium">Trails Legal</h3>
                 </div>
                 
                 {/* Media Container */}
@@ -273,13 +273,13 @@ export function ProjectsShowcase({
                 </div>
                 
                 {/* Metadata */}
-                <div className="py-2 flex flex-col gap-3">
-                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[10px] mb-1">
+                <div className="py-2 flex flex-col gap-2.5">
+                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
                     project
                   </span>
-                  <p className="font-helvetica text-xs text-black/60">Cofounder | Product Designer | Entrepreneurship | Branding</p>
-                  <p className="font-helvetica text-xs font-mono tracking-tight">Trails automates manual workflows to help your legal firm deliver fast, high quality output for your clients</p>
-                  <div className="flex flex-wrap gap-2 text-xs font-helvetica">
+                  <p className="font-helvetica text-sm text-black/60">Cofounder | Product Designer | Entrepreneurship | Branding</p>
+                  <p className="font-helvetica text-sm font-mono tracking-tight">Trails automates manual workflows to help your legal firm deliver fast, high quality output for your clients</p>
+                  <div className="flex flex-wrap gap-2 text-sm font-helvetica">
                     <Link 
                       href="https://trailslegal.com/" 
                       target="_blank" 
@@ -357,7 +357,7 @@ export function ProjectsShowcase({
           </section>
 
           {/* The Butterfly Project Section */}
-          <section className={variant === "embedded" ? "w-4/5 mx-auto flex flex-col" : "relative w-full h-screen overflow-hidden snap-start snap-always"}>
+          <section className={variant === "embedded" ? "w-[750px] mx-auto flex flex-col" : "relative w-full h-screen overflow-hidden snap-start snap-always"}>
             {variant === "embedded" ? (
               <>
                 {/* Logo + Project Name */}
@@ -369,7 +369,7 @@ export function ProjectsShowcase({
                     height={32}
                     className="object-contain"
                   />
-                  <h3 className="font-helvetica text-lg font-medium">The Butterfly Project</h3>
+                  <h3 className="font-helvetica text-base font-medium">The Butterfly Project</h3>
                 </div>
                 
                 {/* Media Container */}
@@ -384,12 +384,12 @@ export function ProjectsShowcase({
                 </div>
                 
                 {/* Metadata */}
-                <div className="py-2 flex flex-col gap-3">
-                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[10px] mb-1">
+                <div className="py-2 flex flex-col gap-2.5">
+                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
                     project
                   </span>
-                  <p className="font-helvetica text-xs text-black/60">Founder | Product Designer | Community Builder</p>
-                  <p className="font-helvetica text-xs font-mono tracking-tight">Cowork together and meet new people.</p>
+                  <p className="font-helvetica text-sm text-black/60">Founder | Product Designer | Community Builder</p>
+                  <p className="font-helvetica text-sm font-mono tracking-tight">Cowork together and meet new people.</p>
                 </div>
               </>
             ) : (

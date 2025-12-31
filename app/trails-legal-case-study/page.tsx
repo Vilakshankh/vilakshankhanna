@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button"
 
 export default function TrailsLegalCaseStudy() {
   return (
-    <main className="flex min-h-screen flex-col bg-white py-8 px-12">
-      <div className="w-[750px] mx-auto">
+    <main className="flex min-h-screen flex-col items-center bg-white py-16 px-6 md:px-12">
+      <div className="max-w-3xl w-full">
         {/* Back Button */}
         <Link href="/" className="inline-block mb-8">
           <Button variant="outline" size="icon">
