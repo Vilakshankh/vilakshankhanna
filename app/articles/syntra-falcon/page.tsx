@@ -20,12 +20,8 @@ const ASSETS = {
   themeBuilderRef: "/articles/Syntra in Falcon/Frame 36.png",
 }
 
-interface IntroducingSyntraProps {
-  isDark?: boolean
-  embedded?: boolean
-}
-
-export default function IntroducingSyntra({ isDark = false, embedded = false }: IntroducingSyntraProps) {
+export default function IntroducingSyntra(props?: { isDark?: boolean; embedded?: boolean }) {
+  const { isDark = false, embedded = false } = props || {}
   return (
     <ArticleContent isDark={isDark} embedded={embedded}>
       <ArticleHero

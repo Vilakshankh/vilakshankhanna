@@ -9,12 +9,8 @@ import {
   ArticleVideo
 } from "@/components/ui/article-content"
 
-interface TrailsLegalCaseStudyProps {
-  isDark?: boolean
-  embedded?: boolean
-}
-
-export default function TrailsLegalCaseStudy({ isDark = false, embedded = false }: TrailsLegalCaseStudyProps) {
+export default function TrailsLegalCaseStudy(props?: { isDark?: boolean; embedded?: boolean }) {
+  const { isDark = false, embedded = false } = props || {}
   return (
     <ArticleContent isDark={isDark} embedded={embedded}>
       <ArticleHero
