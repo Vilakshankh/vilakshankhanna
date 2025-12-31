@@ -16,8 +16,8 @@ const ASSETS = {
   boxStack: "/articles/studioenok and randomanxiety/Studioenok_randomanxiety4.png",
 }
 
-export default function StudioenokRandomAnxietyDesignAutopsy(props?: { isDark?: boolean; embedded?: boolean }) {
-  const { isDark = false, embedded = false } = props || {}
+export default function StudioenokRandomAnxietyDesignAutopsy(props: { isDark?: boolean; embedded?: boolean; params?: any; searchParams?: any } = {}) {
+  const { isDark = false, embedded = false } = props
   return (
     <ArticleContent isDark={isDark} embedded={embedded}>
       <ArticleHero
