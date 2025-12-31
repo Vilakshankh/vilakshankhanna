@@ -3,8 +3,8 @@
 import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Feed } from "@/components/feed"
-import { AboutSidebar } from "@/components/about-sidebar"
 import { DirectorySidebar } from "@/components/directory-sidebar"
+import { AboutSidebar } from "@/components/about-sidebar"
 // import {
 //   Dialog,
 //   DialogContent,
@@ -28,9 +28,6 @@ function HomeContent() {
   
   const [isFlashing, setIsFlashing] = useState(false)
   const [isDark, setIsDark] = useState(false)
-  const [aboutCollapsed, setAboutCollapsed] = useState(false)
-  const [directoryCollapsed, setDirectoryCollapsed] = useState(false)
-  const [isDoNotDisturb, setIsDoNotDisturb] = useState(false)
   // const [isDialogOpen, setIsDialogOpen] = useState(false)
   // const [spotifyData, setSpotifyData] = useState<SpotifyTrack | null>(null)
   // const [isLoading, setIsLoading] = useState(false)
@@ -46,12 +43,6 @@ function HomeContent() {
     }
     return () => clearInterval(interval)
   }, [isFlashing])
-
-  const handleDoNotDisturb = (active: boolean) => {
-    setIsDoNotDisturb(active)
-    setAboutCollapsed(active)
-    setDirectoryCollapsed(active)
-  }
 
   // useEffect(() => {
   //   const fetchNowPlaying = async () => {
@@ -100,13 +91,13 @@ function HomeContent() {
       {/* Main 3-Column Layout */}
       <main className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] flex-1 overflow-hidden">
         {/* About Sidebar */}
-        <AboutSidebar isDark={isDark} directory={directory} isCollapsed={aboutCollapsed} onCollapsedChange={setAboutCollapsed} />
+        <AboutSidebar isDark={isDark} />
 
         {/* Feed Column */}
         <Feed isDark={isDark} />
 
         {/* Directory Sidebar */}
-        <DirectorySidebar isDark={isDark} directory={directory} isCollapsed={directoryCollapsed} onCollapsedChange={setDirectoryCollapsed} isDoNotDisturb={isDoNotDisturb} onDoNotDisturbChange={handleDoNotDisturb} />
+        <DirectorySidebar isDark={isDark} directory={directory} />
       </main>
 
       {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

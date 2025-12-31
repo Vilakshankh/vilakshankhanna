@@ -1,78 +1,85 @@
 "use client"
 
-import Link from "next/link"
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react"
+import { workExperiences } from "@/lib/work-experience"
 
 interface AboutSidebarProps {
   isDark: boolean
-  directory: string | null
-  isCollapsed?: boolean
-  onCollapsedChange?: (collapsed: boolean) => void
 }
 
-export function AboutSidebar({ isDark, directory, isCollapsed = false, onCollapsedChange }: AboutSidebarProps) {
-
+export function AboutSidebar({ isDark }: AboutSidebarProps) {
   return (
-    <aside className={`py-8 border-r bg-black border-white/10 transition-all duration-300 ${isCollapsed ? 'w-12 px-2 overflow-hidden' : 'w-80 px-6 overflow-y-auto'}`}>
-      {/* Header with Title and Toggle */}
-      <div className={`flex items-center mb-4 ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
-        {!isCollapsed && (
-          <h2 className="font-helvetica text-sm font-medium tracking-tight text-white">ABOUT</h2>
-        )}
-        <button
-          onClick={() => onCollapsedChange?.(!isCollapsed)}
-          className="p-1.5 transition-all rounded-lg hover:opacity-70 text-white"
-          title={isCollapsed ? "Expand about" : "Collapse about"}
-        >
-          {isCollapsed ? (
-            <PanelLeftOpen className="w-4 h-4" />
-          ) : (
-            <PanelLeftClose className="w-4 h-4" />
-          )}
-        </button>
-      </div>
-      
-      {!isCollapsed && (
-        <div className="font-helvetica space-y-4 text-white/70">
-        {directory === "work-stats" ? (
-          <>
-            <div>
-              <h3 className="font-helvetica text-lg font-semibold mb-2 text-white">
-                Vilakshan Khanna
-              </h3>
-              <p className="font-helvetica text-sm mb-3 text-white/60">
-                Startup | Design Engineer | Creative Strategist
-              </p>
-            </div>
-            <p className="font-helvetica text-sm text-white/60">
-              📍Toronto, ON | 📩vilakshank20@gmail.com | <Link href="#" className="underline hover:opacity-70 text-white/60">Vilakshan&apos;s Linktree</Link>
-            </p>
-            <p className="font-helvetica text-sm leading-relaxed text-white/70">
-              Five years in high-intensity startup environments have shaped Vilakshan into a builder who thrives on autonomy, solves complex problems with clarity, moves quickly without sacrificing quality, and adapts instantly as requirements evolve.
-            </p>
-          </>
-        ) : (
-          <>
-            <div>
-              <h3 className="font-helvetica text-lg font-semibold mb-2 text-white">
-                Vilakshan Khanna
-              </h3>
-              <p className="font-helvetica text-sm mb-3 text-white/60">
-                Startup | Design Engineer | Creative Strategist
-              </p>
-            </div>
-            <p className="font-helvetica text-sm text-white/60">
-              📍Toronto, ON | 📩vilakshank20@gmail.com | <Link href="#" className="underline hover:opacity-70 text-white/60">Vilakshan&apos;s Linktree</Link>
-            </p>
-            <p className="font-helvetica text-sm leading-relaxed text-white/70">
-              Five years in high-intensity startup environments have shaped Vilakshan into a builder who thrives on autonomy, solves complex problems with clarity, moves quickly without sacrificing quality, and adapts instantly as requirements evolve.
-            </p>
-          </>
-        )}
+    <aside className={`py-8 border-r overflow-y-auto ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} w-64 px-6`}>
+      <div className="flex flex-col gap-6">
+        {/* Header */}
+        <div>
+          <h2 className={`font-helvetica text-sm font-medium tracking-tight mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
+            ABOUT
+          </h2>
         </div>
-      )}
+
+        {/* Bio */}
+        <div className="space-y-3">
+          <p className={`font-helvetica text-xs leading-relaxed ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+            Design Engineer and Brand Strategist with human centered design philosophy. My projects are a reflection of understanding human connection and how to make products and experiences feel human.
+          </p>
+        </div>
+
+        {/* Skills Section */}
+        <div className="space-y-3">
+          <h3 className={`font-helvetica text-xs font-medium ${isDark ? 'text-white/80' : 'text-black/80'}`}>
+            Skills
+          </h3>
+          <div className="space-y-2">
+            <div>
+              <p className={`font-helvetica text-xs font-medium mb-1 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                Technical
+              </p>
+              <p className={`font-helvetica text-xs font-mono ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                React, Next.js, TypeScript, React Native, SwiftUI, Flutter, Javascript, Component Architecture
+              </p>
+            </div>
+            <div>
+              <p className={`font-helvetica text-xs font-medium mb-1 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                Design & AI
+              </p>
+              <p className={`font-helvetica text-xs font-mono ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                Figma, Design Systems, Interaction Design, v0.dev, Cursor, ChatGPT/LLM workflows
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Current Role */}
+        <div className="space-y-2">
+          <h3 className={`font-helvetica text-xs font-medium ${isDark ? 'text-white/80' : 'text-black/80'}`}>
+            Currently
+          </h3>
+          <div>
+            <p className={`font-helvetica text-xs font-medium ${isDark ? 'text-white' : 'text-black'}`}>
+              {workExperiences[0].company} | {workExperiences[0].role}
+            </p>
+            <p className={`font-helvetica text-xs font-mono ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+              {workExperiences[0].location} | {workExperiences[0].period}
+            </p>
+          </div>
+        </div>
+
+        {/* Education */}
+        <div className="space-y-2">
+          <h3 className={`font-helvetica text-xs font-medium ${isDark ? 'text-white/80' : 'text-black/80'}`}>
+            Education
+          </h3>
+          <div>
+            <p className={`font-helvetica text-xs ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+              Computer Science and Business Administration
+            </p>
+            <p className={`font-helvetica text-xs font-mono ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+              Memorial University of Newfoundland (BSc. 2024)
+            </p>
+          </div>
+        </div>
+      </div>
     </aside>
   )
 }
-
 

@@ -1,131 +1,135 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter, usePathname } from "next/navigation"
-import { Newspaper, TrendingUp, Target, PanelRightClose, PanelRightOpen, Moon } from "lucide-react"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import { Newspaper, TrendingUp, Target, Users } from "lucide-react"
+import { useState, useEffect } from "react"
+import { projects } from "@/lib/projects"
 
 interface DirectorySidebarProps {
   isDark: boolean
   directory: string | null
-  isCollapsed?: boolean
-  onCollapsedChange?: (collapsed: boolean) => void
-  isDoNotDisturb?: boolean
-  onDoNotDisturbChange?: (active: boolean) => void
 }
 
-export function DirectorySidebar({ isDark, directory, isCollapsed = false, onCollapsedChange, isDoNotDisturb = false, onDoNotDisturbChange }: DirectorySidebarProps) {
+interface ArticleMeta {
+  slug: string
+  title: string
+  date: string
+}
+
+export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  
+  const article = searchParams.get("article")
+  const project = searchParams.get("project")
+  
+  const [articles, setArticles] = useState<ArticleMeta[]>([])
+  const [isLoadingArticles, setIsLoadingArticles] = useState(false)
+
+  // Fetch articles on mount
+  useEffect(() => {
+    setIsLoadingArticles(true)
+    fetch("/api/articles")
+      .then(res => res.json())
+      .then(data => {
+        setArticles(data)
+        setIsLoadingArticles(false)
+      })
+      .catch(err => {
+        console.error("Failed to fetch articles:", err)
+        setIsLoadingArticles(false)
+      })
+  }, [])
 
   const menuItems = [
     { id: "articles", icon: Newspaper, label: "articles" },
     { id: "projects", icon: TrendingUp, label: "projects" },
     { id: "work-stats", icon: Target, label: "work stats" },
-    // { id: "socials", icon: Users, label: "socials" },
+    { id: "socials", icon: Users, label: "socials" },
     // { id: "music", icon: Music, label: "music" },
   ]
 
   return (
-    <aside className={`py-8 border-l transition-all duration-300 flex flex-col ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} ${isCollapsed ? 'w-12 px-2 overflow-hidden' : 'w-56 px-6 overflow-y-auto'}`}>
-      <div className="flex-1">
-        {/* Header with Title and Toggle */}
-        <div className={`flex items-center mb-4 ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
-          {!isCollapsed && (
-            <h2 className={`font-helvetica text-sm font-medium tracking-tight ${isDark ? 'text-white' : 'text-black'}`}>DIRECTORY</h2>
-          )}
-          <button
-            onClick={() => onCollapsedChange?.(!isCollapsed)}
-            className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 w-9`}
-            title={isCollapsed ? "Expand directory" : "Collapse directory"}
-          >
-            {isCollapsed ? (
-              <PanelRightOpen className="w-4 h-4" />
-            ) : (
-              <PanelRightClose className="w-4 h-4" />
-            )}
-          </button>
+    <aside className={`py-8 border-l overflow-y-auto ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} w-64 px-6`}>
+      <div className="flex flex-col">
+        {/* Header */}
+        <div>
+          <h2 className={`font-helvetica text-sm font-medium tracking-tight mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
+            DIRECTORY
+          </h2>
         </div>
 
-        {!isCollapsed && (
-          <div className="flex flex-col gap-1 items-start">
-            {/* Menu Items */}
-            {menuItems.map((item) => {
-              const Icon = item.icon
-              return (
+        {/* Menu Items */}
+        <div className="flex flex-col gap-2 items-start w-full">
+          {menuItems.map((item) => {
+            const Icon = item.icon
+            const isExpanded = directory === item.id
+            
+            return (
+              <div key={item.id} className="w-full">
+                {/* Parent directory item */}
                 <button
-                  key={item.id}
                   onClick={() => router.push(pathname + "?directory=" + item.id, { scroll: false })}
-                  className={`inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-3 w-full justify-start ${
-                    directory === item.id
-                      ? isDark 
-                        ? "bg-white text-black" 
-                        : "bg-black text-white"
-                      : "hover:bg-accent hover:text-accent-foreground"
-                  }`}
+                  className="inline-flex items-center gap-2 w-full justify-start"
                   title={item.label}
                 >
                   <Icon className="w-4 h-4 flex-shrink-0" />
-                  <span className="font-mono text-xs">{item.label}</span>
+                  <span className={`font-helvetica text-xs ${directory === item.id ? 'font-bold' : ''}`}>
+                    {item.label}
+                  </span>
                 </button>
-              )
-            })}
-          </div>
-        )}
-        
-        {isCollapsed && (
-          <div className="flex flex-col gap-1 items-center">
-            {menuItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => router.push(pathname + "?directory=" + item.id, { scroll: false })}
-                  className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 w-9 ${
-                    directory === item.id
-                      ? isDark 
-                        ? "bg-white text-black" 
-                        : "bg-black text-white"
-                      : "hover:bg-accent hover:text-accent-foreground"
-                  }`}
-                  title={item.label}
-                >
-                  <Icon className="w-4 h-4" />
-                </button>
-              )
-            })}
-          </div>
-        )}
+                
+                {/* Nested children for articles */}
+                {item.id === "articles" && isExpanded && (
+                  <div
+                    className={`mt-1 ml-6 pl-3 flex flex-col gap-1.5 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                  >
+                    {isLoadingArticles ? (
+                      <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                        loading...
+                      </span>
+                    ) : (
+                      articles.map((art) => (
+                        <button
+                          key={art.slug}
+                          onClick={() => router.push(pathname + `?directory=articles&article=${art.slug}`, { scroll: false })}
+                          className={`font-helvetica text-xs text-left hover:opacity-70 transition-opacity ${
+                            article === art.slug ? 'font-bold' : ''
+                          }`}
+                          title={art.title}
+                        >
+                          {art.title.length > 25 ? art.title.substring(0, 25) + "..." : art.title}
+                        </button>
+                      ))
+                    )}
+                  </div>
+                )}
+                
+                {/* Nested children for projects */}
+                {item.id === "projects" && isExpanded && (
+                  <div
+                    className={`mt-1 ml-6 pl-3 flex flex-col gap-1 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                  >
+                    {projects.map((proj) => (
+                      <button
+                        key={proj.id}
+                        onClick={() => router.push(pathname + `?directory=projects&project=${proj.id}`, { scroll: false })}
+                        className={`font-helvetica text-xs text-left hover:opacity-70 transition-opacity ${
+                          project === proj.id ? 'font-bold' : ''
+                        }`}
+                        title={proj.title}
+                      >
+                        {proj.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
       </div>
-
-      {/* Do Not Disturb Button - Footer */}
-      {!isCollapsed && (
-        <button
-          onClick={() => onDoNotDisturbChange?.(!isDoNotDisturb)}
-          className={`inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-3 w-full justify-start mt-8 ${
-            isDoNotDisturb 
-              ? 'bg-purple-600 text-white hover:bg-purple-600/90' 
-              : 'hover:bg-accent hover:text-accent-foreground'
-          }`}
-          title="Do Not Disturb"
-        >
-          <Moon className="w-4 h-4 flex-shrink-0" />
-          <span className="font-sans text-xs">Do Not Disturb</span>
-        </button>
-      )}
-      
-      {isCollapsed && (
-        <button
-          onClick={() => onDoNotDisturbChange?.(!isDoNotDisturb)}
-          className={`inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 w-9 mt-8 ${
-            isDoNotDisturb 
-              ? 'bg-purple-600 text-white hover:bg-purple-600/90' 
-              : 'hover:bg-accent hover:text-accent-foreground'
-          }`}
-          title="Do Not Disturb"
-        >
-          <Moon className="w-4 h-4" />
-        </button>
-      )}
     </aside>
   )
 }

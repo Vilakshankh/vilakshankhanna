@@ -1,8 +1,19 @@
 "use client"
 
-import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight, Calendar } from "lucide-react"
+import Link from "next/link"
+import { ArrowUpRight, Calendar, Newspaper, Users, MessageSquare, TrendingUp } from "lucide-react"
+
+// TypeScript declaration for Twitter widgets
+declare global {
+  interface Window {
+    twttr?: {
+      widgets: {
+        load: () => void
+      }
+    }
+  }
+}
 import { useState, useMemo, useEffect, Suspense } from "react"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import {
@@ -13,8 +24,10 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { ArticleContent } from "./article-content"
-import { ProjectsShowcase } from "./projects-showcase"
+import { FeedCard } from "./ui/feed-card"
+import { FiveFiveFiveStudio, TrailsLegal, ButterflyProject, projectIds } from "./projects"
+import { TrailsWork, MatroxWork, TecnisheWork, Skills, Education } from "./work-stats"
+import { LinkedInPost, TwitterPost } from "./socials"
 
 interface FeedProps {
   isDark: boolean
@@ -25,12 +38,13 @@ interface ArticleMeta {
   title: string
   description: string
   date: string
-  videoSrc: string
+  videoSrc?: string
+  imageSrc?: string
 }
 
 interface UnifiedFeedItem {
   id: string
-  type: "article" | "stub" | "project"
+  type: "article" | "stub" | "project" | "linkedin" | "twitter"
   directory: string
   title: string
   description: string
@@ -38,19 +52,124 @@ interface UnifiedFeedItem {
   videoSrc?: string
   imageSrc?: string
   youtubeEmbed?: string
+  linkedinEmbed?: string
+  twitterEmbed?: string
   logoSrc?: string
   role?: string
   date?: string
 }
 
-interface WorkExperience {
-  id: string
-  company: string
-  role: string
-  location: string
-  period: string
-  description: string
-  achievements: string[]
+
+// Helper: Render Studioenok 4-image thumbnail
+function StudioenokThumbnail() {
+  return (
+    <div className="w-full aspect-[16/10] relative flex">
+      <div className="w-1/4 h-full relative">
+        <Image
+          src="/articles/studioenok and randomanxiety/Studioenok_randomanxiety1.png"
+          alt="RandomAnxiety Branding Design"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="w-1/4 h-full relative">
+        <Image
+          src="/articles/studioenok and randomanxiety/Studioenok_randomanxiety2.png"
+          alt="RandomAnxiety Packaging Design"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="w-1/4 h-full relative">
+        <Image
+          src="/articles/studioenok and randomanxiety/Studioenok_randomanxiety3.png"
+          alt="RandomAnxiety Product Photography"
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="w-1/4 h-full relative">
+        <Image
+          src="/articles/studioenok and randomanxiety/Studioenok_randomanxiety4.png"
+          alt="RandomAnxiety Box Stack"
+          fill
+          className="object-cover"
+        />
+      </div>
+    </div>
+  )
+}
+
+// Helper: Render article media based on item properties
+function renderArticleMedia(item: ArticleMeta) {
+
+  
+  if (item.videoSrc) {
+    return (
+      <div className="w-full aspect-[16/10] relative">
+        <video
+          src={item.videoSrc}
+          className="w-full h-full object-cover rounded-sm"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        />
+      </div>
+    )
+  }
+  
+  if (item.imageSrc) {
+    return (
+      <div className="w-full aspect-[16/10] relative">
+        <Image
+          src={item.imageSrc}
+          alt={item.title}
+          fill
+          className="object-cover rounded-sm"
+        />
+      </div>
+    )
+  }
+  
+  return null
+}
+
+// Helper: Render unified feed item media (for articles in unified feed)
+function renderUnifiedItemMedia(item: UnifiedFeedItem) {
+
+  
+  if (item.videoSrc) {
+    return (
+      <div className="w-full aspect-[16/10] relative">
+        <video
+          src={item.videoSrc}
+          className="w-full h-full object-cover rounded-sm"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        />
+      </div>
+    )
+  }
+  
+  if (item.imageSrc) {
+    return (
+      <div className="w-full aspect-[16/10] relative">
+        <Image
+          src={item.imageSrc}
+          alt={item.title}
+          fill
+          className="object-cover rounded-sm"
+        />
+      </div>
+    )
+  }
+  
+  return null
 }
 
 function FeedContent({ isDark }: FeedProps) {
@@ -60,10 +179,45 @@ function FeedContent({ isDark }: FeedProps) {
   
   const directory = searchParams.get("directory")
   const article = searchParams.get("article")
+  const project = searchParams.get("project")
   
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
   const [articles, setArticles] = useState<ArticleMeta[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [articleComponent, setArticleComponent] = useState<React.ComponentType<{ isDark?: boolean; embedded?: boolean }> | null>(null)
+  const [isArticleLoading, setIsArticleLoading] = useState(false)
+  const [articleError, setArticleError] = useState<string | null>(null)
+
+  // Load Twitter widgets script
+  useEffect(() => {
+    // Check if script already exists
+    if (document.querySelector('script[src="https://platform.twitter.com/widgets.js"]')) {
+      // Script already loaded, just render widgets
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load()
+      }
+      return
+    }
+
+    const script = document.createElement("script")
+    script.src = "https://platform.twitter.com/widgets.js"
+    script.async = true
+    script.charset = "utf-8"
+    script.onload = () => {
+      if (window.twttr && window.twttr.widgets) {
+        window.twttr.widgets.load()
+      }
+    }
+    document.body.appendChild(script)
+
+    return () => {
+      // Cleanup: remove script on unmount
+      const existingScript = document.querySelector('script[src="https://platform.twitter.com/widgets.js"]')
+      if (existingScript && existingScript.parentNode) {
+        existingScript.parentNode.removeChild(existingScript)
+      }
+    }
+  }, [directory])
 
   // Fetch articles when directory=articles OR for unified feed (no directory)
   useEffect(() => {
@@ -82,6 +236,29 @@ function FeedContent({ isDark }: FeedProps) {
     }
   }, [directory])
 
+  // Load article component dynamically when article changes
+  useEffect(() => {
+    if (article) {
+      const loadArticle = async () => {
+        setIsArticleLoading(true)
+        setArticleError(null)
+        try {
+          const module = await import(`@/app/articles/${article}/page`)
+          setArticleComponent(() => module.default)
+        } catch (err) {
+          console.error(`Failed to load article ${article}:`, err)
+          setArticleError(`Failed to load article "${article}"`)
+        } finally {
+          setIsArticleLoading(false)
+        }
+      }
+      loadArticle()
+    } else {
+      setArticleComponent(null)
+      setArticleError(null)
+    }
+  }, [article])
+
   // Sort articles by date
   const sortedArticles = useMemo(() => {
     return [...articles].sort((a, b) => {
@@ -93,50 +270,6 @@ function FeedContent({ isDark }: FeedProps) {
     })
   }, [articles, sortOrder])
 
-  // Work experience data
-  const workExperiences: WorkExperience[] = [
-    {
-      id: "trails",
-      company: "Trails",
-      role: "Co-Founder, Product Designer",
-      location: "Legal-Tech AI Startup | Montréal, QC",
-      period: "2025–Present",
-      description: "Legal-Tech AI Startup | Montréal, QC | 2025–Present",
-      achievements: [
-        "Designed and built UI for 10+ U.S. law firms, using Figma, React, Next.js, and TypeScript with AI tools like v0.dev and Cursor to turn complex legal workflows into intuitive interfaces, improving firm productivity by 86.7% and driving $500K+ projected revenue.",
-        "Prototyped and shipped features quickly using Cursor and v0.dev, shortening sprint cycles and supporting a lean, iterative development process with usability testing early.",
-        "Owned product components end-to-end: product reqs, UX architecture, component design, prototyping, QA, and implementation handoff, ensuring smooth translation from Figma into React, React Native, and SwiftUI.",
-        "Completed 200+ interviews and used ChatGPT + NotebookLM to reduce research analysis time by 70% and speed up prototyping by 3×."
-      ]
-    },
-    {
-      id: "matrox",
-      company: "Matrox",
-      role: "Associate Product Manager",
-      location: "Montréal, QC",
-      period: "2023–2024",
-      description: "Montréal, QC | 2023–2024",
-      achievements: [
-        "Closed a $1M contract by designing UI/UX in Figma, testing, and demoing features for major media companies; worked directly with PMs, engineers, and sales teams to drive adoption across 3 business units.",
-        "Led development of 5 GPU and networking features, using customer insights and KPIs to guide engineering, QA, and PM teams through testing, refinement, and post-release fixes.",
-        "Reduced support queries by 95% by building 10 technical product guides covering GPU architecture and networking protocols, collaborating with engineering to address recurring customer issues."
-      ]
-    },
-    {
-      id: "tecnishe",
-      company: "Tecnishe",
-      role: "Co-founder, Product Designer",
-      location: "Med-Tech AI Startup | Montréal, QC",
-      period: "2021–2023",
-      description: "Med-Tech AI Startup | Montréal, QC | 2021–2023",
-      achievements: [
-        "Cut ER wait times by 5 hours by building an LLM-powered SaaS using GPT-4, directing low-acuity patients to telehealth and improving hospital flow.",
-        "Prototyped and validated workflows using Figma wireframes, React/Next.js web prototypes, and Flutter mobile prototypes, enabling rapid iteration and usability testing early.",
-        "Led UX architecture for the triage system, mapping decision flows, user journeys, and state logic across mobile and web to support accurate patient routing.",
-        "Completed 200+ interviews with patients, clinicians, and administrators, forming partnerships with two telehealth companies, a public hospital, and a government innovation hub."
-      ]
-    }
-  ]
 
   // Create stub cards for other directories
   const stubCards: UnifiedFeedItem[] = [
@@ -161,16 +294,16 @@ function FeedContent({ isDark }: FeedProps) {
       title: "Socials",
       description: "Coming soon — connect across platforms",
     },
-    {
-      id: "music-stub",
-      type: "stub",
-      directory: "music",
-      title: "Music",
-      description: "Coming soon — what I'm listening to",
-    },
+    // {
+    //   id: "music-stub",
+    //   type: "stub",
+    //   directory: "music",
+    //   title: "Music",
+    //   description: "Coming soon — what I'm listening to",
+    // },
   ]
 
-  // Build unified feed items (articles + projects)
+  // Build unified feed items (articles + LinkedIn posts)
   const unifiedFeedItems: UnifiedFeedItem[] = useMemo(() => {
     const articleItems: UnifiedFeedItem[] = sortedArticles.map(article => ({
       id: article.slug,
@@ -180,43 +313,31 @@ function FeedContent({ isDark }: FeedProps) {
       description: article.description,
       slug: article.slug,
       videoSrc: article.videoSrc,
+      imageSrc: article.imageSrc,
       date: article.date,
     }))
     
-    const projectItems: UnifiedFeedItem[] = [
-      {
-        id: "fivefivefive-studio",
-        type: "project" as const,
-        directory: "projects",
-        title: "555 Studio",
-        description: "Creative nights event series in Montreal, 1000+ people so far",
-        role: "Co-organizer | Branding | Community Designer",
-        logoSrc: "/Untitled-2_white.png",
-        youtubeEmbed: "https://www.youtube.com/embed/y9wt2DvbKVo?autoplay=1&loop=1&mute=1&controls=0&playsinline=1&playlist=y9wt2DvbKVo&modestbranding=1&rel=0&start=0",
-      },
-      {
-        id: "trails-legal",
-        type: "project" as const,
-        directory: "projects",
-        title: "Trails Legal",
-        description: "Trails automates manual workflows to help your legal firm deliver fast, high quality output for your clients",
-        role: "Cofounder | Product Designer | Entrepreneurship | Branding",
-        logoSrc: "/Asset 10.svg",
-        imageSrc: "/feature_key legal insights.gif",
-      },
-      {
-        id: "butterfly-project",
-        type: "project" as const,
-        directory: "projects",
-        title: "The Butterfly Project",
-        description: "Cowork together and meet new people.",
-        role: "Founder | Product Designer | Community Builder",
-        logoSrc: "/WPFQXzXewBVy5FNFqSoY5jaFCWs.webp",
-        imageSrc: "/IMG_5698.jpg",
-      },
-    ]
+    const linkedinPost: UnifiedFeedItem = {
+      id: "linkedin-post-7411791559928623105",
+      type: "linkedin" as const,
+      directory: "socials",
+      title: "LinkedIn Post",
+      description: "",
+      linkedinEmbed: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7411791559928623105",
+      date: new Date().toISOString(), // You can set a specific date if needed
+    }
     
-    return [...articleItems, ...projectItems]
+    const twitterPost: UnifiedFeedItem = {
+      id: "twitter-post-2003865797815578684",
+      type: "twitter" as const,
+      directory: "socials",
+      title: "Twitter Post",
+      description: "",
+      twitterEmbed: "2003865797815578684",
+      date: new Date("2025-12-24").toISOString(),
+    }
+    
+    return [...articleItems, linkedinPost, twitterPost]
   }, [sortedArticles])
 
   const toggleSort = () => {
@@ -234,13 +355,26 @@ function FeedContent({ isDark }: FeedProps) {
   const handleUnifiedItemClick = (item: UnifiedFeedItem) => {
     if (item.type === "article" && item.slug) {
       router.push(pathname + `?directory=articles&article=${item.slug}`, { scroll: false })
-    } else if (item.type === "project" || item.type === "stub") {
+    } else if (item.type === "stub") {
       router.push(pathname + `?directory=${item.directory}`, { scroll: false })
     }
+    // LinkedIn posts are embedded and don't need click handling
   }
 
   // Get current article data for breadcrumb
   const currentArticle = article ? articles.find(a => a.slug === article) : null
+  
+  // Get current project name for breadcrumb
+  const getProjectTitle = (projectId: string | null) => {
+    if (!projectId) return null
+    const titles: Record<string, string> = {
+      "fivefivefive-studio": "555 Studio",
+      "trails-legal": "Trails Legal",
+      "butterfly-project": "The Butterfly Project"
+    }
+    return titles[projectId] || projectId
+  }
+  const currentProjectTitle = project ? getProjectTitle(project) : null
   
   // Helper to format directory name for display
   const formatDirectoryName = (dir: string) => {
@@ -251,7 +385,7 @@ function FeedContent({ isDark }: FeedProps) {
   }
 
   return (
-    <section className="py-8 overflow-y-auto flex justify-center">
+    <section className="py-8 pb-16 overflow-y-auto flex justify-center">
       <div className="w-full max-w-[900px] px-12">
         <div className="flex items-center justify-between mb-8 min-h-[32px]">
         <Breadcrumb>
@@ -261,30 +395,30 @@ function FeedContent({ isDark }: FeedProps) {
                 <BreadcrumbLink asChild>
                   <button 
                     onClick={() => handleBreadcrumbClick(pathname)}
-                    className="font-helvetica text-sm font-medium tracking-tight hover:opacity-70"
+                    className="font-helvetica text-sm font-medium hover:opacity-70"
                   >
                     FEED
                   </button>
                 </BreadcrumbLink>
               ) : (
-                <BreadcrumbPage className="font-helvetica text-sm font-medium tracking-tight">FEED</BreadcrumbPage>
+                <BreadcrumbPage className="font-helvetica text-sm font-medium">FEED</BreadcrumbPage>
               )}
             </BreadcrumbItem>
             {directory && (
               <>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  {article ? (
+                  {article || project ? (
                     <BreadcrumbLink asChild>
                       <button 
                         onClick={() => handleBreadcrumbClick(pathname + `?directory=${directory}`)}
-                        className="font-helvetica text-sm font-medium tracking-tight hover:opacity-70"
+                        className="font-helvetica text-sm font-medium hover:opacity-70"
                       >
                         {formatDirectoryName(directory)}
                       </button>
                     </BreadcrumbLink>
                   ) : (
-                    <BreadcrumbPage className="font-helvetica text-sm font-medium tracking-tight">
+                    <BreadcrumbPage className="font-helvetica text-sm font-medium">
                       {formatDirectoryName(directory)}
                     </BreadcrumbPage>
                   )}
@@ -295,7 +429,7 @@ function FeedContent({ isDark }: FeedProps) {
               <>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="font-helvetica text-sm font-medium tracking-tight">
+                  <BreadcrumbPage className="font-helvetica text-sm font-medium">
                     {currentArticle.title.length > 30 
                       ? currentArticle.title.substring(0, 30) + "..." 
                       : currentArticle.title}
@@ -303,8 +437,21 @@ function FeedContent({ isDark }: FeedProps) {
                 </BreadcrumbItem>
               </>
             )}
+            {project && currentProjectTitle && (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="font-helvetica text-sm font-medium">
+                    {currentProjectTitle.length > 30 
+                      ? currentProjectTitle.substring(0, 30) + "..." 
+                      : currentProjectTitle}
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </>
+            )}
           </BreadcrumbList>
         </Breadcrumb>
+
         <div className="w-8 h-8 flex items-center justify-center">
           {directory === "articles" && !article && (
             <button
@@ -328,114 +475,95 @@ function FeedContent({ isDark }: FeedProps) {
           </div>
         ) : article ? (
           // Article view
-          <ArticleContent slug={article} isDark={isDark} />
+          isArticleLoading ? (
+            <div className="flex items-center justify-center py-12">
+              <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                Loading...
+              </p>
+            </div>
+          ) : articleError || !articleComponent ? (
+            <div className="flex items-center justify-center py-12">
+              <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                {articleError || `Article "${article}" not found`}
+              </p>
+            </div>
+          ) : (
+            <div className={`w-full overflow-y-auto max-h-[calc(100vh-200px)] animate-in fade-in duration-500 ${isDark ? 'text-white' : 'text-black'}`}>
+              <Suspense fallback={
+                <div className="flex items-center justify-center py-12">
+                  <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                    Loading article...
+                  </p>
+                </div>
+              }>
+                {articleComponent && (() => {
+                  const ArticleComponent = articleComponent
+                  return <ArticleComponent isDark={isDark} embedded={true} />
+                })()}
+              </Suspense>
+            </div>
+          )
         ) : directory === "articles" ? (
           // Articles list
-          <div className="flex flex-col gap-6 animate-in fade-in duration-500">
+          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
             {sortedArticles.map((item) => (
-              <button
+              <FeedCard
                 key={item.slug}
+                isDark={isDark}
+                interactive
                 onClick={() => handleArticleClick(item.slug)}
-                className="w-[750px] mx-auto flex flex-col relative group cursor-pointer text-left"
-              >
-                <div className="w-full aspect-[16/10] relative">
-                  <video
-                    src={item.videoSrc}
-                    className="w-full h-full object-cover rounded-sm"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                  />
-                </div>
-                <div className={`py-2 flex flex-col gap-2 ${isDark ? 'bg-black' : 'bg-white'}`}>
-                  <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
+                media={renderArticleMedia(item)}
+                chip={
+                  <span className="inline-flex items-center gap-1.5 w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
+                    <Newspaper className="w-3 h-3" />
                     article
                   </span>
-                  <div className="flex items-center justify-between">
-                    <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
-                      {item.title}
-                    </h3>
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
-                  <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
-                    {item.description}
-                  </p>
+                }
+                content={
+                  <>
+                    <div className="flex items-center justify-between">
+                      <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
+                        {item.title}
+                      </h3>
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
+                    <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
+                      {item.description}
+                    </p>
+                  </>
+                }
+                footer={
                   <span className={`font-helvetica text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
                     {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </span>
-                </div>
-              </button>
+                }
+              />
             ))}
           </div>
         ) : directory === "projects" ? (
-          // Projects showcase
-          <div className="animate-in fade-in duration-500">
-            <ProjectsShowcase variant="embedded" isDark={isDark} />
+          // Projects cards
+          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+            {!project && <FiveFiveFiveStudio isDark={isDark} />}
+            {!project && <TrailsLegal isDark={isDark} />}
+            {!project && <ButterflyProject isDark={isDark} />}
+            {project === "fivefivefive-studio" && <FiveFiveFiveStudio isDark={isDark} />}
+            {project === "trails-legal" && <TrailsLegal isDark={isDark} />}
+            {project === "butterfly-project" && <ButterflyProject isDark={isDark} />}
           </div>
         ) : directory === "work-stats" ? (
           // Work experience cards
-          <div className="flex flex-col gap-6 animate-in fade-in duration-500">
-            {/* Skills Section */}
-            <div className={`w-[750px] mx-auto p-5 rounded-sm border ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
-              <h2 className={`font-helvetica text-xl font-medium mb-4 ${isDark ? 'text-white' : 'text-black'}`}>Skills</h2>
-              <div className="space-y-4">
-                <div>
-                  <h3 className={`font-helvetica text-sm font-medium mb-2 ${isDark ? 'text-white/80' : 'text-black/80'}`}>Technical</h3>
-                  <p className={`font-helvetica text-sm ${isDark ? 'text-white/70' : 'text-black/70'}`}>
-                    React, Next.js, TypeScript, React Native, SwiftUI, Flutter, Javascript, Component Architecture
-                  </p>
-                </div>
-                <div>
-                  <h3 className={`font-helvetica text-sm font-medium mb-2 ${isDark ? 'text-white/80' : 'text-black/80'}`}>Design & AI</h3>
-                  <p className={`font-helvetica text-sm ${isDark ? 'text-white/70' : 'text-black/70'}`}>
-                    Figma, Design Systems, Interaction Design, v0.dev, Cursor, ChatGPT/LLM workflows
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Work Experience Cards */}
-            {workExperiences.map((experience) => (
-              <div
-                key={experience.id}
-                className={`w-[750px] mx-auto p-5 rounded-sm border transition-colors ${
-                  isDark 
-                    ? 'border-white/10 bg-white/5 hover:bg-white/10' 
-                    : 'border-black/10 bg-black/5 hover:bg-black/10'
-                }`}
-              >
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col gap-1">
-                    <h3 className={`font-helvetica text-xl font-medium ${isDark ? 'text-white' : 'text-black'}`}>
-                      {experience.company} | {experience.role}
-                    </h3>
-                    <p className={`font-helvetica text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
-                      {experience.location} | {experience.period}
-                    </p>
-                  </div>
-                  <ul className={`space-y-2 mt-1 list-disc list-outside pl-5 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
-                    {experience.achievements.map((achievement, index) => (
-                      <li key={index} className={`font-helvetica text-sm leading-relaxed`}>
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-
-            {/* Education Section */}
-            <div className={`w-[750px] mx-auto p-5 rounded-sm border ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
-              <h2 className={`font-helvetica text-xl font-medium mb-2 ${isDark ? 'text-white' : 'text-black'}`}>Education</h2>
-              <p className={`font-helvetica text-sm ${isDark ? 'text-white/70' : 'text-black/70'} mb-1.5`}>
-                Computer Science and Business Administration (Specializing in UI/UX Design and Video Game Design)
-              </p>
-              <p className={`font-helvetica text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
-                Memorial University of Newfoundland (BSc. 2024)
-              </p>
-            </div>
+          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+            <Skills isDark={isDark} />
+            <TrailsWork isDark={isDark} />
+            <MatroxWork isDark={isDark} />
+            <TecnisheWork isDark={isDark} />
+            <Education isDark={isDark} />
+          </div>
+        ) : directory === "socials" ? (
+          // Socials - LinkedIn and Twitter embedded posts
+          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+            <LinkedInPost isDark={isDark} />
+            <TwitterPost isDark={isDark} />
           </div>
         ) : directory ? (
           // Empty directory state for other directories
@@ -445,93 +573,35 @@ function FeedContent({ isDark }: FeedProps) {
             </p>
           </div>
         ) : (
-          // Unified feed (all directories)
-          <div className="flex flex-col gap-6 animate-in fade-in duration-500">
-            {unifiedFeedItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleUnifiedItemClick(item)}
-                className="w-[750px] mx-auto flex flex-col relative group cursor-pointer text-left"
-              >
-                {/* Logo + Project Name (for projects) */}
-                {item.type === "project" && item.logoSrc && (
-                  <div className={`flex items-center gap-3 mb-4 ${isDark ? 'bg-black' : 'bg-white'} pb-2`}>
-                    <Image 
-                      src={item.id === "fivefivefive-studio" 
-                        ? (isDark ? "/Untitled-2_white.png" : "/Untitled-2_black.png")
-                        : item.logoSrc
-                      } 
-                      alt={`${item.title} Logo`} 
-                      width={32} 
-                      height={32}
-                      className="object-contain"
-                    />
-                    <h3 className={`font-helvetica text-base font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
-                      {item.title}
-                    </h3>
-                  </div>
-                )}
-                
-                {/* Media Content */}
-                {item.type === "article" && item.videoSrc ? (
-                  <div className="w-full aspect-[16/10] relative mb-3">
-                    <video
-                      src={item.videoSrc}
-                      className="w-full h-full object-cover rounded-sm"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="auto"
-                    />
-                  </div>
-                ) : item.type === "project" && item.youtubeEmbed ? (
-                  <div className="w-full aspect-[16/10] relative overflow-hidden rounded-sm mb-3">
-                    <iframe
-                      className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2 scale-150"
-                      src={item.youtubeEmbed}
-                      allow="autoplay; encrypted-media"
-                      allowFullScreen
-                      style={{ pointerEvents: 'none' }}
-                    />
-                  </div>
-                ) : item.type === "project" && item.imageSrc ? (
-                  <div className="w-full aspect-[16/10] relative mb-3">
-                    <Image
-                      src={item.imageSrc}
-                      alt={item.title}
-                      fill
-                      className="object-cover rounded-sm"
-                      unoptimized={item.imageSrc.endsWith('.gif')}
-                    />
-                  </div>
-                ) : item.type === "project" && item.videoSrc ? (
-                  <div className="w-full aspect-[16/10] relative mb-3">
-                    <video
-                      src={item.videoSrc}
-                      className="w-full h-full object-cover rounded-sm"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="auto"
-                    />
-                  </div>
-                ) : (
-                  <div className={`w-full aspect-[16/10] relative rounded-sm flex items-center justify-center mb-3 ${isDark ? 'bg-white/10' : 'bg-black/10'}`}>
-                    <span className={`font-helvetica text-[10px] ${isDark ? 'text-white/40' : 'text-black/40'}`}>
-                      Coming Soon
+          // Unified feed (articles + socials)
+          <div className="flex flex-col gap-12 animate-in fade-in duration-500">
+            {unifiedFeedItems.map((item) => {
+              // LinkedIn post rendering
+              if (item.type === "linkedin" && item.linkedinEmbed) {
+                return <LinkedInPost key={item.id} isDark={isDark} />
+              }
+              
+              // Twitter post rendering
+              if (item.type === "twitter" && item.twitterEmbed) {
+                return <TwitterPost key={item.id} isDark={isDark} />
+              }
+              
+              // Article rendering
+              return (
+                <FeedCard
+                  key={item.id}
+                  isDark={isDark}
+                  interactive
+                  onClick={() => handleUnifiedItemClick(item)}
+                  media={renderUnifiedItemMedia(item)}
+                  chip={
+                    <span className="inline-flex items-center gap-1.5 w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
+                      <Newspaper className="w-3 h-3" />
+                      article
                     </span>
-                  </div>
-                )}
-                
-                {/* Metadata */}
-                <div className={`py-2 flex flex-col gap-2.5 ${isDark ? 'bg-black' : 'bg-white'}`}>
-                  {item.type === "article" && (
+                  }
+                  content={
                     <>
-                      <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
-                        article
-                      </span>
                       <div className="flex items-center justify-between">
                         <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
                           {item.title}
@@ -541,31 +611,18 @@ function FeedContent({ isDark }: FeedProps) {
                       <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
                         {item.description}
                       </p>
-                      {item.date && (
-                        <span className={`font-helvetica text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
-                          {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                        </span>
-                      )}
                     </>
-                  )}
-                  {item.type === "project" && (
-                    <>
-                      <span className="inline-flex w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
-                        project
+                  }
+                  footer={
+                    item.date && (
+                      <span className={`font-helvetica text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                        {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
-                      {item.role && (
-                        <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
-                          {item.role}
-                        </p>
-                      )}
-                      <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
-                        {item.description}
-                      </p>
-                    </>
-                  )}
-                </div>
-              </button>
-            ))}
+                    )
+                  }
+                />
+              )
+            })}
           </div>
         )}
       </div>
@@ -577,7 +634,7 @@ function FeedContent({ isDark }: FeedProps) {
 export function Feed({ isDark }: FeedProps) {
   return (
     <Suspense fallback={
-      <section className={`py-8 border-r overflow-y-auto ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+      <section className={`py-8 overflow-y-auto`}>
         <div className="flex items-center justify-center py-12">
           <div className="animate-spin text-2xl">📀</div>
         </div>
