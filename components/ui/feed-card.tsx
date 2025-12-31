@@ -56,10 +56,19 @@ export function FeedCard({
       
       {/* Chip + Content + Footer wrapper */}
       <div className="py-2 flex flex-col gap-2.5">
-        {/* Chip */}
-        {chip && (
-          <div>
-            {chip}
+        {/* Chip and Footer in same row */}
+        {(chip || footer) && (
+          <div className="flex items-center gap-3">
+            {chip && (
+              <div>
+                {chip}
+              </div>
+            )}
+            {footer && (
+              <div>
+                {footer}
+              </div>
+            )}
           </div>
         )}
         
@@ -67,13 +76,6 @@ export function FeedCard({
         {content && (
           <div>
             {content}
-          </div>
-        )}
-        
-        {/* Footer */}
-        {footer && (
-          <div>
-            {footer}
           </div>
         )}
       </div>

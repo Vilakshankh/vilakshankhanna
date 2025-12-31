@@ -19,12 +19,7 @@ export function TwitterPost({ isDark = false }: TwitterPostProps) {
           />
         </div>
       }
-      chip={
-        <span className="inline-flex items-center gap-1.5 w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
-          <MessageSquare className="w-3 h-3" />
-          socials
-        </span>
-      }
+
     />
   )
 }

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowUpRight, Calendar, Newspaper, Users, MessageSquare, TrendingUp } from "lucide-react"
+import { Calendar, Newspaper, Users, MessageSquare, TrendingUp } from "lucide-react"
 
 // TypeScript declaration for Twitter widgets
 declare global {
@@ -109,7 +109,7 @@ function renderArticleMedia(item: ArticleMeta) {
       <div className="w-full aspect-[16/10] relative">
         <video
           src={item.videoSrc}
-          className="w-full h-full object-cover rounded-sm"
+          className="w-full h-full object-cover"
           autoPlay
           loop
           muted
@@ -127,7 +127,7 @@ function renderArticleMedia(item: ArticleMeta) {
           src={item.imageSrc}
           alt={item.title}
           fill
-          className="object-cover rounded-sm"
+          className="object-cover"
         />
       </div>
     )
@@ -145,7 +145,7 @@ function renderUnifiedItemMedia(item: UnifiedFeedItem) {
       <div className="w-full aspect-[16/10] relative">
         <video
           src={item.videoSrc}
-          className="w-full h-full object-cover rounded-sm"
+          className="w-full h-full object-cover"
           autoPlay
           loop
           muted
@@ -163,7 +163,7 @@ function renderUnifiedItemMedia(item: UnifiedFeedItem) {
           src={item.imageSrc}
           alt={item.title}
           fill
-          className="object-cover rounded-sm"
+          className="object-cover"
         />
       </div>
     )
@@ -521,12 +521,9 @@ function FeedContent({ isDark }: FeedProps) {
                 }
                 content={
                   <>
-                    <div className="flex items-center justify-between">
-                      <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
-                        {item.title}
-                      </h3>
-                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </div>
+                    <h3 className={`font-helvetica text-xl font-medium leading-tight mb-3 transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
+                      {item.title}
+                    </h3>
                     <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
                       {item.description}
                     </p>
@@ -602,12 +599,9 @@ function FeedContent({ isDark }: FeedProps) {
                   }
                   content={
                     <>
-                      <div className="flex items-center justify-between">
-                        <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
-                          {item.title}
-                        </h3>
-                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </div>
+                      <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
+                        {item.title}
+                      </h3>
                       <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
                         {item.description}
                       </p>

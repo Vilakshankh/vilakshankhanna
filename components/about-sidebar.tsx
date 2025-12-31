@@ -1,14 +1,36 @@
 "use client"
 
 import { workExperiences } from "@/lib/work-experience"
+import { useEffect } from "react"
+import Cal, { getCalApi } from "@calcom/embed-react"
 
 interface AboutSidebarProps {
   isDark: boolean
 }
 
 export function AboutSidebar({ isDark }: AboutSidebarProps) {
+  // Initialize Cal.com embed
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "virtual-30min" })
+      cal("ui", {
+        theme: isDark ? "dark" : "light",
+        cssVarsPerTheme: {
+          light: {
+            "cal-brand": "#ee0000"
+          },
+          dark: {
+            "cal-brand": "#a30000"
+          }
+        },
+        hideEventTypeDetails: true,
+        layout: "month_view"
+      })
+    })()
+  }, [isDark])
+
   return (
-    <aside className={`py-8 border-r overflow-y-auto ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} w-64 px-6`}>
+    <aside className={`py-8 border-r overflow-y-auto ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} w-96 px-6`}>
       <div className="flex flex-col gap-6">
         {/* Header */}
         <div>
@@ -76,6 +98,21 @@ export function AboutSidebar({ isDark }: AboutSidebarProps) {
             <p className={`font-helvetica text-xs font-mono ${isDark ? 'text-white/60' : 'text-black/60'}`}>
               Memorial University of Newfoundland (BSc. 2024)
             </p>
+          </div>
+        </div>
+
+        {/* Cal.com Calendar Embed */}
+        <div className={`mt-8 pt-8 border-t ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+          <h3 className={`font-helvetica text-sm font-medium tracking-tight mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
+            SCHEDULE
+          </h3>
+          <div className="w-full">
+            <Cal
+              namespace="virtual-30min"
+              calLink="vilakshankh/virtual-30min"
+              style={{ width: "100%", height: "600px", overflow: "scroll" }}
+              config={{ layout: "month_view", theme: isDark ? "dark" : "light" }}
+            />
           </div>
         </div>
       </div>
