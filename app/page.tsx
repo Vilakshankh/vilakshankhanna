@@ -76,6 +76,7 @@ function HomeContent() {
               📀
             </span>
             VILAKSHAN KHANNA
+            <span className="text-xs font-mono text-black/40">[Beta 1.10]</span>
           </span>
           <span>DESIGN ENGINEER</span>
           <span 
