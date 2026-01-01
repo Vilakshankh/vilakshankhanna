@@ -16,7 +16,11 @@ const ASSETS = {
   boxStack: "/articles/studioenok and randomanxiety/Studioenok_randomanxiety4.png",
 }
 
-export default function StudioenokRandomAnxietyDesignAutopsy(props: { isDark?: boolean; embedded?: boolean; params?: any; searchParams?: any } = {}) {
+type PageProps = { params?: any; searchParams?: any }
+type CustomProps = { isDark?: boolean; embedded?: boolean }
+type Props = PageProps & CustomProps
+
+export default function StudioenokRandomAnxietyDesignAutopsy(props: Props = {} as any): JSX.Element {
   const { isDark = false, embedded = false } = props
   return (
     <ArticleContent isDark={isDark} embedded={embedded}>

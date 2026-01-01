@@ -20,7 +20,11 @@ const ASSETS = {
   themeBuilderRef: "/articles/Syntra in Falcon/Frame 36.png",
 }
 
-export default function IntroducingSyntra(props: { isDark?: boolean; embedded?: boolean; params?: any; searchParams?: any } = {}) {
+type PageProps = { params?: any; searchParams?: any }
+type CustomProps = { isDark?: boolean; embedded?: boolean }
+type Props = PageProps & CustomProps
+
+export default function IntroducingSyntra(props: Props = {} as any): JSX.Element {
   const { isDark = false, embedded = false } = props
   return (
     <ArticleContent isDark={isDark} embedded={embedded}>
