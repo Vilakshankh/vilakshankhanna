@@ -24,7 +24,8 @@ type PageProps = { params?: any; searchParams?: any }
 type CustomProps = { isDark?: boolean; embedded?: boolean }
 type Props = PageProps & CustomProps
 
-export default function IntroducingSyntra(props: Props = {} as any): JSX.Element {
+export default function IntroducingSyntra(_props?: Props): JSX.Element {
+  const props = _props ?? {}
   const { isDark = false, embedded = false } = props
   return (
     <ArticleContent isDark={isDark} embedded={embedded}>
