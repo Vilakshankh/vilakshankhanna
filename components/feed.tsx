@@ -412,13 +412,13 @@ function FeedContent({ isDark }: FeedProps) {
                     <BreadcrumbLink asChild>
                       <button 
                         onClick={() => handleBreadcrumbClick(pathname + `?directory=${directory}`)}
-                        className="font-helvetica text-sm font-medium hover:opacity-70"
+                        className="font-helvetica text-sm font-medium hover:opacity-70 text-red-600"
                       >
                         {formatDirectoryName(directory)}
                       </button>
                     </BreadcrumbLink>
                   ) : (
-                    <BreadcrumbPage className="font-helvetica text-sm font-medium">
+                    <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
                       {formatDirectoryName(directory)}
                     </BreadcrumbPage>
                   )}
@@ -429,7 +429,7 @@ function FeedContent({ isDark }: FeedProps) {
               <>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="font-helvetica text-sm font-medium">
+                  <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
                     {currentArticle.title.length > 30 
                       ? currentArticle.title.substring(0, 30) + "..." 
                       : currentArticle.title}
@@ -441,7 +441,7 @@ function FeedContent({ isDark }: FeedProps) {
               <>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage className="font-helvetica text-sm font-medium">
+                  <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
                     {currentProjectTitle.length > 30 
                       ? currentProjectTitle.substring(0, 30) + "..." 
                       : currentProjectTitle}
