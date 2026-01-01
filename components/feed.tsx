@@ -243,8 +243,19 @@ function FeedContent({ isDark }: FeedProps) {
         setIsArticleLoading(true)
         setArticleError(null)
         try {
-          const articleModule = await import(`@/app/articles/${article}/page`)
-          setArticleComponent(() => articleModule.default)
+          const articleModule = await import(`@/components/articles/${article}`)
+          // Map article slug to component name
+          const componentMap: Record<string, string> = {
+            "studioenok-randomanxiety-design-autopsy": "StudioenokRandomAnxietyDesignAutopsy",
+            "syntra-falcon": "IntroducingSyntra",
+            "trails-legal-case-study": "TrailsLegalCaseStudy",
+          }
+          const componentName = componentMap[article]
+          if (componentName && articleModule[componentName]) {
+            setArticleComponent(() => articleModule[componentName])
+          } else {
+            throw new Error(`Component not found for article: ${article}`)
+          }
         } catch (err) {
           console.error(`Failed to load article ${article}:`, err)
           setArticleError(`Failed to load article "${article}"`)
