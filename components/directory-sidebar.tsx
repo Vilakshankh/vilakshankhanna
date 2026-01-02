@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
-import { Newspaper, TrendingUp, Target, Users, Phone } from "lucide-react"
+import { Newspaper, TrendingUp, Target, Users, Phone, Pin } from "lucide-react"
 import { useState, useEffect } from "react"
 import { projects } from "@/lib/projects"
 import { Button } from "@/components/ui/button"
@@ -92,7 +92,15 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
               <div key={item.id} className="w-full">
                 {/* Parent directory item */}
                 <button
-                  onClick={() => router.push(pathname + "?directory=" + item.id, { scroll: false })}
+                  onClick={() => {
+                    if (isExpanded) {
+                      // If already expanded, collapse and return to feed
+                      router.push(pathname, { scroll: false })
+                    } else {
+                      // If not expanded, expand to show directory
+                      router.push(pathname + "?directory=" + item.id, { scroll: false })
+                    }
+                  }}
                   className="inline-flex items-center gap-2 w-full justify-start"
                   title={item.label}
                 >
@@ -103,53 +111,85 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
                 </button>
                 
                 {/* Nested children for articles */}
-                {item.id === "articles" && isExpanded && (
+                {item.id === "articles" && (
                   <div
-                    className={`mt-1 ml-6 pl-3 flex flex-col gap-1.5 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isExpanded ? 'max-h-[500px] opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'
+                    }`}
                   >
-                    {isLoadingArticles ? (
-                      <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
-                        loading...
-                      </span>
-                    ) : (
-                      articles.map((art) => (
-                        <button
-                          key={art.slug}
-                          onClick={() => router.push(pathname + `?directory=articles&article=${art.slug}`, { scroll: false })}
-                          className={`font-helvetica text-xs text-left hover:opacity-70 transition-opacity ${
-                            article === art.slug ? 'font-bold' : ''
-                          }`}
-                          title={art.title}
-                        >
-                          {art.title.length > 25 ? art.title.substring(0, 25) + "..." : art.title}
-                        </button>
-                      ))
-                    )}
+                    <div
+                      className={`ml-6 pl-3 flex flex-col gap-1.5 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                    >
+                      {isLoadingArticles ? (
+                        <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                          loading...
+                        </span>
+                      ) : (
+                        articles.map((art) => (
+                          <button
+                            key={art.slug}
+                            onClick={() => router.push(pathname + `?directory=articles&article=${art.slug}`, { scroll: false })}
+                            className={`font-helvetica text-xs text-left hover:opacity-70 transition-opacity ${
+                              article === art.slug ? 'font-bold' : ''
+                            }`}
+                            title={art.title}
+                          >
+                            {art.title.length > 25 ? art.title.substring(0, 25) + "..." : art.title}
+                          </button>
+                        ))
+                      )}
+                    </div>
                   </div>
                 )}
                 
                 {/* Nested children for projects */}
-                {item.id === "projects" && isExpanded && (
+                {item.id === "projects" && (
                   <div
-                    className={`mt-1 ml-6 pl-3 flex flex-col gap-1 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isExpanded ? 'max-h-[500px] opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'
+                    }`}
                   >
-                    {projects.map((proj) => (
-                      <button
-                        key={proj.id}
-                        onClick={() => router.push(pathname + `?directory=projects&project=${proj.id}`, { scroll: false })}
-                        className={`font-helvetica text-xs text-left hover:opacity-70 transition-opacity ${
-                          project === proj.id ? 'font-bold' : ''
-                        }`}
-                        title={proj.title}
-                      >
-                        {proj.title}
-                      </button>
-                    ))}
+                    <div
+                      className={`ml-6 pl-3 flex flex-col gap-1 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                    >
+                      {projects.map((proj) => (
+                        <button
+                          key={proj.id}
+                          onClick={() => router.push(pathname + `?directory=projects&project=${proj.id}`, { scroll: false })}
+                          className={`font-helvetica text-xs text-left hover:opacity-70 transition-opacity ${
+                            project === proj.id ? 'font-bold' : ''
+                          }`}
+                          title={proj.title}
+                        >
+                          {proj.title}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
             )
           })}
+        </div>
+
+        {/* Pinned Section */}
+        <div className={`mt-6 pt-6 border-t ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+          <div className="flex items-center gap-2 mb-3">
+            <Pin className={`w-4 h-4 flex-shrink-0 ${isDark ? 'text-white/60' : 'text-black/60'}`} />
+            <h3 className={`font-helvetica text-xs font-medium ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+              PINNED
+            </h3>
+          </div>
+          <button
+            onClick={() => router.push(pathname + `?directory=articles&article=trails-legal-case-study`, { scroll: false })}
+            className={`inline-flex items-center gap-2 w-full justify-start font-helvetica text-xs hover:opacity-70 transition-opacity ${
+              article === 'trails-legal-case-study' ? 'font-bold' : ''
+            } ${isDark ? 'text-white' : 'text-black'}`}
+            title="Modern Interfaces for an Ancient Industry: How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems."
+          >
+            <Newspaper className="w-4 h-4 flex-shrink-0" />
+            <span>My Approach to Legal Tech UX</span>
+          </button>
         </div>
       </div>
 

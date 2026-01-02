@@ -19,8 +19,8 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
     <ArticleContent isDark={isDark} embedded={embedded}>
       <ArticleHero
         isDark={isDark}
-        title="Modern Interfaces for an Ancient Industry: My Approach to Legal UX"
-        subtitle="How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems."
+        title="My Approach to Legal Tech UX"
+        subtitle="Modern Interfaces for an Ancient Industry: How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems."
         date="December 30, 2025"
         backButton={!embedded}
       />
