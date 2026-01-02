@@ -74,7 +74,13 @@ export function FeedCard({
         
         {/* Content */}
         {content && (
-          <div>
+          <div className={`font-helvetica 
+            [&>h3]:text-xl [&>h3]:font-medium [&>h3]:leading-tight [&>h3]:mb-3 [&>h3]:transition-colors
+            ${interactive ? (isDark ? '[&>h3]:group-hover:text-white/70' : '[&>h3]:group-hover:text-black/70') : ''}
+            [&>p]:text-sm  [&>p]:transition-colors
+            ${isDark ? '[&>p]:text-white/60' : '[&>p]:text-black/60'}
+            ${interactive ? (isDark ? '[&>p]:group-hover:text-white/80' : '[&>p]:group-hover:text-black/80') : ''}
+          `.trim().replace(/\s+/g, ' ')}>
             {content}
           </div>
         )}

@@ -538,12 +538,8 @@ function FeedContent({ isDark }: FeedProps) {
                 }
                 content={
                   <>
-                    <h3 className={`font-helvetica text-xl font-medium leading-tight mb-3 transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
-                      {item.title}
-                    </h3>
-                    <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
-                      {item.description}
-                    </p>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
                   </>
                 }
                 footer={
@@ -616,12 +612,8 @@ function FeedContent({ isDark }: FeedProps) {
                   }
                   content={
                     <>
-                      <h3 className={`font-helvetica text-xl font-medium transition-colors ${isDark ? 'group-hover:text-white/70' : 'group-hover:text-black/70'}`}>
-                        {item.title}
-                      </h3>
-                      <p className={`font-helvetica text-sm font-mono tracking-tight transition-colors ${isDark ? 'text-white/60 group-hover:text-white/80' : 'text-black/60 group-hover:text-black/80'}`}>
-                        {item.description}
-                      </p>
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
                     </>
                   }
                   footer={
