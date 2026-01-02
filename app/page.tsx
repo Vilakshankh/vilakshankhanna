@@ -5,13 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { Feed } from "@/components/feed"
 import { DirectorySidebar } from "@/components/directory-sidebar"
 import { AboutSidebar } from "@/components/about-sidebar"
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogHeader,
-//   DialogTitle,
-// } from "@/components/ui/dialog"
+// import { ReleaseNotesDialog } from "@/components/release-notes-dialog"
 
 // interface SpotifyTrack {
 //   isPlaying: boolean
@@ -28,7 +22,7 @@ function HomeContent() {
   
   const [isFlashing, setIsFlashing] = useState(false)
   const [isDark, setIsDark] = useState(false)
-  // const [isDialogOpen, setIsDialogOpen] = useState(false)
+  // const [isReleaseNotesOpen, setIsReleaseNotesOpen] = useState(false)
   // const [spotifyData, setSpotifyData] = useState<SpotifyTrack | null>(null)
   // const [isLoading, setIsLoading] = useState(false)
 
@@ -66,7 +60,7 @@ function HomeContent() {
   return (
     <div className={`h-screen flex flex-col transition-colors duration-75 ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
       {/* Top Navigation Row */}
-      <nav className={`px-8 py-3 border-b flex-shrink-0 ${isDark ? 'border-white/10 bg-white/5' : 'border-black/10 bg-black/5'}`}>
+      <nav className={`px-8 py-3 border-b flex-shrink-0 ${isDark ? 'border-white/10 bg-black' : 'border-black/10 bg-white'}`}>
         <div className="flex justify-between items-baseline text-xl font-helvetica font-semibold">
           <span className="flex items-center gap-2 group/disc">
             <span 
@@ -76,7 +70,12 @@ function HomeContent() {
               📀
             </span>
             VILAKSHAN KHANNA
-            <span className="text-xs font-mono text-black/40">[Beta 1.10]</span>
+            <span 
+              className={`text-xs font-mono ${isDark ? 'text-white/40' : 'text-black/40'}`}
+              // onClick={() => setIsReleaseNotesOpen(true)}
+            >
+              [Beta 1.10]
+            </span>
           </span>
           <span>DESIGN ENGINEER</span>
           <span 
@@ -156,6 +155,13 @@ function HomeContent() {
           )}
         </DialogContent>
       </Dialog> */}
+
+      {/* Release Notes Dialog */}
+      {/* <ReleaseNotesDialog 
+        open={isReleaseNotesOpen} 
+        onOpenChange={setIsReleaseNotesOpen}
+        isDark={isDark}
+      /> */}
     </div>
   )
 }

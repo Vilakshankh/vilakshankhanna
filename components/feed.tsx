@@ -396,88 +396,94 @@ function FeedContent({ isDark }: FeedProps) {
   }
 
   return (
-    <section className="py-8 pb-16 overflow-y-auto flex justify-center">
-      <div className="w-full max-w-[900px] px-12">
-        <div className="flex items-center justify-between mb-8 min-h-[32px]">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              {directory ? (
-                <BreadcrumbLink asChild>
-                  <button 
-                    onClick={() => handleBreadcrumbClick(pathname)}
-                    className="font-helvetica text-sm font-medium hover:opacity-70"
-                  >
-                    FEED
-                  </button>
-                </BreadcrumbLink>
-              ) : (
-                <BreadcrumbPage className="font-helvetica text-sm font-medium">FEED</BreadcrumbPage>
-              )}
-            </BreadcrumbItem>
-            {directory && (
-              <>
-                <BreadcrumbSeparator />
+    <section className={`flex flex-col h-full overflow-hidden ${isDark ? 'bg-white/5' : 'bg-black/5'}`}>
+      {/* Fixed Breadcrumb Area */}
+      <div className={`flex-shrink-0 py-4 flex justify-center border-b ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+        <div className="w-full max-w-[900px] px-12">
+          <div className="flex items-center justify-between min-h-[32px]">
+            <Breadcrumb>
+              <BreadcrumbList>
                 <BreadcrumbItem>
-                  {article || project ? (
+                  {directory ? (
                     <BreadcrumbLink asChild>
                       <button 
-                        onClick={() => handleBreadcrumbClick(pathname + `?directory=${directory}`)}
-                        className="font-helvetica text-sm font-medium hover:opacity-70 text-red-600"
+                        onClick={() => handleBreadcrumbClick(pathname)}
+                        className="font-helvetica text-sm font-medium hover:opacity-70"
                       >
-                        {formatDirectoryName(directory)}
+                        FEED
                       </button>
                     </BreadcrumbLink>
                   ) : (
-                    <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
-                      {formatDirectoryName(directory)}
-                    </BreadcrumbPage>
+                    <BreadcrumbPage className="font-helvetica text-sm font-medium">FEED</BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
-              </>
-            )}
-            {article && currentArticle && (
-              <>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
-                    {currentArticle.title.length > 30 
-                      ? currentArticle.title.substring(0, 30) + "..." 
-                      : currentArticle.title}
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </>
-            )}
-            {project && currentProjectTitle && (
-              <>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
-                    {currentProjectTitle.length > 30 
-                      ? currentProjectTitle.substring(0, 30) + "..." 
-                      : currentProjectTitle}
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </>
-            )}
-          </BreadcrumbList>
-        </Breadcrumb>
+                {directory && (
+                  <>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      {article || project ? (
+                        <BreadcrumbLink asChild>
+                          <button 
+                            onClick={() => handleBreadcrumbClick(pathname + `?directory=${directory}`)}
+                            className="font-helvetica text-sm font-medium hover:opacity-70 text-red-600"
+                          >
+                            {formatDirectoryName(directory)}
+                          </button>
+                        </BreadcrumbLink>
+                      ) : (
+                        <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
+                          {formatDirectoryName(directory)}
+                        </BreadcrumbPage>
+                      )}
+                    </BreadcrumbItem>
+                  </>
+                )}
+                {article && currentArticle && (
+                  <>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
+                        {currentArticle.title.length > 30 
+                          ? currentArticle.title.substring(0, 30) + "..." 
+                          : currentArticle.title}
+                      </BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </>
+                )}
+                {project && currentProjectTitle && (
+                  <>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
+                        {currentProjectTitle.length > 30 
+                          ? currentProjectTitle.substring(0, 30) + "..." 
+                          : currentProjectTitle}
+                      </BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </>
+                )}
+              </BreadcrumbList>
+            </Breadcrumb>
 
-        <div className="w-8 h-8 flex items-center justify-center">
-          {directory === "articles" && !article && (
-            <button
-              onClick={toggleSort}
-              className={`p-1 rounded hover:bg-black/5 transition-colors ${isDark ? 'hover:bg-white/5' : 'hover:bg-black/5'}`}
-              title={`Sort ${sortOrder === "desc" ? "oldest first" : "newest first"}`}
-            >
-              <Calendar className={`w-4 h-4 ${sortOrder === "asc" ? "rotate-180" : ""} transition-transform`} />
-            </button>
-          )}
+            <div className="w-8 h-8 flex items-center justify-center">
+              {directory === "articles" && !article && (
+                <button
+                  onClick={toggleSort}
+                  className={`p-1 rounded hover:bg-black/5 transition-colors ${isDark ? 'hover:bg-white/5' : 'hover:bg-black/5'}`}
+                  title={`Sort ${sortOrder === "desc" ? "oldest first" : "newest first"}`}
+                >
+                  <Calendar className={`w-4 h-4 ${sortOrder === "asc" ? "rotate-180" : ""} transition-transform`} />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className="min-h-[400px]">
+      {/* Scrollable Content Area */}
+      <div className="flex-1 overflow-y-auto flex justify-center">
+        <div className="w-full max-w-[900px] px-12 py-8">
+          <div className="min-h-[200px]">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
             <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
@@ -499,7 +505,7 @@ function FeedContent({ isDark }: FeedProps) {
               </p>
             </div>
           ) : (
-            <div className={`w-full overflow-y-auto max-h-[calc(100vh-200px)] animate-in fade-in duration-500 ${isDark ? 'text-white' : 'text-black'}`}>
+            <div className={`w-full animate-in fade-in duration-500 ${isDark ? 'text-white' : 'text-black'}`}>
               <Suspense fallback={
                 <div className="flex items-center justify-center py-12">
                   <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
@@ -516,7 +522,7 @@ function FeedContent({ isDark }: FeedProps) {
           )
         ) : directory === "articles" ? (
           // Articles list
-          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+          <div className="flex flex-col gap-4 animate-in fade-in duration-500">
             {sortedArticles.map((item) => (
               <FeedCard
                 key={item.slug}
@@ -550,7 +556,7 @@ function FeedContent({ isDark }: FeedProps) {
           </div>
         ) : directory === "projects" ? (
           // Projects cards
-          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+          <div className="flex flex-col gap-4 animate-in fade-in duration-500">
             {!project && <FiveFiveFiveStudio isDark={isDark} />}
             {!project && <TrailsLegal isDark={isDark} />}
             {!project && <ButterflyProject isDark={isDark} />}
@@ -560,7 +566,7 @@ function FeedContent({ isDark }: FeedProps) {
           </div>
         ) : directory === "work-stats" ? (
           // Work experience cards
-          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+          <div className="flex flex-col gap-4 animate-in fade-in duration-500">
             <Skills isDark={isDark} />
             <TrailsWork isDark={isDark} />
             <MatroxWork isDark={isDark} />
@@ -569,7 +575,7 @@ function FeedContent({ isDark }: FeedProps) {
           </div>
         ) : directory === "socials" ? (
           // Socials - LinkedIn and Twitter embedded posts
-          <div className="flex flex-col gap-8 animate-in fade-in duration-500">
+          <div className="flex flex-col gap-4 animate-in fade-in duration-500">
             <LinkedInPost isDark={isDark} />
             <TwitterPost isDark={isDark} />
           </div>
@@ -582,7 +588,7 @@ function FeedContent({ isDark }: FeedProps) {
           </div>
         ) : (
           // Unified feed (articles + socials)
-          <div className="flex flex-col gap-12 animate-in fade-in duration-500">
+          <div className="flex flex-col gap-4 animate-in fade-in duration-500">
             {unifiedFeedItems.map((item) => {
               // LinkedIn post rendering
               if (item.type === "linkedin" && item.linkedinEmbed) {
@@ -630,7 +636,8 @@ function FeedContent({ isDark }: FeedProps) {
             })}
           </div>
         )}
-      </div>
+          </div>
+        </div>
       </div>
     </section>
   )

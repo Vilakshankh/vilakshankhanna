@@ -35,7 +35,7 @@ export function FeedCard({
     <Component
       onClick={onClick}
       className={`
-        ${containerWidth} mx-auto flex flex-col relative p-6
+        ${containerWidth} mx-auto flex flex-col relative p-6 bg-white
         ${interactive ? 'group cursor-pointer text-left' : ''}
         ${className}
       `.trim().replace(/\s+/g, ' ')}

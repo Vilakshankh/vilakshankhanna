@@ -1,37 +1,15 @@
 "use client"
 
 import { workExperiences } from "@/lib/work-experience"
-import { useEffect } from "react"
-import Cal, { getCalApi } from "@calcom/embed-react"
-import { Phone } from "lucide-react"
 
 interface AboutSidebarProps {
   isDark: boolean
 }
 
 export function AboutSidebar({ isDark }: AboutSidebarProps) {
-  // Initialize Cal.com embed
-  useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "vilak-intro-30min" })
-      cal("ui", {
-        theme: "light",
-        cssVarsPerTheme: {
-          light: {
-            "cal-brand": "#e80e0e"
-          },
-          dark: {
-            "cal-brand": "#e80e0e"
-          }
-        },
-        hideEventTypeDetails: true,
-        layout: "month_view"
-      })
-    })()
-  }, [])
 
   return (
-    <aside className={`py-8 border-r overflow-y-auto ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} w-96 px-6`}>
+    <aside className={`py-8 border-r overflow-y-auto ${isDark ? 'bg-black border-white/10' : 'bg-white border-black/10'} w-96 px-6`}>
       <div className="flex flex-col gap-6">
         {/* Header */}
         <div>
@@ -99,22 +77,6 @@ export function AboutSidebar({ isDark }: AboutSidebarProps) {
             <p className={`font-helvetica text-xs font-mono ${isDark ? 'text-white/60' : 'text-black/60'}`}>
               Memorial University of Newfoundland (BSc. 2024)
             </p>
-          </div>
-        </div>
-
-        {/* Cal.com Calendar Embed */}
-        <div className={`mt-8 pt-8 border-t ${isDark ? 'border-white/10' : 'border-black/10'}`}>
-          <h3 className={`font-helvetica text-sm font-medium tracking-tight mb-4 flex items-center gap-2 ${isDark ? 'text-white' : 'text-black'}`}>
-            <Phone className="w-4 h-4" />
-            SCHEDULE A CALL
-          </h3>
-          <div className="w-full">
-            <Cal
-              namespace="vilak-intro-30min"
-              calLink="vilakshankh/vilak-intro-30min"
-              style={{ width: "100%", height: "100%", overflow: "scroll" }}
-              config={{ layout: "month_view", theme: "light" }}
-            />
           </div>
         </div>
       </div>

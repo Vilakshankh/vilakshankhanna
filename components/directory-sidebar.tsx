@@ -1,9 +1,11 @@
 "use client"
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
-import { Newspaper, TrendingUp, Target, Users } from "lucide-react"
+import { Newspaper, TrendingUp, Target, Users, Phone } from "lucide-react"
 import { useState, useEffect } from "react"
 import { projects } from "@/lib/projects"
+import { Button } from "@/components/ui/button"
+import { getCalApi } from "@calcom/embed-react"
 
 interface DirectorySidebarProps {
   isDark: boolean
@@ -26,6 +28,26 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
   
   const [articles, setArticles] = useState<ArticleMeta[]>([])
   const [isLoadingArticles, setIsLoadingArticles] = useState(false)
+
+  // Initialize Cal.com embed
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "vilak-intro-30min" })
+      cal("ui", {
+        theme: "light",
+        cssVarsPerTheme: {
+          light: {
+            "cal-brand": "#e80e0e"
+          },
+          dark: {
+            "cal-brand": "#e80e0e"
+          }
+        },
+        hideEventTypeDetails: false,
+        layout: "month_view"
+      })
+    })()
+  }, [])
 
   // Fetch articles on mount
   useEffect(() => {
@@ -51,8 +73,8 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
   ]
 
   return (
-    <aside className={`py-8 border-l overflow-y-auto ${isDark ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'} w-64 px-6`}>
-      <div className="flex flex-col">
+    <aside className={`py-8 border-l overflow-y-auto ${isDark ? 'bg-black border-white/10' : 'bg-white border-black/10'} w-64 px-6 flex flex-col`}>
+      <div className="flex flex-col flex-1">
         {/* Header */}
         <div>
           <h2 className={`font-helvetica text-sm font-medium tracking-tight mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
@@ -129,6 +151,20 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
             )
           })}
         </div>
+      </div>
+
+      {/* Schedule a Call Button */}
+      <div className={`mt-auto pt-8 border-t ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+        <Button
+          data-cal-namespace="vilak-intro-30min"
+          data-cal-link="vilakshankh/vilak-intro-30min"
+          data-cal-config='{"layout":"month_view","theme":"light"}'
+          className={`w-full font-helvetica text-xs ${isDark ? 'bg-white text-black hover:bg-white/90' : 'bg-black text-white hover:bg-black/90'}`}
+          variant="default"
+        >
+          <Phone className="w-4 h-4" />
+          Schedule a Call
+        </Button>
       </div>
     </aside>
   )
