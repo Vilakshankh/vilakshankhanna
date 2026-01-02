@@ -2,13 +2,11 @@ import { Users } from "lucide-react"
 import { FeedCard } from "../ui/feed-card"
 
 interface LinkedInPostProps {
-  isDark?: boolean
 }
 
-export function LinkedInPost({ isDark = false }: LinkedInPostProps) {
+export function LinkedInPost({}: LinkedInPostProps) {
   return (
     <FeedCard
-      isDark={isDark}
       media={
         <div className="w-full flex justify-center">
           <div className="w-full max-w-[504px]">

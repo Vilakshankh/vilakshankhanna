@@ -7,13 +7,11 @@ import { ArrowLeft, ExternalLink, Newspaper } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface ArticleContentProps {
-  isDark?: boolean
   embedded?: boolean
   children: ReactNode
 }
 
 interface ArticleHeroProps {
-  isDark?: boolean
   title: string
   subtitle: string
   author?: string
@@ -22,7 +20,6 @@ interface ArticleHeroProps {
 }
 
 interface ArticleSectionProps {
-  isDark?: boolean
   title?: string
   children: ReactNode
 }
@@ -32,7 +29,6 @@ interface ArticleImageProps {
   alt: string
   caption?: string
   priority?: boolean
-  isDark?: boolean
   width?: number
   height?: number
   className?: string
@@ -44,7 +40,6 @@ interface ArticleImageGalleryProps {
     src: string
     alt: string
   }>
-  isDark?: boolean
 }
 
 interface ArticleVideoProps {
@@ -56,21 +51,18 @@ interface ArticleLinkProps {
   href: string
   children: ReactNode
   external?: boolean
-  isDark?: boolean
 }
 
 interface ArticleTagsProps {
   tags: string[]
-  isDark?: boolean
 }
 
 interface ArticleSubheadingProps {
   children: ReactNode
-  isDark?: boolean
 }
 
 // Main wrapper
-export function ArticleContent({ isDark = false, embedded = false, children }: ArticleContentProps) {
+export function ArticleContent({ embedded = false, children }: ArticleContentProps) {
   const content = (
     <div className={`${embedded ? 'w-full' : 'w-[750px] mx-auto'}`}>
       {children}
@@ -82,14 +74,14 @@ export function ArticleContent({ isDark = false, embedded = false, children }: A
   }
 
   return (
-    <main className={`flex min-h-screen flex-col py-8 px-12 ${isDark ? 'bg-black' : 'bg-white'}`}>
+    <main className="flex min-h-screen flex-col py-8 px-12 bg-white">
       {content}
     </main>
   )
 }
 
 // Hero section
-export function ArticleHero({ isDark = false, title, subtitle, author = "Vilakshan Khanna", date, backButton = false }: ArticleHeroProps) {
+export function ArticleHero({ title, subtitle, author = "Vilakshan Khanna", date, backButton = false }: ArticleHeroProps) {
   return (
     <>
       {backButton && (
@@ -100,10 +92,10 @@ export function ArticleHero({ isDark = false, title, subtitle, author = "Vilaksh
         </Link>
       )}
       
-      <h1 className={`text-xl md:text-2xl font-semibold mb-3 text-left font-helvetica ${isDark ? 'text-white' : 'text-black'}`}>
+      <h1 className="text-xl md:text-2xl font-semibold mb-3 text-left font-helvetica text-black">
         {title}
       </h1>
-      <span className={`block text-sm font-helvetica md:text-sm mb-3 ${isDark ? 'text-white/80' : 'text-black/80'}`}>
+      <span className="block text-sm font-helvetica md:text-sm mb-3 text-black/80">
         {subtitle}
       </span>
       <div className="flex items-center gap-3 mb-8">
@@ -111,7 +103,7 @@ export function ArticleHero({ isDark = false, title, subtitle, author = "Vilaksh
           <Newspaper className="w-3 h-3" />
           article
         </span>
-        <p className={`text-sm font-helvetica ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+        <p className="text-sm font-helvetica text-black/60">
           by {author} · {date}
         </p>
       </div>
@@ -120,15 +112,15 @@ export function ArticleHero({ isDark = false, title, subtitle, author = "Vilaksh
 }
 
 // Content section
-export function ArticleSection({ isDark = false, title, children }: ArticleSectionProps) {
+export function ArticleSection({ title, children }: ArticleSectionProps) {
   return (
     <section className="mb-16">
       {title && (
-        <h2 className={`text-xl md:text-2xl font-bold mb-6 text-left font-helvetica ${isDark ? 'text-white' : 'text-black'}`}>
+        <h2 className="text-xl md:text-2xl font-bold mb-6 text-left font-helvetica text-black">
           {title}
         </h2>
       )}
-      <div className={`space-y-6 text-sm leading-relaxed font-helvetica ${isDark ? 'text-white/80' : 'text-black/80'}`}>
+      <div className="space-y-6 text-sm leading-relaxed font-helvetica text-black/80">
         {children}
       </div>
     </section>
@@ -136,16 +128,16 @@ export function ArticleSection({ isDark = false, title, children }: ArticleSecti
 }
 
 // Subheading (h3)
-export function ArticleSubheading({ children, isDark = false }: ArticleSubheadingProps) {
+export function ArticleSubheading({ children }: ArticleSubheadingProps) {
   return (
-    <h3 className={`text-lg md:text-xl font-semibold pt-4 font-helvetica ${isDark ? 'text-white' : 'text-black'}`}>
+    <h3 className="text-lg md:text-xl font-semibold pt-4 font-helvetica text-black">
       {children}
     </h3>
   )
 }
 
 // Single image with caption
-export function ArticleImage({ src, alt, caption, priority = false, isDark = false, width = 1600, height = 1000, className = "w-full h-auto rounded-sm", unoptimized = false }: ArticleImageProps) {
+export function ArticleImage({ src, alt, caption, priority = false, width = 1600, height = 1000, className = "w-full h-auto rounded-sm", unoptimized = false }: ArticleImageProps) {
   const imageElement = (
     <Image
       src={src}
@@ -162,7 +154,7 @@ export function ArticleImage({ src, alt, caption, priority = false, isDark = fal
     return (
       <figure className="space-y-3">
         {imageElement}
-        <figcaption className={`text-sm font-helvetica ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+        <figcaption className="text-sm font-helvetica text-black/60">
           {caption}
         </figcaption>
       </figure>
@@ -173,7 +165,7 @@ export function ArticleImage({ src, alt, caption, priority = false, isDark = fal
 }
 
 // Image gallery (horizontal scroll)
-export function ArticleImageGallery({ images, isDark = false }: ArticleImageGalleryProps) {
+export function ArticleImageGallery({ images }: ArticleImageGalleryProps) {
   return (
     <div className="mb-12">
       <div className="flex gap-3 overflow-x-auto">
@@ -212,13 +204,13 @@ export function ArticleVideo({ src, className = "w-full" }: ArticleVideoProps) {
 }
 
 // External link
-export function ArticleLink({ href, children, external = true, isDark = false }: ArticleLinkProps) {
+export function ArticleLink({ href, children, external = true }: ArticleLinkProps) {
   return (
     <a
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className={`inline-flex items-center gap-2 hover:underline ${isDark ? 'text-blue-400' : 'text-blue-600'}`}
+      className="inline-flex items-center gap-2 hover:underline text-blue-600"
     >
       {children}
       {external && <ExternalLink className="h-4 w-4" />}
@@ -227,14 +219,14 @@ export function ArticleLink({ href, children, external = true, isDark = false }:
 }
 
 // Tags section
-export function ArticleTags({ tags, isDark = false }: ArticleTagsProps) {
+export function ArticleTags({ tags }: ArticleTagsProps) {
   return (
     <section className="mb-16">
       <div className="flex flex-wrap gap-2">
         {tags.map((tag) => (
           <span
             key={tag}
-            className={`px-3 py-1 rounded-full text-sm font-helvetica ${isDark ? 'bg-white/10 text-white/60' : 'bg-black/5 text-black/60'}`}
+            className="px-3 py-1 rounded-full text-sm font-helvetica bg-black/5 text-black/60"
           >
             {tag}
           </span>

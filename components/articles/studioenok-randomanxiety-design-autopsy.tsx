@@ -17,15 +17,13 @@ const ASSETS = {
 }
 
 interface StudioenokRandomAnxietyDesignAutopsyProps {
-  isDark?: boolean
   embedded?: boolean
 }
 
-export function StudioenokRandomAnxietyDesignAutopsy({ isDark = false, embedded = false }: StudioenokRandomAnxietyDesignAutopsyProps) {
+export function StudioenokRandomAnxietyDesignAutopsy({ embedded = false }: StudioenokRandomAnxietyDesignAutopsyProps) {
   return (
-    <ArticleContent isDark={isDark} embedded={embedded}>
+    <ArticleContent embedded={embedded}>
       <ArticleHero
-        isDark={isDark}
         title="Design Autopsy of Studioenok: Defining RandomAnxiety's Jewellery Brand"
         subtitle="How Studioenok created a rigid grid design system that reorganizes chaotic information into structured layouts, allowing wearers to build personal relationships with the jewellery."
         date="January 15, 2025"
@@ -39,10 +37,9 @@ export function StudioenokRandomAnxietyDesignAutopsy({ isDark = false, embedded 
           { src: ASSETS.productPhoto, alt: "RandomAnxiety Product Photography" },
           { src: ASSETS.boxStack, alt: "RandomAnxiety Box Stack" },
         ]}
-        isDark={isDark}
       />
 
-      <ArticleSection isDark={isDark}>
+      <ArticleSection>
         <p>
           Studioenok believed that a jewellery brand should create space for the wearer to build a personal relationship with the object. They did this by creating a rigid grid design system for Random Anxiety. A system that reorganizes chaotic information into structured layouts.
         </p>
@@ -52,20 +49,20 @@ export function StudioenokRandomAnxietyDesignAutopsy({ isDark = false, embedded 
         </p>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Personal Takeaways">
+      <ArticleSection title="Personal Takeaways">
         <ul className="list-disc list-inside space-y-2 pl-4">
           <li>Create branding systems that can hold stories</li>
           <li>Give space for the audience to build personal relationships with elements</li>
         </ul>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Further Reading">
+      <ArticleSection title="Further Reading">
         <div className="space-y-4">
-          <ArticleLink href="https://lnkd.in/eWHVuszF" isDark={isDark}>
+          <ArticleLink href="https://lnkd.in/eWHVuszF">
             Read more about Studioenok&apos;s work
           </ArticleLink>
           <br />
-          <ArticleLink href="https://lnkd.in/e6xdfj6Z" isDark={isDark}>
+          <ArticleLink href="https://lnkd.in/e6xdfj6Z">
             Additional resources on RandomAnxiety branding
           </ArticleLink>
         </div>
@@ -78,7 +75,6 @@ export function StudioenokRandomAnxietyDesignAutopsy({ isDark = false, embedded 
           "#productdesign",
           "#typography",
         ]}
-        isDark={isDark}
       />
     </ArticleContent>
   )

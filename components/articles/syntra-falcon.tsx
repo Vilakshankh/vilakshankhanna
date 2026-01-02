@@ -21,15 +21,13 @@ const ASSETS = {
 }
 
 interface IntroducingSyntraProps {
-  isDark?: boolean
   embedded?: boolean
 }
 
-export function IntroducingSyntra({ isDark = false, embedded = false }: IntroducingSyntraProps) {
+export function IntroducingSyntra({ embedded = false }: IntroducingSyntraProps) {
   return (
-    <ArticleContent isDark={isDark} embedded={embedded}>
+    <ArticleContent embedded={embedded}>
       <ArticleHero
-        isDark={isDark}
         title="Introducing Syntra"
         subtitle="A new design experience that helps Design Engineers visually manipulate components and see their code change in real time."
         date="December 31, 2025"
@@ -40,10 +38,9 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
         src="/articles/Syntra in Falcon/Frame 38.png"
         alt="Syntra hero illustration"
         priority
-        isDark={isDark}
       />
 
-      <ArticleSection isDark={isDark}>
+      <ArticleSection>
         <p>
           Designers and engineers have spent decades battling the same fundamental problem: the gap between imagining an interface and building it.
           The workflow is still fragmented—design in one tool, implementation in another, and constant back-and-forth.
@@ -59,7 +56,7 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
         </p>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Reducing Friction For Designers To Be Engineers">
+      <ArticleSection title="Reducing Friction For Designers To Be Engineers">
         <p>
           Falcon already sits at the intersection of imagination and implementation. Its IDE interface, component library, and live preview give it
           a unique opportunity to let designers creatively experiment while building production code side by side.
@@ -82,7 +79,7 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
         </p>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="How does Syntra work?">
+      <ArticleSection title="How does Syntra work?">
         <p>
           When a user enters Falcon, they begin in code mode. This grounds engineers immediately, while still keeping room for designers to enter
           visually when needed. By default, Falcon behaves like a traditional IDE until the user opens a component file.
@@ -92,10 +89,9 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           src={ASSETS.codeMode}
           alt="Coding a component in Code Mode"
           caption="Coding a component in Code Mode (default)"
-          isDark={isDark}
         />
 
-        <ArticleSubheading isDark={isDark}>
+        <ArticleSubheading>
           Editing a Component Directly in Preview Mode
         </ArticleSubheading>
 
@@ -108,7 +104,6 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           src={ASSETS.editPreview}
           alt="Editing a component directly in Preview Mode"
           caption="Editing a component directly in Preview Mode"
-          isDark={isDark}
         />
 
         <p>
@@ -117,7 +112,7 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
         </p>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Hierarchy View">
+      <ArticleSection title="Hierarchy View">
         <p>
           The Hierarchy View is a hierarchical outline that appears whenever a component is being worked on. It mirrors the exact structure of the
           component&apos;s code: parent, child, wrapper, and layout group—helping designers understand structure without scanning code.
@@ -127,7 +122,6 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           src={ASSETS.hierarchyExplainer}
           alt="Hierarchy View explainer"
           caption="Hierarchy View mirrors the component&apos;s code structure"
-          isDark={isDark}
         />
 
         <p>
@@ -139,11 +133,10 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           src={ASSETS.selectTool}
           alt="Selecting a component highlights it in code and in hierarchy"
           caption="Selecting a component highlights it across preview, hierarchy, and code"
-          isDark={isDark}
         />
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Cosmetic Editing Tools">
+      <ArticleSection title="Cosmetic Editing Tools">
         <p>
           These tools appear when a component is selected in Syntra. They allow designers to work directly with the component instead of modifying
           values in code—every visual change is reflected back into code.
@@ -165,11 +158,10 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           src={ASSETS.customization}
           alt="Component customization panel"
           caption="A closer look at Syntra&apos;s customization tools"
-          isDark={isDark}
         />
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="How it fits into workflow">
+      <ArticleSection title="How it fits into workflow">
         <p>A typical flow looks like this:</p>
 
         <ol className="list-decimal list-inside space-y-2 pl-4">
@@ -187,13 +179,13 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
         </p>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Sample Prototype">
-        <ArticleLink href="https://zero-minus-82708488.figma.site/" isDark={isDark}>
+      <ArticleSection title="Sample Prototype">
+        <ArticleLink href="https://zero-minus-82708488.figma.site/">
           Open the Syntra prototype
         </ArticleLink>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Testing">
+      <ArticleSection title="Testing">
         <p>
           I would approach testing this feature the same way a design engineer would encounter it in real use. The goal is to understand how users
           interpret Syntra, where friction appears, and how well the visual editing model holds up under real workflows.
@@ -204,7 +196,7 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           low-fidelity interactive prototypes as proof of concept.
         </p>
 
-        <ArticleSubheading isDark={isDark}>Success criteria</ArticleSubheading>
+        <ArticleSubheading>Success criteria</ArticleSubheading>
         <ul className="list-disc list-inside space-y-2 pl-4">
           <li>
             <strong>Clarity:</strong> Users instantly recognize Syntra is editable and understand the relationship between hierarchy, canvas, and code.
@@ -217,7 +209,7 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           </li>
         </ul>
 
-        <ArticleSubheading isDark={isDark}>Potential cognitive load leaks</ArticleSubheading>
+        <ArticleSubheading>Potential cognitive load leaks</ArticleSubheading>
         <ul className="list-disc list-inside space-y-2 pl-4">
           <li>Are there too many panels open?</li>
           <li>Does the hierarchy feel natural or intrusive?</li>
@@ -226,7 +218,7 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
         </ul>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Marketing and positioning">
+      <ArticleSection title="Marketing and positioning">
         <p>
           <strong>Syntra</strong> captures the futuristic spirit of what this workflow enables: a creative space inside Falcon where the interface becomes
           something you can shape directly with your hands.
@@ -236,7 +228,6 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           src={ASSETS.marketingFrame}
           alt="Introducing Syntra marketing frame"
           caption="&quot;Introducing Syntra&quot; marketing frame"
-          isDark={isDark}
         />
 
         <p>
@@ -245,20 +236,20 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
         </p>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Feedback and future versions">
+      <ArticleSection title="Feedback and future versions">
         <p>
           Syntra&apos;s first version forms the foundation: editing components visually with code updating in real time. From there, the evolution depends on
           observing how users push, bend, and break the system.
         </p>
 
-        <ArticleSubheading isDark={isDark}>Version 1.1: refine the core interaction</ArticleSubheading>
+        <ArticleSubheading>Version 1.1: refine the core interaction</ArticleSubheading>
         <ul className="list-disc list-inside space-y-2 pl-4">
           <li>Refine hierarchy drag + drop behaviors</li>
           <li>Smooth code generation edge cases</li>
           <li>Add micro-interactions that reinforce predictability</li>
         </ul>
 
-        <ArticleSubheading isDark={isDark}>Version 2: thematic customization</ArticleSubheading>
+        <ArticleSubheading>Version 2: thematic customization</ArticleSubheading>
         <p>
           A strong signal from interviews: designers value theme systems—defining appearance, semantics, and stylistic rules. Extending Syntra into
           theme-level editing could unlock major value.
@@ -268,10 +259,9 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           src={ASSETS.themeBuilderRef}
           alt="Theme builder reference"
           caption="Theme builder reference mentioned in user interviews"
-          isDark={isDark}
         />
 
-        <ArticleSubheading isDark={isDark}>Long-term vision</ArticleSubheading>
+        <ArticleSubheading>Long-term vision</ArticleSubheading>
         <p>
           <strong>Make Falcon the place where interfaces are shaped and coded together.</strong>
         </p>
@@ -288,7 +278,6 @@ export function IntroducingSyntra({ isDark = false, embedded = false }: Introduc
           "#ui",
           "#designsystems",
         ]}
-        isDark={isDark}
       />
     </ArticleContent>
   )

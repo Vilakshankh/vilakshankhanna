@@ -5,12 +5,10 @@ import Image from "next/image"
 
 interface ProjectsShowcaseProps {
   variant?: "standalone" | "embedded"
-  isDark?: boolean
 }
 
 export function ProjectsShowcase({ 
-  variant = "embedded",
-  isDark = false
+  variant = "embedded"
 }: ProjectsShowcaseProps) {
   return (
     <>
@@ -19,7 +17,7 @@ export function ProjectsShowcase({
         {/* Logo + Project Name */}
         <div className="flex items-center gap-3 mb-4 pb-2">
           <Image 
-            src={isDark ? "/Untitled-2_white.png" : "/Untitled-2_black.png"} 
+            src="/Untitled-2_black.png" 
             alt="555 Studio Logo" 
             width={32} 
             height={32}

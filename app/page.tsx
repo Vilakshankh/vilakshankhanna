@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, Suspense } from "react"
+import { Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Feed } from "@/components/feed"
 import { DirectorySidebar } from "@/components/directory-sidebar"
@@ -19,24 +19,6 @@ import { AboutSidebar } from "@/components/about-sidebar"
 function HomeContent() {
   const searchParams = useSearchParams()
   const directory = searchParams.get("directory")
-  
-  const [isFlashing, setIsFlashing] = useState(false)
-  const [isDark, setIsDark] = useState(false)
-  // const [isReleaseNotesOpen, setIsReleaseNotesOpen] = useState(false)
-  // const [spotifyData, setSpotifyData] = useState<SpotifyTrack | null>(null)
-  // const [isLoading, setIsLoading] = useState(false)
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout
-    if (isFlashing) {
-      interval = setInterval(() => {
-        setIsDark(prev => !prev)
-      }, 100) // Switch every 100ms for rapid flashing
-    } else {
-      setIsDark(false)
-    }
-    return () => clearInterval(interval)
-  }, [isFlashing])
 
   // useEffect(() => {
   //   const fetchNowPlaying = async () => {
@@ -58,9 +40,9 @@ function HomeContent() {
   //   fetchNowPlaying()
   // }, [isDialogOpen])
   return (
-    <div className={`h-screen flex flex-col transition-colors duration-75 ${isDark ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <div className="h-screen flex flex-col transition-colors duration-75 bg-white text-black">
       {/* Top Navigation Row */}
-      <nav className={`px-8 py-3 border-b flex-shrink-0 ${isDark ? 'border-white/10 bg-black' : 'border-black/10 bg-white'}`}>
+      <nav className="px-8 py-3 border-b flex-shrink-0 border-black/10 bg-white">
         <div className="flex justify-between items-baseline text-xl font-helvetica font-semibold">
           <span className="flex items-center gap-2 group/disc">
             <span 
@@ -71,18 +53,14 @@ function HomeContent() {
             </span>
             VILAKSHAN KHANNA
             <span 
-              className={`text-xs font-mono ${isDark ? 'text-white/40' : 'text-black/40'}`}
+              className="text-xs font-mono text-black/40"
               // onClick={() => setIsReleaseNotesOpen(true)}
             >
               [Beta 1.10]
             </span>
           </span>
           <span>DESIGN ENGINEER</span>
-          <span 
-            className="cursor-pointer"
-            onMouseEnter={() => setIsFlashing(true)}
-            onMouseLeave={() => setIsFlashing(false)}
-          >
+          <span>
             BRAND STRATEGIST
           </span>
         </div>
@@ -91,13 +69,13 @@ function HomeContent() {
       {/* Main 3-Column Layout */}
       <main className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] flex-1 overflow-hidden">
         {/* About Sidebar */}
-        <AboutSidebar isDark={isDark} />
+        <AboutSidebar />
 
         {/* Feed Column */}
-        <Feed isDark={isDark} />
+        <Feed />
 
         {/* Directory Sidebar */}
-        <DirectorySidebar isDark={isDark} directory={directory} />
+        <DirectorySidebar directory={directory} />
       </main>
 
       {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -160,7 +138,6 @@ function HomeContent() {
       {/* <ReleaseNotesDialog 
         open={isReleaseNotesOpen} 
         onOpenChange={setIsReleaseNotesOpen}
-        isDark={isDark}
       /> */}
     </div>
   )

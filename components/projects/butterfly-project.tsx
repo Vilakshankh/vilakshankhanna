@@ -1,15 +1,13 @@
 import Image from "next/image"
-import { TrendingUp } from "lucide-react"
+import { Disc } from "lucide-react"
 import { FeedCard } from "../ui/feed-card"
 
 interface ButterflyProjectProps {
-  isDark?: boolean
 }
 
-export function ButterflyProject({ isDark = false }: ButterflyProjectProps) {
+export function ButterflyProject({}: ButterflyProjectProps) {
   return (
     <FeedCard
-      isDark={isDark}
       header={
         <div className="flex items-center gap-3 pb-2">
           <Image 
@@ -19,7 +17,7 @@ export function ButterflyProject({ isDark = false }: ButterflyProjectProps) {
             height={32}
             className="object-contain"
           />
-          <h3 className={`font-helvetica text-xl font-medium ${isDark ? 'text-white' : 'text-black'}`}>
+          <h3 className="font-helvetica text-xl font-medium text-black">
             The Butterfly Project
           </h3>
         </div>
@@ -37,16 +35,16 @@ export function ButterflyProject({ isDark = false }: ButterflyProjectProps) {
       }
       chip={
         <span className="inline-flex items-center gap-1.5 w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
-          <TrendingUp className="w-3 h-3" />
+          <Disc className="w-3 h-3" />
           project
         </span>
       }
       content={
         <>
-          <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+          <p className="font-helvetica text-sm text-black/60">
             Founder | Product Designer | Community Builder
           </p>
-          <p className={`font-helvetica text-sm font-mono tracking-tight ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+          <p className="font-helvetica text-sm font-mono tracking-tight text-black/70">
             Cowork together and meet new people.
           </p>
         </>

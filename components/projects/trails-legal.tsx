@@ -1,16 +1,14 @@
 import Image from "next/image"
 import Link from "next/link"
-import { TrendingUp } from "lucide-react"
+import { Disc } from "lucide-react"
 import { FeedCard } from "../ui/feed-card"
 
 interface TrailsLegalProps {
-  isDark?: boolean
 }
 
-export function TrailsLegal({ isDark = false }: TrailsLegalProps) {
+export function TrailsLegal({}: TrailsLegalProps) {
   return (
     <FeedCard
-      isDark={isDark}
       header={
         <div className="flex items-center gap-3 pb-2">
           <Image 
@@ -20,7 +18,7 @@ export function TrailsLegal({ isDark = false }: TrailsLegalProps) {
             height={32}
             className="object-contain"
           />
-          <h3 className={`font-helvetica text-xl font-medium ${isDark ? 'text-white' : 'text-black'}`}>
+          <h3 className="font-helvetica text-xl font-medium text-black">
             Trails Legal
           </h3>
         </div>
@@ -38,16 +36,16 @@ export function TrailsLegal({ isDark = false }: TrailsLegalProps) {
       }
       chip={
         <span className="inline-flex items-center gap-1.5 w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
-          <TrendingUp className="w-3 h-3" />
+          <Disc className="w-3 h-3" />
           project
         </span>
       }
       content={
         <>
-          <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+          <p className="font-helvetica text-sm text-black/60">
             Cofounder | Product Designer | Entrepreneurship | Branding
           </p>
-          <p className={`font-helvetica text-sm font-mono tracking-tight ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+          <p className="font-helvetica text-sm font-mono tracking-tight text-black/70">
             Trails automates manual workflows to help your legal firm deliver fast, high quality output for your clients
           </p>
           <div className="flex flex-wrap gap-2 text-sm font-helvetica mt-1">
@@ -55,13 +53,13 @@ export function TrailsLegal({ isDark = false }: TrailsLegalProps) {
               href="https://trailslegal.com/" 
               target="_blank"
               rel="noopener noreferrer"
-              className={`underline hover:opacity-70 transition-opacity ${isDark ? 'text-white/70' : 'text-black/70'}`}
+              className="underline hover:opacity-70 transition-opacity text-black/70"
             >
               Website
             </Link>
             <Link 
               href="/trails-legal-case-study" 
-              className={`underline hover:opacity-70 transition-opacity ${isDark ? 'text-white/70' : 'text-black/70'}`}
+              className="underline hover:opacity-70 transition-opacity text-black/70"
             >
               Case Study
             </Link>

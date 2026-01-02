@@ -17,10 +17,9 @@ import {
 interface ReleaseNotesDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  isDark: boolean
 }
 
-export function ReleaseNotesDialog({ open, onOpenChange, isDark }: ReleaseNotesDialogProps) {
+export function ReleaseNotesDialog({ open, onOpenChange }: ReleaseNotesDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto">
@@ -36,15 +35,15 @@ export function ReleaseNotesDialog({ open, onOpenChange, isDark }: ReleaseNotesD
         
         <Accordion type="single" collapsible className="font-helvetica w-full">
           {/* December 26, 2024 */}
-          <AccordionItem value="item-1" className={`${isDark ? 'border-white/10' : 'border-black/10'}`}>
-            <AccordionTrigger className={`text-xs font-mono ${isDark ? 'text-white/80 hover:text-white' : 'text-black/80 hover:text-black'}`}>
+          <AccordionItem value="item-1" className="border-black/10">
+            <AccordionTrigger className="text-xs font-mono text-black/80 hover:text-black">
               December 26, 2024
             </AccordionTrigger>
-            <AccordionContent className={`${isDark ? 'text-white' : 'text-black'}`}>
+            <AccordionContent className="text-black">
               <div className="space-y-3 pt-2">
                   <div>
-                    <h3 className={`text-sm font-semibold mb-2 ${isDark ? 'text-white' : 'text-black'}`}>What&apos;s New</h3>
-                  <ul className={`text-sm space-y-1.5 list-disc list-inside ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                    <h3 className="text-sm font-semibold mb-2 text-black">What&apos;s New</h3>
+                  <ul className="text-sm space-y-1.5 list-disc list-inside text-black/70">
                     <li>Redesigned feed layout with improved navigation</li>
                     <li>Fixed breadcrumb navigation that stays visible on scroll</li>
                     <li>Enhanced card spacing and visual hierarchy</li>
@@ -54,8 +53,8 @@ export function ReleaseNotesDialog({ open, onOpenChange, isDark }: ReleaseNotesD
                 </div>
                 
                 <div>
-                  <h3 className={`text-sm font-semibold mb-2 ${isDark ? 'text-white' : 'text-black'}`}>Improvements</h3>
-                  <ul className={`text-sm space-y-1.5 list-disc list-inside ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                  <h3 className="text-sm font-semibold mb-2 text-black">Improvements</h3>
+                  <ul className="text-sm space-y-1.5 list-disc list-inside text-black/70">
                     <li>Optimized scrolling performance</li>
                     <li>Better content organization in feed</li>
                     <li>Streamlined sidebar navigation</li>
@@ -66,15 +65,15 @@ export function ReleaseNotesDialog({ open, onOpenChange, isDark }: ReleaseNotesD
           </AccordionItem>
 
           {/* December 20, 2024 */}
-          <AccordionItem value="item-2" className={`${isDark ? 'border-white/10' : 'border-black/10'}`}>
-            <AccordionTrigger className={`text-xs font-mono ${isDark ? 'text-white/80 hover:text-white' : 'text-black/80 hover:text-black'}`}>
+          <AccordionItem value="item-2" className="border-black/10">
+            <AccordionTrigger className="text-xs font-mono text-black/80 hover:text-black">
               December 20, 2024
             </AccordionTrigger>
-            <AccordionContent className={`${isDark ? 'text-white' : 'text-black'}`}>
+            <AccordionContent className="text-black">
               <div className="space-y-3 pt-2">
                 <div>
-                  <h3 className={`text-sm font-semibold mb-2 ${isDark ? 'text-white' : 'text-black'}`}>Improvements</h3>
-                  <ul className={`text-sm space-y-1.5 list-disc list-inside ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+                  <h3 className="text-sm font-semibold mb-2 text-black">Improvements</h3>
+                  <ul className="text-sm space-y-1.5 list-disc list-inside text-black/70">
                     <li>Initial beta release</li>
                     <li>Core navigation and feed functionality</li>
                   </ul>
@@ -84,12 +83,12 @@ export function ReleaseNotesDialog({ open, onOpenChange, isDark }: ReleaseNotesD
           </AccordionItem>
 
           {/* Known Issues */}
-          <AccordionItem value="item-3" className={`${isDark ? 'border-white/10' : 'border-black/10'}`}>
-            <AccordionTrigger className={`text-xs font-mono ${isDark ? 'text-white/80 hover:text-white' : 'text-black/80 hover:text-black'}`}>
+          <AccordionItem value="item-3" className="border-black/10">
+            <AccordionTrigger className="text-xs font-mono text-black/80 hover:text-black">
               Known Issues
             </AccordionTrigger>
-            <AccordionContent className={`${isDark ? 'text-white' : 'text-black'}`}>
-              <ul className={`text-sm space-y-1.5 list-disc list-inside pt-2 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+            <AccordionContent className="text-black">
+              <ul className="text-sm space-y-1.5 list-disc list-inside pt-2 text-black/70">
                 <li>Some features are still in development</li>
                 <li>Performance optimizations ongoing</li>
               </ul>

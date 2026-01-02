@@ -1,14 +1,13 @@
 "use client"
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
-import { Newspaper, TrendingUp, Target, Users, Phone, Pin } from "lucide-react"
+import { Newspaper, Disc, Trophy, Users, Phone, Pin } from "lucide-react"
 import { useState, useEffect } from "react"
 import { projects } from "@/lib/projects"
 import { Button } from "@/components/ui/button"
 import { getCalApi } from "@calcom/embed-react"
 
 interface DirectorySidebarProps {
-  isDark: boolean
   directory: string | null
 }
 
@@ -18,7 +17,7 @@ interface ArticleMeta {
   date: string
 }
 
-export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
+export function DirectorySidebar({ directory }: DirectorySidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -66,18 +65,18 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
 
   const menuItems = [
     { id: "articles", icon: Newspaper, label: "articles" },
-    { id: "projects", icon: TrendingUp, label: "projects" },
-    { id: "work-stats", icon: Target, label: "work stats" },
+    { id: "projects", icon: Disc, label: "projects" },
+    { id: "work-stats", icon: Trophy, label: "work stats" },
     { id: "socials", icon: Users, label: "socials" },
     // { id: "music", icon: Music, label: "music" },
   ]
 
   return (
-    <aside className={`py-8 border-l overflow-y-auto ${isDark ? 'bg-black border-white/10' : 'bg-white border-black/10'} w-64 px-6 flex flex-col`}>
+    <aside className="py-8 border-l overflow-y-auto bg-white border-black/10 w-64 px-6 flex flex-col">
       <div className="flex flex-col flex-1">
         {/* Header */}
         <div>
-          <h2 className={`font-helvetica text-sm font-medium tracking-tight mb-4 ${isDark ? 'text-white' : 'text-black'}`}>
+          <h2 className="font-helvetica text-sm font-medium tracking-tight mb-4 text-black">
             DIRECTORY
           </h2>
         </div>
@@ -118,10 +117,10 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
                     }`}
                   >
                     <div
-                      className={`ml-6 pl-3 flex flex-col gap-1.5 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                      className="ml-6 pl-3 flex flex-col gap-1.5 border-l border-black/10"
                     >
                       {isLoadingArticles ? (
-                        <span className={`font-mono text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                        <span className="font-mono text-xs text-black/40">
                           loading...
                         </span>
                       ) : (
@@ -150,7 +149,7 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
                     }`}
                   >
                     <div
-                      className={`ml-6 pl-3 flex flex-col gap-1 border-l ${isDark ? "border-white/10" : "border-black/10"}`}
+                      className="ml-6 pl-3 flex flex-col gap-1 border-l border-black/10"
                     >
                       {projects.map((proj) => (
                         <button
@@ -173,10 +172,10 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
         </div>
 
         {/* Pinned Section */}
-        <div className={`mt-6 pt-6 border-t ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+        <div className="mt-6 pt-6 border-t border-black/10">
           <div className="flex items-center gap-2 mb-3">
-            <Pin className={`w-4 h-4 flex-shrink-0 ${isDark ? 'text-white/60' : 'text-black/60'}`} />
-            <h3 className={`font-helvetica text-xs font-medium ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+            <Pin className="w-4 h-4 flex-shrink-0 text-black/60" />
+            <h3 className="font-helvetica text-xs font-medium text-black/60">
               PINNED
             </h3>
           </div>
@@ -184,7 +183,7 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
             onClick={() => router.push(pathname + `?directory=articles&article=trails-legal-case-study`, { scroll: false })}
             className={`inline-flex items-center gap-2 w-full justify-start font-helvetica text-xs hover:opacity-70 transition-opacity ${
               article === 'trails-legal-case-study' ? 'font-bold' : ''
-            } ${isDark ? 'text-white' : 'text-black'}`}
+            } text-black`}
             title="Modern Interfaces for an Ancient Industry: How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems."
           >
             <Newspaper className="w-4 h-4 flex-shrink-0" />
@@ -194,12 +193,12 @@ export function DirectorySidebar({ isDark, directory }: DirectorySidebarProps) {
       </div>
 
       {/* Schedule a Call Button */}
-      <div className={`mt-auto pt-8 border-t ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+      <div className="mt-auto pt-8 border-t border-black/10">
         <Button
           data-cal-namespace="vilak-intro-30min"
           data-cal-link="vilakshankh/vilak-intro-30min"
           data-cal-config='{"layout":"month_view","theme":"light"}'
-          className={`w-full font-helvetica text-xs ${isDark ? 'bg-white text-black hover:bg-white/90' : 'bg-black text-white hover:bg-black/90'}`}
+          className="w-full font-helvetica text-xs bg-black text-white hover:bg-black/90"
           variant="default"
         >
           <Phone className="w-4 h-4" />

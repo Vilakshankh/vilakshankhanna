@@ -2,13 +2,11 @@ import { MessageSquare } from "lucide-react"
 import { FeedCard } from "../ui/feed-card"
 
 interface TwitterPostProps {
-  isDark?: boolean
 }
 
-export function TwitterPost({ isDark = false }: TwitterPostProps) {
+export function TwitterPost({}: TwitterPostProps) {
   return (
     <FeedCard
-      isDark={isDark}
       media={
         <div className="w-full flex justify-center px-4">
           <blockquote 

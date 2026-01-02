@@ -1,26 +1,24 @@
 import Image from "next/image"
 import Link from "next/link"
-import { TrendingUp } from "lucide-react"
+import { Disc } from "lucide-react"
 import { FeedCard } from "../ui/feed-card"
 
 interface FiveFiveFiveStudioProps {
-  isDark?: boolean
 }
 
-export function FiveFiveFiveStudio({ isDark = false }: FiveFiveFiveStudioProps) {
+export function FiveFiveFiveStudio({}: FiveFiveFiveStudioProps) {
   return (
     <FeedCard
-      isDark={isDark}
       header={
         <div className="flex items-center gap-3 pb-2">
           <Image 
-            src={isDark ? "/Untitled-2_white.png" : "/Untitled-2_black.png"} 
+            src="/Untitled-2_black.png" 
             alt="555 Studio Logo" 
             width={32} 
             height={32}
             className="object-contain"
           />
-          <h3 className={`font-helvetica text-xl font-medium ${isDark ? 'text-white' : 'text-black'}`}>
+          <h3 className="font-helvetica text-xl font-medium text-black">
             555 Studio
           </h3>
         </div>
@@ -38,16 +36,16 @@ export function FiveFiveFiveStudio({ isDark = false }: FiveFiveFiveStudioProps) 
       }
       chip={
         <span className="inline-flex items-center gap-1.5 w-fit px-2 py-0.5 bg-black text-white font-mono text-[11px]">
-          <TrendingUp className="w-3 h-3" />
+          <Disc className="w-3 h-3" />
           project
         </span>
       }
       content={
         <>
-          <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+          <p className="font-helvetica text-sm text-black/60">
             Co-organizer | Branding | Community Designer
           </p>
-          <p className={`font-helvetica text-sm font-mono tracking-tight ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+          <p className="font-helvetica text-sm font-mono tracking-tight text-black/70">
             Creative nights event series in Montreal, 1000+ people so far
           </p>
           <div className="flex flex-wrap gap-2 text-sm font-helvetica mt-1">
@@ -55,7 +53,7 @@ export function FiveFiveFiveStudio({ isDark = false }: FiveFiveFiveStudioProps) 
               href="https://luma.com/fivefivefive?k=c&period=past" 
               target="_blank"
               rel="noopener noreferrer"
-              className={`underline hover:opacity-70 transition-opacity ${isDark ? 'text-white/70' : 'text-black/70'}`}
+              className="underline hover:opacity-70 transition-opacity text-black/70"
             >
               Events
             </Link>
@@ -63,7 +61,7 @@ export function FiveFiveFiveStudio({ isDark = false }: FiveFiveFiveStudioProps) 
               href="https://www.instagram.com/fivefivefive_studio/" 
               target="_blank"
               rel="noopener noreferrer"
-              className={`underline hover:opacity-70 transition-opacity ${isDark ? 'text-white/70' : 'text-black/70'}`}
+              className="underline hover:opacity-70 transition-opacity text-black/70"
             >
               Instagram
             </Link>
@@ -71,7 +69,7 @@ export function FiveFiveFiveStudio({ isDark = false }: FiveFiveFiveStudioProps) 
               href="https://x.com/555studio_" 
               target="_blank"
               rel="noopener noreferrer"
-              className={`underline hover:opacity-70 transition-opacity ${isDark ? 'text-white/70' : 'text-black/70'}`}
+              className="underline hover:opacity-70 transition-opacity text-black/70"
             >
               X
             </Link>
@@ -79,7 +77,7 @@ export function FiveFiveFiveStudio({ isDark = false }: FiveFiveFiveStudioProps) 
               href="https://fivefivefive.ca" 
               target="_blank"
               rel="noopener noreferrer"
-              className={`underline hover:opacity-70 transition-opacity ${isDark ? 'text-white/70' : 'text-black/70'}`}
+              className="underline hover:opacity-70 transition-opacity text-black/70"
             >
               Website
             </Link>

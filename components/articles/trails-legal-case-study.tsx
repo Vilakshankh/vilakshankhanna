@@ -10,15 +10,13 @@ import {
 } from "@/components/ui/article-content"
 
 interface TrailsLegalCaseStudyProps {
-  isDark?: boolean
   embedded?: boolean
 }
 
-export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: TrailsLegalCaseStudyProps) {
+export function TrailsLegalCaseStudy({ embedded = false }: TrailsLegalCaseStudyProps) {
   return (
-    <ArticleContent isDark={isDark} embedded={embedded}>
+    <ArticleContent embedded={embedded}>
       <ArticleHero
-        isDark={isDark}
         title="My Approach to Legal Tech UX"
         subtitle="Modern Interfaces for an Ancient Industry: How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems."
         date="December 30, 2025"
@@ -27,7 +25,7 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
 
       <ArticleVideo src="/trails-product-images/trailslegal.com.mov" />
 
-      <ArticleSection isDark={isDark} title="Product Design">
+      <ArticleSection title="Product Design">
         <p>
           <strong>Trails was important to me because it was my first real attempt at reimagining how legal work could function — not just cosmetically, but fundamentally.</strong> I walked into an industry where everything felt old-school: slow systems, rigid workflows, interfaces that looked like they hadn&apos;t been touched in 20 years. I wanted to see if it was possible to take something this entrenched and redesign it into something modern, streamlined, and deeply personalized.
         </p>
@@ -55,7 +53,6 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
             width={300}
             height={200}
             className="rounded-xl h-auto"
-            isDark={isDark}
             unoptimized
           />
           <ArticleImage
@@ -64,7 +61,6 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
             width={300}
             height={200}
             className="rounded-xl h-auto"
-            isDark={isDark}
             unoptimized
           />
           <ArticleImage
@@ -73,7 +69,6 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
             width={300}
             height={200}
             className="rounded-xl h-auto"
-            isDark={isDark}
             unoptimized
           />
           <ArticleImage
@@ -82,7 +77,6 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
             width={300}
             height={200}
             className="rounded-xl h-auto"
-            isDark={isDark}
             unoptimized
           />
         </div>
@@ -111,7 +105,6 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
           width={200}
           height={400}
           className="rounded-sm h-auto"
-          isDark={isDark}
         />
         <ArticleImage
           src="/trails-product-images/IMG_0229.PNG"
@@ -119,7 +112,6 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
           width={200}
           height={400}
           className="rounded-sm h-auto"
-          isDark={isDark}
         />
         <ArticleImage
           src="/trails-product-images/IMG_0234.PNG"
@@ -127,11 +119,10 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
           width={200}
           height={400}
           className="rounded-sm h-auto"
-          isDark={isDark}
         />
       </div>
 
-      <ArticleSection isDark={isDark} title="Branding">
+      <ArticleSection title="Branding">
         <p>
           Trails&apos; branding began with a simple question I asked myself: <em>how do I modernize a legal practice without alienating the people who built it?</em> My target demographic included middle-aged lawyers with decades of experience — people who have seen the legal field evolve but still work in an environment associated with tradition, luxury, and formality: Dior suits, negotiation rooms, refined paperwork, the balance scale, and all the classic symbolism of law.
         </p>
@@ -168,7 +159,7 @@ export function TrailsLegalCaseStudy({ isDark = false, embedded = false }: Trail
         </p>
       </ArticleSection>
 
-      <ArticleSection isDark={isDark} title="Outcome">
+      <ArticleSection title="Outcome">
         <p>500k arr</p>
         <p>4 contracts</p>
       </ArticleSection>

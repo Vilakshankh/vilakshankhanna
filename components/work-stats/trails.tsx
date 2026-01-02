@@ -1,26 +1,21 @@
 interface TrailsWorkProps {
-  isDark?: boolean
 }
 
-export function TrailsWork({ isDark = false }: TrailsWorkProps) {
+export function TrailsWork({}: TrailsWorkProps) {
   return (
     <div
-      className={`w-[750px] mx-auto p-5 rounded-sm border ${
-        isDark 
-          ? 'border-white/10 bg-white/5' 
-          : 'border-black/10 bg-black/5'
-      }`}
+      className="w-[750px] mx-auto p-5 rounded-sm border border-black/10 bg-black/5"
     >
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <h3 className={`font-helvetica text-xl font-medium ${isDark ? 'text-white' : 'text-black'}`}>
+          <h3 className="font-helvetica text-xl font-medium text-black">
             Trails | Co-Founder, Product Designer
           </h3>
-          <p className={`font-helvetica text-xs ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+          <p className="font-helvetica text-xs text-black/60">
             Legal-Tech AI Startup | Montréal, QC | 2025–Present
           </p>
         </div>
-        <ul className={`space-y-2 mt-1 list-disc list-outside pl-5 ${isDark ? 'text-white/70' : 'text-black/70'}`}>
+        <ul className="space-y-2 mt-1 list-disc list-outside pl-5 text-black/70">
           <li className={`font-helvetica text-sm leading-relaxed`}>
             Designed and built UI for 10+ U.S. law firms, using Figma, React, Next.js, and TypeScript with AI tools like v0.dev and Cursor to turn complex legal workflows into intuitive interfaces, improving firm productivity by 86.7% and driving $500K+ projected revenue.
           </li>

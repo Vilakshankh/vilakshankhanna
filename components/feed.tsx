@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Calendar, Newspaper, Users, MessageSquare, TrendingUp } from "lucide-react"
+import { Calendar, Newspaper, Users, MessageSquare } from "lucide-react"
 
 // TypeScript declaration for Twitter widgets
 declare global {
@@ -30,7 +30,6 @@ import { TrailsWork, MatroxWork, TecnisheWork, Skills, Education } from "./work-
 import { LinkedInPost, TwitterPost } from "./socials"
 
 interface FeedProps {
-  isDark: boolean
 }
 
 interface ArticleMeta {
@@ -172,7 +171,7 @@ function renderUnifiedItemMedia(item: UnifiedFeedItem) {
   return null
 }
 
-function FeedContent({ isDark }: FeedProps) {
+function FeedContent({}: FeedProps) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -184,7 +183,7 @@ function FeedContent({ isDark }: FeedProps) {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
   const [articles, setArticles] = useState<ArticleMeta[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const [articleComponent, setArticleComponent] = useState<React.ComponentType<{ isDark?: boolean; embedded?: boolean }> | null>(null)
+  const [articleComponent, setArticleComponent] = useState<React.ComponentType<{ embedded?: boolean }> | null>(null)
   const [isArticleLoading, setIsArticleLoading] = useState(false)
   const [articleError, setArticleError] = useState<string | null>(null)
 
@@ -396,9 +395,9 @@ function FeedContent({ isDark }: FeedProps) {
   }
 
   return (
-    <section className={`flex flex-col h-full overflow-hidden ${isDark ? 'bg-white/5' : 'bg-black/5'}`}>
+    <section className="flex flex-col h-full overflow-hidden bg-black/5">
       {/* Fixed Breadcrumb Area */}
-      <div className={`flex-shrink-0 py-4 flex justify-center border-b ${isDark ? 'border-white/10' : 'border-black/10'}`}>
+      <div className="flex-shrink-0 py-4 flex justify-center border-b border-black/10">
         <div className="w-full max-w-[900px] px-12">
           <div className="flex items-center justify-between min-h-[32px]">
             <Breadcrumb>
@@ -469,7 +468,7 @@ function FeedContent({ isDark }: FeedProps) {
               {directory === "articles" && !article && (
                 <button
                   onClick={toggleSort}
-                  className={`p-1 rounded hover:bg-black/5 transition-colors ${isDark ? 'hover:bg-white/5' : 'hover:bg-black/5'}`}
+                  className="p-1 rounded hover:bg-black/5 transition-colors"
                   title={`Sort ${sortOrder === "desc" ? "oldest first" : "newest first"}`}
                 >
                   <Calendar className={`w-4 h-4 ${sortOrder === "asc" ? "rotate-180" : ""} transition-transform`} />
@@ -486,7 +485,7 @@ function FeedContent({ isDark }: FeedProps) {
           <div className="min-h-[200px]">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
-            <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+            <p className="font-helvetica text-sm text-black/60">
               Loading...
             </p>
           </div>
@@ -494,28 +493,28 @@ function FeedContent({ isDark }: FeedProps) {
           // Article view
           isArticleLoading ? (
             <div className="flex items-center justify-center py-12">
-              <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+              <p className="font-helvetica text-sm text-black/60">
                 Loading...
               </p>
             </div>
           ) : articleError || !articleComponent ? (
             <div className="flex items-center justify-center py-12">
-              <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+              <p className="font-helvetica text-sm text-black/60">
                 {articleError || `Article "${article}" not found`}
               </p>
             </div>
           ) : (
-            <div className={`w-full animate-in fade-in duration-500 ${isDark ? 'text-white' : 'text-black'}`}>
+            <div className="w-full animate-in fade-in duration-500 text-black">
               <Suspense fallback={
                 <div className="flex items-center justify-center py-12">
-                  <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+                  <p className="font-helvetica text-sm text-black/60">
                     Loading article...
                   </p>
                 </div>
               }>
                 {articleComponent && (() => {
                   const ArticleComponent = articleComponent
-                  return <ArticleComponent isDark={isDark} embedded={true} />
+                  return <ArticleComponent embedded={true} />
                 })()}
               </Suspense>
             </div>
@@ -526,7 +525,6 @@ function FeedContent({ isDark }: FeedProps) {
             {sortedArticles.map((item) => (
               <FeedCard
                 key={item.slug}
-                isDark={isDark}
                 interactive
                 onClick={() => handleArticleClick(item.slug)}
                 media={renderArticleMedia(item)}
@@ -543,7 +541,7 @@ function FeedContent({ isDark }: FeedProps) {
                   </>
                 }
                 footer={
-                  <span className={`font-helvetica text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                  <span className="font-helvetica text-xs text-black/40">
                     {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </span>
                 }
@@ -553,32 +551,32 @@ function FeedContent({ isDark }: FeedProps) {
         ) : directory === "projects" ? (
           // Projects cards
           <div className="flex flex-col gap-4 animate-in fade-in duration-500">
-            {!project && <FiveFiveFiveStudio isDark={isDark} />}
-            {!project && <TrailsLegal isDark={isDark} />}
-            {!project && <ButterflyProject isDark={isDark} />}
-            {project === "fivefivefive-studio" && <FiveFiveFiveStudio isDark={isDark} />}
-            {project === "trails-legal" && <TrailsLegal isDark={isDark} />}
-            {project === "butterfly-project" && <ButterflyProject isDark={isDark} />}
+            {!project && <FiveFiveFiveStudio />}
+            {!project && <TrailsLegal />}
+            {!project && <ButterflyProject />}
+            {project === "fivefivefive-studio" && <FiveFiveFiveStudio />}
+            {project === "trails-legal" && <TrailsLegal />}
+            {project === "butterfly-project" && <ButterflyProject />}
           </div>
         ) : directory === "work-stats" ? (
           // Work experience cards
           <div className="flex flex-col gap-4 animate-in fade-in duration-500">
-            <Skills isDark={isDark} />
-            <TrailsWork isDark={isDark} />
-            <MatroxWork isDark={isDark} />
-            <TecnisheWork isDark={isDark} />
-            <Education isDark={isDark} />
+            <Skills />
+            <TrailsWork />
+            <MatroxWork />
+            <TecnisheWork />
+            <Education />
           </div>
         ) : directory === "socials" ? (
           // Socials - LinkedIn and Twitter embedded posts
           <div className="flex flex-col gap-4 animate-in fade-in duration-500">
-            <LinkedInPost isDark={isDark} />
-            <TwitterPost isDark={isDark} />
+            <LinkedInPost />
+            <TwitterPost />
           </div>
         ) : directory ? (
           // Empty directory state for other directories
           <div className="flex items-center justify-center py-12 animate-in fade-in duration-500">
-            <p className={`font-helvetica text-sm ${isDark ? 'text-white/60' : 'text-black/60'}`}>
+            <p className="font-helvetica text-sm text-black/60">
               empty
             </p>
           </div>
@@ -588,19 +586,18 @@ function FeedContent({ isDark }: FeedProps) {
             {unifiedFeedItems.map((item) => {
               // LinkedIn post rendering
               if (item.type === "linkedin" && item.linkedinEmbed) {
-                return <LinkedInPost key={item.id} isDark={isDark} />
+                return <LinkedInPost key={item.id} />
               }
               
               // Twitter post rendering
               if (item.type === "twitter" && item.twitterEmbed) {
-                return <TwitterPost key={item.id} isDark={isDark} />
+                return <TwitterPost key={item.id} />
               }
               
               // Article rendering
               return (
                 <FeedCard
                   key={item.id}
-                  isDark={isDark}
                   interactive
                   onClick={() => handleUnifiedItemClick(item)}
                   media={renderUnifiedItemMedia(item)}
@@ -618,7 +615,7 @@ function FeedContent({ isDark }: FeedProps) {
                   }
                   footer={
                     item.date && (
-                      <span className={`font-helvetica text-xs ${isDark ? 'text-white/40' : 'text-black/40'}`}>
+                      <span className="font-helvetica text-xs text-black/40">
                         {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </span>
                     )
@@ -635,16 +632,16 @@ function FeedContent({ isDark }: FeedProps) {
   )
 }
 
-export function Feed({ isDark }: FeedProps) {
+export function Feed({}: FeedProps) {
   return (
     <Suspense fallback={
-      <section className={`py-8 overflow-y-auto`}>
+      <section className="py-8 overflow-y-auto">
         <div className="flex items-center justify-center py-12">
           <div className="animate-spin text-2xl">📀</div>
         </div>
       </section>
     }>
-      <FeedContent isDark={isDark} />
+      <FeedContent />
     </Suspense>
   )
 }
