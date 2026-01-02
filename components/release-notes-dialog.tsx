@@ -42,8 +42,8 @@ export function ReleaseNotesDialog({ open, onOpenChange, isDark }: ReleaseNotesD
             </AccordionTrigger>
             <AccordionContent className={`${isDark ? 'text-white' : 'text-black'}`}>
               <div className="space-y-3 pt-2">
-                <div>
-                  <h3 className={`text-sm font-semibold mb-2 ${isDark ? 'text-white' : 'text-black'}`}>What's New</h3>
+                  <div>
+                    <h3 className={`text-sm font-semibold mb-2 ${isDark ? 'text-white' : 'text-black'}`}>What&apos;s New</h3>
                   <ul className={`text-sm space-y-1.5 list-disc list-inside ${isDark ? 'text-white/70' : 'text-black/70'}`}>
                     <li>Redesigned feed layout with improved navigation</li>
                     <li>Fixed breadcrumb navigation that stays visible on scroll</li>
