@@ -71,7 +71,7 @@ export function AboutSidebar() {
             Currently
           </h2>
           <p className="font-helvetica text-sm leading-relaxed text-black/70">
-            I am open to work for product design or branding for startups in canada
+            I am open to work roles in Product Design, Branding, or Design Engineering for startups in Canada
           </p>
         </div>
 

@@ -431,7 +431,7 @@ function FeedContent({}: FeedProps) {
                           </button>
                         </BreadcrumbLink>
                       ) : (
-                        <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
+                        <BreadcrumbPage className="font-helvetica text-sm font-medium">
                           {formatDirectoryName(directory)}
                         </BreadcrumbPage>
                       )}
@@ -442,7 +442,7 @@ function FeedContent({}: FeedProps) {
                   <>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                      <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
+                      <BreadcrumbPage className="font-helvetica text-sm font-medium">
                         {currentArticle.title.length > 30 
                           ? currentArticle.title.substring(0, 30) + "..." 
                           : currentArticle.title}
@@ -454,7 +454,7 @@ function FeedContent({}: FeedProps) {
                   <>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                      <BreadcrumbPage className="font-helvetica text-sm font-medium text-red-600">
+                      <BreadcrumbPage className="font-helvetica text-sm font-medium">
                         {currentProjectTitle.length > 30 
                           ? currentProjectTitle.substring(0, 30) + "..." 
                           : currentProjectTitle}
