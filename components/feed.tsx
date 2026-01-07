@@ -247,7 +247,8 @@ function FeedContent({}: FeedProps) {
           const componentMap: Record<string, string> = {
             "studioenok-randomanxiety-design-autopsy": "StudioenokRandomAnxietyDesignAutopsy",
             "syntra-falcon": "IntroducingSyntra",
-            "trails-legal-case-study": "TrailsLegalCaseStudy",
+            "trails-branding": "TrailsBranding",
+            "how-to-redesign-old-industries": "HowToRedesignOldIndustries",
           }
           const componentName = componentMap[article]
           if (componentName && articleModule[componentName]) {
@@ -481,7 +482,7 @@ function FeedContent({}: FeedProps) {
 
       {/* Scrollable Content Area */}
       <div className="flex-1 overflow-y-auto flex justify-center">
-        <div className="w-full max-w-[900px] px-12 py-8">
+        <div className="w-full max-w-[900px] px-12 pt-8 pb-12">
           <div className="min-h-[200px]">
         {isLoading ? (
           <div className="flex items-center justify-center py-12">

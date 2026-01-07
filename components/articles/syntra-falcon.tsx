@@ -28,7 +28,7 @@ export function IntroducingSyntra({ embedded = false }: IntroducingSyntraProps) 
   return (
     <ArticleContent embedded={embedded}>
       <ArticleHero
-        title="Introducing Syntra"
+        title="Reducing the gap between imagining and building"
         subtitle="A new design experience that helps Design Engineers visually manipulate components and see their code change in real time."
         date="December 31, 2025"
         backButton={!embedded}

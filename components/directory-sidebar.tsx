@@ -180,14 +180,14 @@ export function DirectorySidebar({ directory }: DirectorySidebarProps) {
             </h3>
           </div>
           <button
-            onClick={() => router.push(pathname + `?directory=articles&article=trails-legal-case-study`, { scroll: false })}
+            onClick={() => router.push(pathname + `?directory=articles&article=how-to-redesign-old-industries`, { scroll: false })}
             className={`inline-flex items-center gap-2 w-full justify-start font-helvetica text-xs hover:opacity-70 transition-opacity ${
-              article === 'trails-legal-case-study' ? 'font-bold' : ''
+              article === 'how-to-redesign-old-industries' ? 'font-bold' : ''
             } text-black`}
-            title="Modern Interfaces for an Ancient Industry: How thoughtful design, automation, and branding can transform one of the most rigid professional ecosystems."
+            title="Design is informed by personal philosophy. Your opinions and values guide what you question, what you challenge, and what you choose to improve."
           >
             <Newspaper className="w-4 h-4 flex-shrink-0" />
-            <span>My Approach to Legal Tech UX</span>
+            <span>How to Redesign Old Industries</span>
           </button>
         </div>
       </div>

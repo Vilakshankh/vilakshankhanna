@@ -64,7 +64,7 @@ interface ArticleSubheadingProps {
 // Main wrapper
 export function ArticleContent({ embedded = false, children }: ArticleContentProps) {
   const content = (
-    <div className={`${embedded ? 'w-full' : 'w-[750px] mx-auto'}`}>
+    <div className={`${embedded ? 'w-full' : 'w-[750px] mx-auto'} pb-16`}>
       {children}
     </div>
   )

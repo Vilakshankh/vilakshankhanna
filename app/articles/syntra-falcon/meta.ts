@@ -1,6 +1,6 @@
 export const meta = {
     slug: "syntra-falcon",
-    title: "Introducing Syntra",
+    title: "Reducing the gap between imagining and building",
     description:
       "A new design experience that helps Design Engineers visually manipulate components and see their code change in real time.",
     date: "2025-12-31",

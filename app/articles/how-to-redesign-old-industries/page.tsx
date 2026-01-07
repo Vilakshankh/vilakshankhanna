@@ -1,4 +1,4 @@
-import { TrailsLegalCaseStudy } from "@/components/articles/trails-legal-case-study"
+import { HowToRedesignOldIndustries } from "@/components/articles/how-to-redesign-old-industries"
 
 interface PageProps {
   searchParams?: { embedded?: string }
@@ -7,5 +7,6 @@ interface PageProps {
 export default function Page({ searchParams }: PageProps) {
   const embedded = searchParams?.embedded === "1"
   
-  return <TrailsLegalCaseStudy embedded={embedded} />
+  return <HowToRedesignOldIndustries embedded={embedded} />
 }
+
